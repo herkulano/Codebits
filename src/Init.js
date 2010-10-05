@@ -12,8 +12,8 @@ Ext.setup({
     
     if(localStorage['uid'] && localStorage['token']){
       //main.fireEvent('setCard', 'SessionListView', localStorage['uid'], null);
-      //main.fireEvent('setCard', 'SessionListView', 1, null);
-      main.fireEvent('setCard', 'SessionDetailView', 110, null);
+      main.fireEvent('setCard', 'SessionListView', 1, null);
+      //main.fireEvent('setCard', 'SessionDetailView', 110, null);
     }
     else {
       main.fireEvent('setCard', 'LoginForm', null, null);

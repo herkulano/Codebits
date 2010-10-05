@@ -18,6 +18,8 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
       ui: 'Default'
     });
     
+    this.loginBt.on('tap', this.onTryLogin, this);
+    
     this.fieldSet = new Ext.form.FieldSet({
       defaults: {
           required: true
@@ -51,7 +53,8 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
             direction:'down',
             easing:'ease-out'
           };
-          that.fireEvent('setCard', 'SessionListView', anim);
+          // TODO: 1 > should be user_id
+          that.fireEvent('setCard', 'SessionListView', 1, anim);
         }
         else if (result.error) {
           alert(G_TRY_AGAIN);

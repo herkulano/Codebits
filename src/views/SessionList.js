@@ -35,7 +35,7 @@ app.SessionListView = Ext.extend(Ext.List, {
     var store   = item.getStore(),
         record  = store.getAt(index);
         
-    this.fireEvent('setCard', 'SessionDetailView', record.data.id, null);
+    this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
   }
 });
 
