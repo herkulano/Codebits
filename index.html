@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    
+		<title>CODEBITS 2010</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="libs/css/ext-touch-debug.css" type="text/css">
+    <link rel="stylesheet" href="res/css/main.css" type="text/css">
+    
+    <!-- Libs -->
+		<script type="text/javascript" src="libs/ext-touch-debug.js"></script>
+		<script type="text/javascript" src="libs/Associations/Association.js"></script>
+		<script type="text/javascript" src="libs/Associations/BelongsToAssociation.js"></script>
+		<script type="text/javascript" src="libs/Associations/HasManyAssociation.js"></script>
+		<script type="text/javascript" src="libs/Associations/PolymorphicAssociation.js"></script>
+    
+    <!-- Main (init) / Controllers / Proxies -->
+    <script type="text/javascript" src="src/GlobalConst.js"></script>
+    <script type="text/javascript" src="src/Init.js"></script>
+    <script type="text/javascript" src="src/Main.js"></script>
+    <script type="text/javascript" src="src/CodebitsProxy.js"></script>
+    <!-- Views -->
+    <script type="text/javascript" src="src/views/Login.js"></script>
+    <script type="text/javascript" src="src/views/SessionList.js"></script>
+    <script type="text/javascript" src="src/views/SessionDetail.js"></script>
+    <!-- Models -->
+    <script type="text/javascript" src="src/models/Session.js"></script>
+    <script type="text/javascript" src="src/models/SessionDetail.js"></script>
+    <script type="text/javascript" src="src/models/Speaker.js"></script>
+    
+</head>
+<body>
+<textarea id="sessionlist" class="x-hidden-display">
+  <tpl for=".">
+    <div class="sessionlist-list-item" style="height:auto;">
+      <p>{id}<strong> {title} </strong></p>
+        <p>{place} {start}</p>
+    </div>
+  </tpl>
+</textarea>
+<textarea id="sessiondetail" class="x-hidden-display">
+  <tpl for=".">
+    <div class="sessiondetail-item" style="height:auto;">
+      <p>{id}</p>
+      <p><strong>{title}</strong></p>
+      <p>{place}</p>
+      <p>{placename}</p>
+      <p>{start}</p>
+      <p>{slideshare}</p>
+      <p>{pfile}</p>
+      <p>{video}</p>
+      <p>{lang}</p>
+    </div>
+    <tpl for="speakers">
+      <div class="speakers-list-item" style="height:auto;">
+        <p>{id}</p>
+        <p><strong>{name}</strong></p>
+        <p>{karma}</p>
+        <p>{twitter}</p>
+        <p>{blog}</p>
+      </div>
+    </tpl>
+  </tpl>
+</textarea>
+</body>
+</html>
