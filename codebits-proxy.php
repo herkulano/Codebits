@@ -52,7 +52,8 @@ curl_close( $ch );
 $toarr = preg_match_all('/Codebits\/session/', $url, $arr );
 
 if ( $toarr > 0 ) {
-  print '[' . $contents . ']';
+  $json = array(json_decode($contents));
+  print json_encode($json);
 }
 else {
   print $contents;
