@@ -7,7 +7,7 @@
 		<title>CODEBITS 2010</title>
     
     <!-- Styles -->
-    <link rel="stylesheet" href="libs/css/ext-touch-debug.css" type="text/css">
+    <link rel="stylesheet" href="libs/css/ext-touch.css" type="text/css">
     <link rel="stylesheet" href="res/css/main.css" type="text/css">
     
     <!-- Libs -->
@@ -26,6 +26,7 @@
     <script type="text/javascript" src="src/views/Login.js"></script>
     <script type="text/javascript" src="src/views/SessionList.js"></script>
     <script type="text/javascript" src="src/views/SessionDetail.js"></script>
+    <script type="text/javascript" src="src/views/Home.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="src/models/Session.js"></script>
     <script type="text/javascript" src="src/models/SessionDetail.js"></script>
@@ -33,11 +34,21 @@
     
 </head>
 <body>
+<textarea id="home" class="x-hidden-display">
+  <ul class="home-container">
+  <tpl for=".">
+    <li class="home-item">
+      <div class="home-item-img">{img}</div>
+      <p>{title}</p>
+    </li>
+  </tpl>
+  </ul>
+</textarea>
 <textarea id="sessionlist" class="x-hidden-display">
   <tpl for=".">
     <div class="sessionlist-list-item" style="height:auto;">
       <p>{id}<strong> {title} </strong></p>
-        <p>{place} {start}</p>
+      <p>{place} {start}</p>
     </div>
   </tpl>
 </textarea>

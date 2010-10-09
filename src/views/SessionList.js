@@ -1,6 +1,6 @@
 app.SessionListView = Ext.extend(Ext.List, {
   name:'SessionListView',
-  itemSelector: '.sessionlist-list-item',
+  itemSelector: 'sessionlist-list-item',
   singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
@@ -26,8 +26,30 @@ app.SessionListView = Ext.extend(Ext.List, {
         url: 'usersessions/' + user_id,
         token: localStorage['token']
       },
-      callback: function(result) {
-        console.log('updateSessionListView', result);
+      callback: function(records, operation, success) {
+        console.log(records, operation, success);
+        /*if(!result.error){
+          console.log('updateSessionListView', result); 
+          console.log(result, success, response);
+          console.log(this.response.responseText);
+        }
+        else {
+          console.log('TOKEN EXPIRED!');
+        }*/
+      },
+      success: function(response){
+        var result = Ext.util.JSON.decode(response.responseText);
+        console.log(result);
+        if(!result.error){
+          
+        }
+        else {
+          alert(G_TRY_AGAIN);
+        }
+        that.getEl().unmask();
+      },
+      failure: function(){
+        alert(G_NO_CONN);
       }
     });
   },

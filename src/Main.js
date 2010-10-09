@@ -16,29 +16,24 @@ app.Main = Ext.extend(Ext.Panel, {
       }
     });
     this.dockedItems = [this.toolbar];
+    
     // init items
-    this.loginForm = new app.LoginForm({
+    var cardOptions = {
       listeners: {
         setCard: this.onSetCard,
         scope: this
       }
-    });
-    this.sessionListView = new app.SessionListView({
-      listeners: {
-        setCard: this.onSetCard,
-        scope: this
-      }
-    });
-    this.sessionDetailView = new app.SessionDetailView({
-      listeners: {
-        setCard: this.onSetCard,
-        scope: this
-      }
-    });
+    };
+    this.loginForm = new app.LoginForm(cardOptions);
+    this.homeView = new app.HomeView(cardOptions);
+    this.sessionListView = new app.SessionListView(cardOptions);
+    this.sessionDetailView = new app.SessionDetailView(cardOptions);
+    
     // add items to main
     this.items = [
-      this.loginForm, 
-      this.sessionListView, 
+      this.loginForm,
+      this.homeView,
+      this.sessionListView,
       this.sessionDetailView
     ];
     
@@ -47,22 +42,26 @@ app.Main = Ext.extend(Ext.Panel, {
     
     app.Main.superclass.initComponent.call(this);
   },
-  onSetCard: function(card, data, anim){
-    var cardIndex = 0;
-    switch(card) {
+  onSetCard: function(cardName, data, anim){
+    var card = this.loginForm;
+    switch(cardName) {
       case 'LoginForm':
-        cardIndex = 0;
+        card = this.loginView;
+        break;
+      case 'HomeView':
+        card = this.homeView;
+        //this.homeView.fireEvent('updateHomeView', data);
         break;
       case 'SessionListView':
-        cardIndex = 1;
+        card = this.sessionListView;
         this.sessionListView.fireEvent('updateSessionListView', data);
         break;
       case 'SessionDetailView':
-        cardIndex = 2;
+        card = this.sessionDetailView;
         this.sessionDetailView.fireEvent('updateSessionDetailView', data);
         break;
     }
-    console.log('onSetCard',cardIndex,data,anim);
-    this.setCard(cardIndex, anim);
+    console.log('onSetCard',card,data,anim);
+    this.setCard(card, anim);
   }
 });

@@ -22,8 +22,15 @@ app.SessionDetailView = Ext.extend(Ext.DataView, {
       params:{
         url: 'session/' + session_id
       },
-      callback: function(result) {
-        console.log('updateSessionDetailView', result);
+      callback: function(result, success, response) {
+        if(!result.error){
+          console.log('updateSessionDetailView', result);
+          console.log(result, success, response);
+          console.log(this.store.getAt(0));
+        }
+        else {
+          console.log('TOKEN EXPIRED!');
+        }
       }
     });
   }

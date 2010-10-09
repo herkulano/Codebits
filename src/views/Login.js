@@ -2,7 +2,7 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
   name:'LoginForm',
   scroll:'vertical',
   standardSubmit:true,
-  initComponent: function() {
+  initComponent: function(){
     this.email = new Ext.form.EmailField({
       name : 'user',
       placeHolder: 'email'
@@ -42,24 +42,20 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
         user: that.getValues().user,
         password: that.getValues().password
       },
-      success: function(response) {
+      success: function(response){
         var result = Ext.util.JSON.decode(response.responseText);
-        console.log(result);
-        if(result.token){
+        if(!result.error){
           localStorage['token'] = result.token;
           localStorage['uid'] = result.uid;
-          anim = {
-            type: 'slide',
-            direction:'down',
-            easing:'ease-out'
-          };
-          // TODO: 1 > should be user_id
-          that.fireEvent('setCard', 'SessionListView', 1, anim);
+          that.fireEvent('setCard', 'SessionListView', result.uid, SLIDE_DOWN);
         }
-        else if (result.error) {
+        else {
           alert(G_TRY_AGAIN);
         }
         that.getEl().unmask();
+      },
+      failure: function(){
+        alert(G_NO_CONN);
       }
     });
   }

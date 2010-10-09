@@ -1,4 +1,4 @@
-require 'compass-colors'
+# require 'compass-colors' # no longer needed
 
 css_dir = "../css"
 sass_dir = "../sass"
