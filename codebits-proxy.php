@@ -49,7 +49,8 @@ $contents = curl_exec( $ch );
 
 curl_close( $ch );
 
-$toarr = preg_match_all('/Codebits\/session/', $url, $arr );
+$toarr = preg_match_all('/\/session\//', $url, $arr );
+$toarr += preg_match_all('/\/user\//', $url, $arr );
 
 if ( $toarr > 0 ) {
   $json = array(json_decode($contents));

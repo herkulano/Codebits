@@ -24,13 +24,18 @@
     <script type="text/javascript" src="src/CodebitsProxy.js"></script>
     <!-- Views -->
     <script type="text/javascript" src="src/views/Login.js"></script>
+    <script type="text/javascript" src="src/views/Home.js"></script>
     <script type="text/javascript" src="src/views/SessionList.js"></script>
     <script type="text/javascript" src="src/views/SessionDetail.js"></script>
-    <script type="text/javascript" src="src/views/Home.js"></script>
+    <script type="text/javascript" src="src/views/UserSkillList.js"></script>
+    <script type="text/javascript" src="src/views/UserList.js"></script>
+    <script type="text/javascript" src="src/views/UserDetail.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="src/models/Session.js"></script>
     <script type="text/javascript" src="src/models/SessionDetail.js"></script>
     <script type="text/javascript" src="src/models/Speaker.js"></script>
+    <script type="text/javascript" src="src/models/User.js"></script>
+    <script type="text/javascript" src="src/models/UserDetail.js"></script>
     
 </head>
 <body>
@@ -46,7 +51,7 @@
 </textarea>
 <textarea id="sessionlist" class="x-hidden-display">
   <tpl for=".">
-    <div class="sessionlist-list-item" style="height:auto;">
+    <div class="sessionlist-item" style="height:auto;">
       <p>{id}<strong> {title} </strong></p>
       <p>{place} {start}</p>
     </div>
@@ -66,7 +71,7 @@
       <p>{lang}</p>
     </div>
     <tpl for="speakers">
-      <div class="speakers-list-item" style="height:auto;">
+      <div class="speakers-item" style="height:auto;">
         <p>{id}</p>
         <p><strong>{name}</strong></p>
         <p>{karma}</p>
@@ -74,6 +79,38 @@
         <p>{blog}</p>
       </div>
     </tpl>    
+  </tpl>
+</textarea>
+<textarea id="userskilllist" class="x-hidden-display">
+  <tpl for=".">
+    <div class="userskilllist-item" style="height:auto;">
+      <p>{skill}</p>
+    </div>
+  </tpl>
+</textarea>
+<textarea id="userlist" class="x-hidden-display">
+  <tpl for=".">
+    <div class="userlist-item" style="height:auto;">
+      <p>{id}</p>
+      <p><strong>{name}</strong></p>
+      <p>{nick}</p>
+      <p>{twitter}</p>
+      <p>{blog}</p>
+    </div>
+  </tpl>
+</textarea>
+<textarea id="userdetail" class="x-hidden-display">
+  <tpl for=".">
+    <div class="userdetail-item" style="height:auto;">
+      <p>{id}</p>
+      <p><strong>{name}</strong></p>
+      <p>{nick}</p>
+      <p>{karma}</p>
+      <p>{bio}</p>
+      <p>{twitter}</p>
+      <p>{blog}</p>
+      <p><tpl for="skills">{.}</tpl></p>
+    </div>
   </tpl>
 </textarea>
 </body>

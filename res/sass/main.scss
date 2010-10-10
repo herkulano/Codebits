@@ -3,7 +3,7 @@
 
 @import "compass/css3/columns";
 
-$base_color: #333;
+$back_color: #F2F2F2;
 
 body {
   background-color: #EEE;
@@ -54,8 +54,12 @@ div.home-view {
   }
 }
 
-.session-detail {
+div.sessiondetail-view {
+  background-color: $back-color;
 }
 
-.sessionlist-list-item {
+div.sessionlist-view {
+  
+  div.sessionlist-item {
+  }
 }

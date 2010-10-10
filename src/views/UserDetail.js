@@ -1,20 +1,17 @@
-app.SessionListView = Ext.extend(Ext.List, {
-  name:'SessionListView',
-  cls: 'sessionlist-view',
-  itemSelector: 'div.sessionlist-item',
+app.UserDetailView = Ext.extend(Ext.List, {
+  name:'UserDetailView',
+  cls: 'userdetail-view',
+  itemSelector: 'div.userdetail-item',
   singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
   initComponent: function() {
-    this.user_id;
-    this.dataUpdated = false;
-    
     this.store = new Ext.data.Store({
-      model: 'Session',
+      model: 'UserDetail',
       proxy: 'CodebitsProxy',
       autoload: false
     });
-    this.tpl = Ext.XTemplate.from('sessionlist');
+    this.tpl = Ext.XTemplate.from('userdetail');
     this.tpl.compile();
     
     this.addEvents('updateData');
@@ -24,14 +21,11 @@ app.SessionListView = Ext.extend(Ext.List, {
     
     app.SessionListView.superclass.initComponent.call(this);
   },
-  onUpdateData: function(user_id, refresh) {
-    if (this.dataUpdated === true && refresh !== true)
-      return false;
-      
+  onUpdateData: function(user_id) {
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
-        url: 'usersessions/' + user_id,
+        url: 'user/' + user_id,
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
@@ -46,17 +40,14 @@ app.SessionListView = Ext.extend(Ext.List, {
         }*/
       }
     });
-    
-    this.user_id = user_id;
-    this.dataUpdated = true;
   },
   onListItemTap: function(item, index, el, e){
     var store   = item.getStore(),
         record  = store.getAt(index);
-        
+
     console.log(record.data.id);
-    this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
+   //this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
   }
 });
 
-Ext.reg('SessionListView', app.SessionListView);
+Ext.reg('UserDetailView', app.UserDetailView);

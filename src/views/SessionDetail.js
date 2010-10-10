@@ -1,6 +1,6 @@
 app.SessionDetailView = Ext.extend(Ext.DataView, {
   name:'SessionDetailView',
-  cls: 'session-detail',
+  cls: 'sessiondetail-view',
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
   initComponent: function() {
@@ -12,12 +12,13 @@ app.SessionDetailView = Ext.extend(Ext.DataView, {
     this.tpl = Ext.XTemplate.from('sessiondetail');
     this.tpl.compile();
     
-    this.addEvents('updateSessionDetailView');
-    this.on('updateSessionDetailView', this.onUpdateData, this);
+    this.addEvents('updateData');
+    this.on('updateData', this.onUpdateData, this);
     
     app.SessionDetailView.superclass.initComponent.call(this);
   },
   onUpdateData: function(session_id) {
+    this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
         url: 'session/' + session_id

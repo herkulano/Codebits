@@ -1,6 +1,6 @@
 app.HomeView = Ext.extend(Ext.DataView, {
   name:'HomeView',
-  cls: 'home-view',
+  cls:'home-view',
   itemSelector:'li.home-item',
   singleSelect: true,
   loadingText: G_LOADING,
@@ -8,9 +8,9 @@ app.HomeView = Ext.extend(Ext.DataView, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       fields: ['card','title','img'],
-      data : [
-        {title:'Favorite Sessions', card:'--', img:'00'},
-        {title:'Users by Skill',    card:'--', img:'00'},
+      data: [
+        {title:'Favorite Sessions', card:'SessionListView', img:'00'},
+        {title:'Users by Skill',    card:'UserSkillListView', img:'00'},
         {title:'Where?',            card:'--', img:'00'},
         
         {title:'Calendar',          card:'--', img:'00'},
@@ -31,10 +31,13 @@ app.HomeView = Ext.extend(Ext.DataView, {
   },
   onListItemTap: function(item, index, el, e){
     var store   = item.getStore(),
-        record  = store.getAt(index);
+        record  = store.getAt(index),
+        anim    = {
+          type: 'pop',
+          scaleOnExit: false
+        };
         
-    console.log(record.data.title);
-    //this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
+    this.fireEvent('setCard', record.data.card, 3, anim);
   }
 });
 
