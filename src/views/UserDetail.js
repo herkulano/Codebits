@@ -1,8 +1,6 @@
-app.UserDetailView = Ext.extend(Ext.List, {
+app.UserDetailView = Ext.extend(Ext.DataView, {
   name:'UserDetailView',
   cls: 'userdetail-view',
-  itemSelector: 'div.userdetail-item',
-  singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
   initComponent: function() {
