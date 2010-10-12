@@ -10,14 +10,9 @@ Ext.setup({
       scope:this
     });
     
-    if(localStorage['uid'] && localStorage['token']){
-      //main.fireEvent('setCard', 'SessionListView', localStorage['uid'], null);
-      //main.fireEvent('setCard', 'SessionListView', 3, null);
-      //main.fireEvent('setCard', 'SessionDetailView', 110, null);
+    if(localStorage['uid'] && localStorage['token'])
       main.fireEvent('setCard', 'HomeView', null, null);
-    }
-    else {
-      main.fireEvent('setCard', 'LoginForm', null, null);
-    }
+    else
+      main.fireEvent('setCard', 'LoginView', null, null);
   }
 });

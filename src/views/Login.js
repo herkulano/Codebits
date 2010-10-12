@@ -1,5 +1,5 @@
 app.LoginForm = Ext.extend(Ext.form.FormPanel, {
-  name:'LoginForm',
+  name:'LoginView',
   scroll:'vertical',
   standardSubmit:true,
   initComponent: function(){
@@ -47,7 +47,7 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
         if(!result.error){
           localStorage['token'] = result.token;
           localStorage['uid'] = result.uid;
-          that.fireEvent('setCard', 'SessionListView', result.uid, SLIDE_DOWN);
+          that.fireEvent('setCard', 'HomeView', null, SLIDE_DOWN);
         }
         else {
           alert(G_TRY_AGAIN);
@@ -56,9 +56,10 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
       },
       failure: function(){
         alert(G_NO_CONN);
+        that.getEl().unmask();
       }
     });
   }
 });
 
-Ext.reg('LoginForm', app.LoginForm);
+Ext.reg('LoginView', app.LoginForm);

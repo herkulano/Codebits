@@ -26,10 +26,8 @@ app.UserSkillListView = Ext.extend(Ext.List, {
     
     app.UserSkillListView.superclass.initComponent.call(this);
   },
-  onListItemTap: function(item, index, el, e){
-    var store   = item.getStore(),
-        record  = store.getAt(index);
-        
+  onListItemTap: function(view, index, item, e){
+    var record = this.getRecord(item);
     this.fireEvent('setCard', 'UserListView', record.data.skill, 'slide');
   }
 });

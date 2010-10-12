@@ -11,14 +11,14 @@ app.HomeView = Ext.extend(Ext.DataView, {
       data: [
         {title:'Favorite Sessions', card:'SessionListView', img:'00'},
         {title:'Users by Skill',    card:'UserSkillListView', img:'00'},
-        {title:'Where?',            card:'--', img:'00'},
+        {title:'Where?',            card:'HomeView', img:'00'},
         
-        {title:'Calendar',          card:'--', img:'00'},
-        {title:'Blog',              card:'--', img:'00'},
-        {title:'About',             card:'--', img:'00'},
+        {title:'Calendar',          card:'CalendarListView', img:'00'},
+        {title:'??Blog??',          card:'HomeView', img:'00'},
+        {title:'About',             card:'HomeView', img:'00'},
         
-        {title:'Projects',          card:'--', img:'00'},
-        {title:'#codebits twits',   card:'--', img:'00'},
+        {title:'Projects',          card:'HomeView', img:'00'},
+        {title:'#codebits twits',   card:'HomeView', img:'00'},
       ]
     });
     
@@ -29,14 +29,12 @@ app.HomeView = Ext.extend(Ext.DataView, {
     
     app.HomeView.superclass.initComponent.call(this);
   },
-  onListItemTap: function(item, index, el, e){
-    var store   = item.getStore(),
-        record  = store.getAt(index),
-        anim    = {
+  onListItemTap: function(view, index, item, e){
+    var record = this.getRecord(item),
+        anim   = {
           type: 'pop',
           scaleOnExit: false
         };
-        
     this.fireEvent('setCard', record.data.card, 3, anim);
   }
 });

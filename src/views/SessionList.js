@@ -27,7 +27,8 @@ app.SessionListView = Ext.extend(Ext.List, {
   onUpdateData: function(user_id, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
-      
+    
+    var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
@@ -35,26 +36,20 @@ app.SessionListView = Ext.extend(Ext.List, {
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
-        //console.log(operation.response.responseText, success);
-        /*if(!result.error){
-          console.log('updateSessionListView', result); 
-          console.log(result, success, response);
-          console.log(this.response.responseText);
+        var result = Ext.util.JSON.decode(operation.response.responseText);
+        if(result.error){
+          alert('Token expired!');
+          that.fireEvent('setCard', 'LoginForm', null, SLIDE_UP);
         }
-        else {
-          console.log('TOKEN EXPIRED!');
-        }*/
+        else{
+          that.dataUpdated = true;
+        }
       }
     });
-    
     this.user_id = user_id;
-    this.dataUpdated = true;
   },
-  onListItemTap: function(item, index, el, e){
-    var store   = item.getStore(),
-        record  = store.getAt(index);
-        
-    console.log(record.data.id);
+  onListItemTap: function(view, index, item, e){
+    var record = this.getRecord(item);
     this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
   }
 });

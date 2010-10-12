@@ -47,6 +47,7 @@ app.Main = Ext.extend(Ext.Panel, {
     this.userSkillListView = new app.UserSkillListView(cardOptions);
     this.userListView = new app.UserListView(cardOptions);
     this.userDetailView = new app.UserDetailView(cardOptions);
+    this.calendarListView = new app.CalendarListView(cardOptions);
     
     // add items to main
     this.items = [
@@ -57,6 +58,7 @@ app.Main = Ext.extend(Ext.Panel, {
       this.userSkillListView,
       this.userListView,
       this.userDetailView,
+      this.calendarListView,
     ];
     
     this.addEvents('setCard');
@@ -67,7 +69,7 @@ app.Main = Ext.extend(Ext.Panel, {
   onSetCard: function(cardName, data, anim, back){
     // choose card to set
     switch(cardName) {
-      case 'LoginForm':
+      case 'LoginView':
         card = this.loginView;
         break;
       case 'HomeView':
@@ -76,7 +78,7 @@ app.Main = Ext.extend(Ext.Panel, {
         break;
       case 'SessionListView':
         card = this.sessionListView;
-        //this.sessionListView.fireEvent('updateData', data);
+        this.sessionListView.fireEvent('updateData', data);
         break;
       case 'SessionDetailView':
         card = this.sessionDetailView;
@@ -94,6 +96,11 @@ app.Main = Ext.extend(Ext.Panel, {
         card = this.userDetailView;
         this.userDetailView.fireEvent('updateData', data);
         break;
+      case 'CalendarListView':
+        card = this.calendarListView;
+        this.calendarListView.fireEvent('updateData', data);
+        break;
+        
       default:
         card = this.loginView;
         break;

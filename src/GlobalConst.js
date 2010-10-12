@@ -8,6 +8,7 @@ var G_NO_CONN = "Can't connect. Try again."
 // animations
 var SLIDE_DOWN = {
   type: 'slide',
+  reveal: true,
   direction:'down',
   easing:'ease-out'
 };

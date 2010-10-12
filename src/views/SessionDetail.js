@@ -18,19 +18,17 @@ app.SessionDetailView = Ext.extend(Ext.DataView, {
     app.SessionDetailView.superclass.initComponent.call(this);
   },
   onUpdateData: function(session_id) {
+    var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
         url: 'session/' + session_id
       },
-      callback: function(result, success, response) {
-        if(!result.error){
-          console.log('updateSessionDetailView', result);
-          console.log(result, success, response);
-          console.log(this.store.getAt(0));
-        }
-        else {
-          console.log('TOKEN EXPIRED!');
+      callback: function(records, operation, success) {
+        var result = Ext.util.JSON.decode(operation.response.responseText);
+        if(result.error){
+          alert('Token expired!');
+          that.fireEvent('setCard', 'LoginForm', null, SLIDE_UP);
         }
       }
     });

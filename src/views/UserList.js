@@ -22,6 +22,7 @@ app.UserListView = Ext.extend(Ext.List, {
     app.SessionListView.superclass.initComponent.call(this);
   },
   onUpdateData: function(skill) {
+    var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
@@ -29,14 +30,16 @@ app.UserListView = Ext.extend(Ext.List, {
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
-        
+        var result = Ext.util.JSON.decode(operation.response.responseText);
+        if(result.error){
+          alert('Token expired!');
+          that.fireEvent('setCard', 'LoginForm', null, SLIDE_UP);
+        }
       }
     });
   },
-  onListItemTap: function(item, index, el, e){
-    var store   = item.getStore(),
-        record  = store.getAt(index);
-
+  onListItemTap: function(view, index, item, e){
+    var record = this.getRecord(item);
     this.fireEvent('setCard', 'UserDetailView', record.data.id, 'slide');
   }
 });

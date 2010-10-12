@@ -30,12 +30,14 @@
     <script type="text/javascript" src="src/views/UserSkillList.js"></script>
     <script type="text/javascript" src="src/views/UserList.js"></script>
     <script type="text/javascript" src="src/views/UserDetail.js"></script>
+    <script type="text/javascript" src="src/views/CalendarList.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="src/models/Session.js"></script>
     <script type="text/javascript" src="src/models/SessionDetail.js"></script>
     <script type="text/javascript" src="src/models/Speaker.js"></script>
     <script type="text/javascript" src="src/models/User.js"></script>
     <script type="text/javascript" src="src/models/UserDetail.js"></script>
+    <script type="text/javascript" src="src/models/Calendar.js"></script>
     
 </head>
 <body>
@@ -72,6 +74,7 @@
     </div>
     <tpl for="speakers">
       <div class="speakers-item" style="height:auto;">
+        <p>------</p>
         <p>{id}</p>
         <p><strong>{name}</strong></p>
         <p>{karma}</p>
@@ -111,6 +114,27 @@
       <p>{blog}</p>
       <p><tpl for="skills">{.} </tpl></p>
     </div>
+  </tpl>
+</textarea>
+<textarea id="calendarlist" class="x-hidden-display">
+  <tpl for=".">
+    <tpl if="colspan == 1">
+      <div class="calendarlist-item" style="height:auto;">
+        <p>{id}</p>
+        <p>{hour}</p>
+        <p>{start} > {end}</p>
+        <p><strong>{title}</strong></p>
+        <p>{placename}</p>
+        <p><tpl for="speakers">{name}</tpl></p>
+      </div>
+    </tpl>
+    <tpl if="colspan == 4">
+      <div class="calendarlist-break-item" style="height:auto;">
+        <p>{hour}</p>
+        <p>{start} > {end}</p>
+        <p><strong>{title}</strong></p>
+      </div>
+    </tpl>
   </tpl>
 </textarea>
 </body>
