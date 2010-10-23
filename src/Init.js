@@ -1,10 +1,10 @@
 Ext.ns('app', 'model', 'view', 'proxy');
 
 Ext.setup({
-  tabletStartupScreen: 'res/imgs/tablet_startup.png',
+  //tabletStartupScreen: 'res/imgs/tablet_startup.png',
   phoneStartupScreen: 'res/imgs/phone_startup.png',
   icon: 'res/imgs/icon.png',
-  glossOnIcon: true,
+  glossOnIcon: false,
   onReady: function() {
     var main = new app.Main({
       scope:this
