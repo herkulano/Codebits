@@ -2,6 +2,7 @@ app.HomeView = Ext.extend(Ext.DataView, {
   name:'HomeView',
   cls:'home-view',
   itemSelector:'li.home-item>div',
+  sroll:'vertical',
   singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
@@ -22,13 +23,13 @@ app.HomeView = Ext.extend(Ext.DataView, {
     this.store = new Ext.data.Store({
       fields: ['card','title','img'],
       data: [
-        {title:'favorite sessions', card:'SessionListView', img:'favorites'},
+        {title:'favorite', card:'SessionListView', img:'favorites'},
         {title:'projects',          card:'HomeView', img:'projects'},
         {title:'calendar',          card:'CalendarListView', img:'calendar'},
         {title:'#codebits',         card:'HomeView', img:'twitter'},
         {title:'users',             card:'UserSkillListView', img:'users'},
         //{title:'Blog ?',          card:'HomeView', img:'00'},
-        {title:'where is it?',      card:'HomeView', img:'where'},
+        {title:'where?',      card:'HomeView', img:'where'},
       ]
     });
     

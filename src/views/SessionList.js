@@ -2,6 +2,7 @@ app.SessionListView = Ext.extend(Ext.List, {
   name:'SessionListView',
   cls: 'list-view',
   itemSelector: 'div.sessionlist-item',
+  scroll:'vertical',
   singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,

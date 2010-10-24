@@ -1,7 +1,8 @@
 app.UserListView = Ext.extend(Ext.List, {
   name:'UserListView',
-  cls: 'list-view',
-  itemSelector: 'div.userlist-item',
+  cls:'list-view',
+  itemSelector:'div.userlist-item',
+  scroll:'vertical',
   singleSelect: true,
   loadingText: G_LOADING,
   emptyText: G_EMPTY,

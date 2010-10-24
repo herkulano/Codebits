@@ -1,11 +1,18 @@
 CACHE MANIFEST
-#rev1
+#rev2
 
-libs/css/ext-touch-debug.css
-libs/ext-touch-debug.js
-libs/css/ext-touch.css
-libs/ext-touch.js
+res/imgs/bt-back.png
+res/imgs/bt-refresh.png
+res/imgs/home_calendar.png
+res/imgs/home_favorites.png
+res/imgs/home_header.png
+res/imgs/home_projects.png
+res/imgs/home_twitter.png
+res/imgs/home_users.png
+res/imgs/home_where.png
 
-NETWORK
-src/*
+#libs/css/ext-touch.css
+#libs/ext-touch.js
+
+#res/css/main.css
 

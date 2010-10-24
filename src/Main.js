@@ -2,7 +2,6 @@ app.Main = Ext.extend(Ext.Panel, {
   name: 'Main',
   cls: 'main',
   fullscreen: true,
-  scroll: 'vertical',
   layout: 'card',
   activeItem: 0,
   initComponent: function() {
@@ -55,7 +54,6 @@ app.Main = Ext.extend(Ext.Panel, {
       name: 'InnerPanel',
       cls: 'inner',
       fullscreen: true,
-      scroll: 'vertical',
       layout: 'card',
       activeItem: 0,
       items: [

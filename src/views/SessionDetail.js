@@ -1,6 +1,7 @@
 app.SessionDetailView = Ext.extend(Ext.DataView, {
   name:'SessionDetailView',
-  cls: 'sessiondetail-view',
+  cls:'sessiondetail-view',
+  scroll:'vertical',
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
   initComponent: function() {
