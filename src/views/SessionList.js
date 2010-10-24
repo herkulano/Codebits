@@ -1,6 +1,6 @@
 app.SessionListView = Ext.extend(Ext.List, {
   name:'SessionListView',
-  cls: 'sessionlist-view',
+  cls: 'list-view',
   itemSelector: 'div.sessionlist-item',
   singleSelect: true,
   loadingText: G_LOADING,

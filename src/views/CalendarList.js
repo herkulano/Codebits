@@ -1,6 +1,6 @@
 app.CalendarListView = Ext.extend(Ext.List, {
   name:'CalendarListView',
-  cls: 'calendarlist-view',
+  cls: 'list-view',
   itemSelector: 'div.calendarlist-item',
   singleSelect: true,
   grouped: true,

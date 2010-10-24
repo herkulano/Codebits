@@ -9,10 +9,10 @@ app.Main = Ext.extend(Ext.Panel, {
     this.cardPath = [];
     
     this.backBt = new Ext.Button({
-      text: 'Back',
-      ui: 'back',
+      text: 'back',
+      ui: 'plain',
+      cls: 'back-bt',
       handler: this.onBackBtTap,
-      hidden: false,
       scope: this
     });
     

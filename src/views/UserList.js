@@ -1,6 +1,6 @@
 app.UserListView = Ext.extend(Ext.List, {
   name:'UserListView',
-  cls: 'userlist-view',
+  cls: 'list-view',
   itemSelector: 'div.userlist-item',
   singleSelect: true,
   loadingText: G_LOADING,

@@ -5,7 +5,11 @@
 
 $back_color: rgba(51, 51, 51, 1);
 $home_text_color: rgba(102, 102, 102, 1);
+$text_color: rgba(179, 179, 179, 1);
 $dark_color: rgba(31, 31, 31, 1);
+$divide_color: rgba(77, 77, 77, 1);
+$shadow_color: rgba(0,0,0,0.5);
+$bt_text_color: rgba(204,204,204,1);
 
 body {
   background-color: $back_color;
@@ -23,7 +27,7 @@ div.x-toolbar.home-toolbar {
   height: 85px;
   background: $dark_color;
   border-bottom: darken($dark_color, 5%) 1px none;
-  @include box-shadow(rgba(0,0,0,0.5), 0px, 1px, 10px);
+  @include box-shadow($shadow_color, 0px, 1px, 16px);
   
   div.x-container {
     width:100%;
@@ -73,12 +77,76 @@ div.home-view {
   }
 }
 
-div.sessiondetail-view {
-  //background-color: $back-color;
+div.x-toolbar.navbar {
+  height: 47px;
+  background: $dark_color;
+  border-bottom: darken($dark_color, 10%) 1px none;
+  @include box-shadow($shadow_color, 0px, 1px, 8px);
 }
 
-div.sessionlist-view {
+.x-toolbar .x-button.x-button-plain {
+  border: $divide_color 1px solid;
+  background: $back_color;
+  color: $bt_text_color;
+  @include border-radius(0px);
+  height: 33px;
+  margin: 0px;
+  padding: 0px 5px 0px 25px;
+  
+  & > span {
+    font-size: 1em;
+    margin: auto;
+  }
+  
+  &.x-button-pressed {
+    background: darken($back_color, 5%);
+  }
+}
+
+.x-toolbar .x-button.x-button-plain.back-bt {
+  background: $back_color url('../imgs/bt-back.png') no-repeat 3px 4px;
+  
+  &.x-button-pressed {
+    background: darken($back_color, 5%) url('../imgs/bt-back.png') no-repeat 3px 4px;
+  }
+}
+
+.x-list .x-list-group-items, .x-list.x-list-flat .x-list-parent {
+  
+  & > * {
+    border-top: none;
+    border-bottom: $divide_color 1px solid;
+    color: $text_color;
+  }
+  
+  & > .x-item-pressed {
+    background: darken($back_color, 5%);
+    border-top: none;
+  }
+  
+  & > .x-item-selected {
+    background: darken($back_color, 5%);
+    border-top: none;
+    border-bottom: $divide_color 1px solid;
+    @include linear-gradient( 
+      color-stops(
+        darken($back_color, 8%), 
+        darken($back_color, 5%) 30%,
+        darken($back_color, 5%) 70%,
+        darken($back_color, 8%) 100%
+      ));
+  }
+}
+
+.list-view {
+  background-color: $back-color;
+  color: $text_color;
   
   div.sessionlist-item {
+    
+  }
+  
+  div.userskilllist-item {
+    
   }
 }

@@ -1,6 +1,6 @@
 app.UserSkillListView = Ext.extend(Ext.List, {
   name:'UserSkillListView',
-  cls:'userskilllist-view',
+  cls:'list-view',
   itemSelector:'div.userskilllist-item',
   singleSelect: true,
   loadingText: G_LOADING,
