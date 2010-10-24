@@ -1,4 +1,4 @@
-app.LoginForm = Ext.extend(Ext.form.FormPanel, {
+app.LoginView = Ext.extend(Ext.form.FormPanel, {
   name:'LoginView',
   scroll:'vertical',
   standardSubmit:true,
@@ -29,7 +29,7 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
     
     this.items = [this.fieldSet];
     
-    app.LoginForm.superclass.initComponent.call(this);
+    app.LoginView.superclass.initComponent.call(this);
   },
   onTryLogin: function(){
     var that = this;
@@ -62,4 +62,4 @@ app.LoginForm = Ext.extend(Ext.form.FormPanel, {
   }
 });
 
-Ext.reg('LoginView', app.LoginForm);
+Ext.reg('LoginView', app.LoginView);

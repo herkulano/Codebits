@@ -15,9 +15,7 @@ app.UserDetailView = Ext.extend(Ext.DataView, {
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);
     
-    this.on('itemtap', this.onListItemTap);
-    
-    app.SessionListView.superclass.initComponent.call(this);
+    app.UserDetailView.superclass.initComponent.call(this);
   },
   onUpdateData: function(user_id) {
     var that = this;
@@ -35,11 +33,6 @@ app.UserDetailView = Ext.extend(Ext.DataView, {
         }
       }
     });
-  },
-  onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
-    // TODO Add Speaker Detail ?
-    //this.fireEvent('setCard', '--SPEAKERS--', record.data.id, 'slide');
   }
 });
 

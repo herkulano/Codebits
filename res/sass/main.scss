@@ -1,33 +1,69 @@
 // This must be compiled after it is edited, for more information, see
 // http://www.sass-lang.org
 
-//@import "compass/css3/columns";
+@import "compass/css3";
 
-$back_color: #F2F2F2;
+$back_color: rgba(51, 51, 51, 1);
+$home_text_color: rgba(102, 102, 102, 1);
+$dark_color: rgba(31, 31, 31, 1);
 
 body {
-  background-color: #EEE;
+  background-color: $back_color;
 }
 
 .x-panel-body {
   //background-color: #f2f2f2;
 }
 
+.x-scrollbar {
+  //change 
+}
+
+div.x-toolbar.home-toolbar {
+  height: 85px;
+  background: $dark_color;
+  border-bottom: darken($dark_color, 5%) 1px none;
+  @include box-shadow(rgba(0,0,0,0.5), 0px, 1px, 10px);
+  
+  div.x-container {
+    width:100%;
+  }
+  div.home-toolbar-img {
+    width: 300px;
+    height: 75px;
+    margin:auto;
+    background: url('../imgs/home_header.png') no-repeat;
+  }
+}
+
 div.home-view {
-  background-color: #99FFFF;
   
   ul.home-container {
-    margin: 50px 10px;
+    margin: 20px 10px;
   }
   
-  li.home-item { 
+  li.home-item {
     float: left;
     width: 33.33%;
-    height: 120px;
-    background-color: rgba(100,50,100,1);
+    padding: 10px;
+    
+    div {
+      background-color: lighten($dark_color, 5%);
+      width: 110px;
+      height: 150px;
+      padding-top: 10px;
+      margin: auto;
+      @include border-radius(8px);
+      
+      &.x-item-selected, &.x-item-pressed {
+        background-color: $dark_color;
+      }
+    }
     
     p {
+      color: $home_text_color;
       text-align: center;
+      line-height: 1em;
     }
     
     img {
@@ -35,21 +71,10 @@ div.home-view {
       margin: 5px auto;
     }
   }
-  
-  li.home-item-over {
-    background-color: rgba(200,100,100,1);
-  }
-  
-  li.x-item-selected {
-    background-color: rgba(200,100,100,1);
-  }
-  li.x-item-pressed {
-    background-color: rgba(100,100,250,1);
-  }
 }
 
 div.sessiondetail-view {
-  background-color: $back-color;
+  //background-color: $back-color;
 }
 
 div.sessionlist-view {

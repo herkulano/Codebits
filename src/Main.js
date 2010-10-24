@@ -12,7 +12,7 @@ app.Main = Ext.extend(Ext.Panel, {
       text: 'Back',
       ui: 'back',
       handler: this.onBackBtTap,
-      hidden: true,
+      hidden: false,
       scope: this
     });
     
@@ -26,22 +26,24 @@ app.Main = Ext.extend(Ext.Panel, {
     });
     
     this.navBar = new Ext.Toolbar({
-      title: 'CODEBITS 2010',
+      cls: 'navbar',
       dock: 'top',
       items: [this.backBt, {flex: 1, xtype: 'spacer'}, this.refreshBt]
     });
     
-    this.dockedItems = [this.navBar];
-    
     // init items
-    var cardOptions = {
-      listeners: {
-        setCard: this.onSetCard,
-        scope: this
-      }
+    var cardListeners = {
+      setCard: this.onSetCard,
+      updateTitle: this.onUpdateTitle,
+      scope: this
     };
-    this.loginForm = new app.LoginForm(cardOptions);
+    var cardOptions = {
+       listeners:cardListeners,
+    };
+    //
+    this.loginView = new app.LoginView({listeners:cardListeners});
     this.homeView = new app.HomeView(cardOptions);
+    //
     this.sessionListView = new app.SessionListView(cardOptions);
     this.sessionDetailView = new app.SessionDetailView(cardOptions);
     this.userSkillListView = new app.UserSkillListView(cardOptions);
@@ -49,20 +51,34 @@ app.Main = Ext.extend(Ext.Panel, {
     this.userDetailView = new app.UserDetailView(cardOptions);
     this.calendarListView = new app.CalendarListView(cardOptions);
     
+    this.innerPanel = new Ext.Panel({
+      name: 'InnerPanel',
+      cls: 'inner',
+      fullscreen: true,
+      scroll: 'vertical',
+      layout: 'card',
+      activeItem: 0,
+      items: [
+        this.sessionListView,
+        this.sessionDetailView,
+        this.userSkillListView,
+        this.userListView,
+        this.userDetailView,
+        this.calendarListView,
+      ],
+      dockedItems: [this.navBar]
+    });
+    
     // add items to main
     this.items = [
-      this.loginForm,
+      this.loginView,
       this.homeView,
-      this.sessionListView,
-      this.sessionDetailView,
-      this.userSkillListView,
-      this.userListView,
-      this.userDetailView,
-      this.calendarListView,
+      this.innerPanel,
     ];
     
-    this.addEvents('setCard');
+    this.addEvents('setCard', 'updateTitle');
     this.on('setCard', this.onSetCard, this);
+    this.on('updateTitle', this.onUpdateTitle, this);
     
     app.Main.superclass.initComponent.call(this);
   },
@@ -106,21 +122,9 @@ app.Main = Ext.extend(Ext.Panel, {
         break;
     }
     
-    // hide or show backBt
-    if(this.items.indexOf(card) > 1)
-      this.backBt.show();
-    else
-      this.backBt.hide('fade');
-    
-    // hide or show refreshBt
-    if(card == this.sessionListView)
-      this.refreshBt.show();
-    else
-      this.refreshBt.hide('fade');
-    
     // add or remove to card path
     // choose anim according to view and backBt
-    if(back !== true && card != this.loginForm) {
+    if(back !== true && card != this.loginView) {
       this.cardPath.push(cardName); 
     }
     else {
@@ -131,18 +135,34 @@ app.Main = Ext.extend(Ext.Panel, {
       else
         anim = {type: 'slide', reverse: true};
     }
-    console.log('cardPath', this.cardPath);
+    
+    console.log('cardPath', this.cardPath, this.cardPath.length);
     console.log('onSetCard',card,data,anim);
-    this.setCard(card, anim);
+    
+    if(this.cardPath.length == 2 ) {
+      this.setCard(this.innerPanel, anim);
+      this.innerPanel.setCard(card, anim);
+    }
+    else if(this.cardPath.length > 2 ) {
+      this.innerPanel.setCard(card, anim);
+    }
+    else if(this.cardPath.length == 1) {
+      this.setCard(card, anim);
+    }
+    
+    console.log('lastOnSetCard');
   },
   onBackBtTap: function(){
+    console.log('backBt', this.cardPath[this.cardPath.length-2]);
     this.fireEvent(
       'setCard', this.cardPath[this.cardPath.length-2],
       null, null, true
     );
-    console.log('backBt');
   },
   onRefreshTap: function(){
     this.getActiveItem().fireEvent('updateData', 3, true);
+  },
+  onUpdateTitle: function(title){
+    this.navBar.setTitle(title);
   }
 });

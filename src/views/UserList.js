@@ -19,9 +19,12 @@ app.UserListView = Ext.extend(Ext.List, {
     
     this.on('itemtap', this.onListItemTap);
     
-    app.SessionListView.superclass.initComponent.call(this);
+    app.UserListView.superclass.initComponent.call(this);
   },
   onUpdateData: function(skill) {
+    if (this.skill === null)
+      return false;
+      
     var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({

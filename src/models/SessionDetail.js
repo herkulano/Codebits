@@ -6,14 +6,15 @@ Ext.regModel('SessionDetail', {
     {name: 'place',       type: 'string'},
     {name: 'placename',   type: 'string'},
     {name: 'start',       type: 'string'},
-    {name: 'slideshare',  types: 'string'},
+    {name: 'slideshare',  type: 'string'},
     {name: 'pfile',       type: 'string'},
     {name: 'video',       type: 'string'},
     {name: 'lang',        type: 'string'},
+    {name: 'speakers',    type: 'array'}, // TODO: CHANGE TO hasMany
   ],
-  
+  /*
   associations: [
       {type: 'hasMany', model: 'Speaker', name: 'speakers'}
   ]
-
+  */
 });
