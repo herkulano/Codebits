@@ -51,6 +51,7 @@ curl_close( $ch );
 
 $toarr = preg_match_all('/\/session\//', $url, $arr );
 $toarr += preg_match_all('/\/user\//', $url, $arr );
+$toarr += preg_match_all('/\/project\//', $url, $arr );
 
 if ( $toarr > 0 ) {
   $json = array(json_decode($contents));

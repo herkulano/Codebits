@@ -23,13 +23,12 @@ app.HomeView = Ext.extend(Ext.DataView, {
     this.store = new Ext.data.Store({
       fields: ['card','title','img'],
       data: [
-        {title:'favorite', card:'SessionListView', img:'favorites'},
-        {title:'projects',          card:'HomeView', img:'projects'},
-        {title:'calendar',          card:'CalendarListView', img:'calendar'},
-        {title:'#codebits',         card:'HomeView', img:'twitter'},
-        {title:'users',             card:'UserSkillListView', img:'users'},
-        //{title:'Blog ?',          card:'HomeView', img:'00'},
-        {title:'where?',      card:'HomeView', img:'where'},
+        {title:'favorite',    card:'SessionListView',   img:'favorites'},
+        {title:'projects',    card:'ProjectListView',   img:'projects'},
+        {title:'calendar',    card:'CalendarListView',  img:'calendar'},
+        {title:'#codebits',   card:'CalendarListView',  img:'twitter'},
+        {title:'users',       card:'UserSkillListView', img:'users'},
+        {title:'where?',      card:'CalendarListView',  img:'where'},
       ]
     });
     

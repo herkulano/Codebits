@@ -49,6 +49,8 @@ app.Main = Ext.extend(Ext.Panel, {
     this.userListView = new app.UserListView(cardOptions);
     this.userDetailView = new app.UserDetailView(cardOptions);
     this.calendarListView = new app.CalendarListView(cardOptions);
+    this.projectListView = new app.ProjectListView(cardOptions);
+    this.projectDetailView = new app.ProjectDetailView(cardOptions);
     
     this.innerPanel = new Ext.Panel({
       name: 'InnerPanel',
@@ -63,6 +65,8 @@ app.Main = Ext.extend(Ext.Panel, {
         this.userListView,
         this.userDetailView,
         this.calendarListView,
+        this.projectListView,
+        this.projectDetailView,
       ],
       dockedItems: [this.navBar]
     });
@@ -103,8 +107,7 @@ app.Main = Ext.extend(Ext.Panel, {
         break;
       case 'UserListView':
         card = this.userListView;
-        if(back !== true)
-          this.userListView.fireEvent('updateData', data);
+        this.userListView.fireEvent('updateData', data);
         break;
       case 'UserDetailView':
         card = this.userDetailView;
@@ -113,6 +116,14 @@ app.Main = Ext.extend(Ext.Panel, {
       case 'CalendarListView':
         card = this.calendarListView;
         this.calendarListView.fireEvent('updateData', data);
+        break;
+      case 'ProjectListView':
+        card = this.projectListView;
+        this.projectListView.fireEvent('updateData', data);
+        break;
+      case 'ProjectDetailView':
+        card = this.projectDetailView;
+        this.projectDetailView.fireEvent('updateData', data);
         break;
         
       default:

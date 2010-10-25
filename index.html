@@ -1,6 +1,5 @@
 <!doctype html>
 <html manifest="cache.manifest">
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -33,6 +32,8 @@
     <script type="text/javascript" src="src/views/UserList.js"></script>
     <script type="text/javascript" src="src/views/UserDetail.js"></script>
     <script type="text/javascript" src="src/views/CalendarList.js"></script>
+    <script type="text/javascript" src="src/views/ProjectList.js"></script>
+    <script type="text/javascript" src="src/views/ProjectDetail.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="src/models/Session.js"></script>
     <script type="text/javascript" src="src/models/SessionDetail.js"></script>
@@ -40,6 +41,8 @@
     <script type="text/javascript" src="src/models/User.js"></script>
     <script type="text/javascript" src="src/models/UserDetail.js"></script>
     <script type="text/javascript" src="src/models/Calendar.js"></script>
+    <script type="text/javascript" src="src/models/Project.js"></script>
+    <script type="text/javascript" src="src/models/ProjectDetail.js"></script>
     
 </head>
 <body>
@@ -137,6 +140,39 @@
         <p>{hour}</p>
         <p>{start} > {end}</p>
         <p><strong>{title}</strong></p>
+      </div>
+    </tpl>
+  </tpl>
+</textarea>
+<textarea id="projectlist" class="x-hidden-display">
+  <tpl for=".">
+    <div class="projectlist-item" style="height:auto;">
+      <p>{id} <strong>{title}</strong></p>
+      <p>{status}</p>
+    </div>
+  </tpl>
+</textarea>
+<textarea id="projectdetail" class="x-hidden-display">
+  <tpl for=".">
+    <div class="projectdetail-item" style="height:auto;">
+      <p>{id}</p>
+      <p>{owner_id}</p>
+      <p><strong>{title}</strong></p>
+      <p>{abstract}</p>
+      <p>{description}</p>
+      <p>{url}</p>
+      <p>{date_created}</p>
+      <p>{date_modified}</p>
+      <p>{presentation_position}</p>
+      <p>{location}</p>
+      <p>{edition}</p>
+      <p>{video_offset}</p>
+    </div>
+    <tpl for="users">
+      <div class="users-item" style="height:auto;">
+        <p>------</p>
+        <p>{user_id}</p>
+        <p><strong>{name}</strong></p>
       </div>
     </tpl>
   </tpl>
