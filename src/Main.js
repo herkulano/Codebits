@@ -134,8 +134,7 @@ app.Main = Ext.extend(Ext.Panel, {
     );
   },
   onRefreshTap: function(){
-    console.log('REFRESH');
-    this.getActiveItem().fireEvent('updateData', null, true);
+    this.innerPanel.getActiveItem().fireEvent('updateData', null, true);
   },
   onUpdateTitle: function(title){
     this.navBar.setTitle(title);
