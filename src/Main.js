@@ -52,6 +52,7 @@ app.Main = Ext.extend(Ext.Panel, {
     this.projectListView = new app.ProjectListView(cardOptions);
     this.projectDetailView = new app.ProjectDetailView(cardOptions);
     this.twitterView = new app.TwitterView(cardOptions);
+    this.mapView = new app.MapView(cardOptions);
     
     this.innerPanel = new Ext.Panel({
       name: 'InnerPanel',
@@ -69,6 +70,7 @@ app.Main = Ext.extend(Ext.Panel, {
         this.projectListView,
         this.projectDetailView,
         this.twitterView,
+        this.mapView,
       ],
       dockedItems: [this.navBar]
     });
@@ -91,7 +93,7 @@ app.Main = Ext.extend(Ext.Panel, {
     var card = Ext.getCmp(cardName);
     card.fireEvent('updateData', data);
     
-    if (card == this.sessionListView || card == this.twitterView)
+    if (card == this.sessionListView || card == this.twitterView || card == this.MapView)
       this.refreshBt.show();
     else
       this.refreshBt.hide();

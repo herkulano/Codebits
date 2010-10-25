@@ -28,7 +28,7 @@ app.HomeView = Ext.extend(Ext.DataView, {
         {title:'calendar',    card:'CalendarListView',  img:'calendar'},
         {title:'#codebits',   card:'TwitterView',       img:'twitter'},
         {title:'users',       card:'UserSkillListView', img:'users'},
-        {title:'where?',      card:'CalendarListView',  img:'where'},
+        {title:'where?',      card:'MapView',           img:'where'},
       ]
     });
     
