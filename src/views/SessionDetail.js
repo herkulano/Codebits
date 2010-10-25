@@ -1,5 +1,5 @@
 app.SessionDetailView = Ext.extend(Ext.DataView, {
-  name:'SessionDetailView',
+  id:'SessionDetailView',
   cls:'sessiondetail-view',
   scroll:'vertical',
   loadingText: G_LOADING,

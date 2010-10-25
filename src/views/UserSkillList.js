@@ -1,5 +1,5 @@
 app.UserSkillListView = Ext.extend(Ext.List, {
-  name:'UserSkillListView',
+  id:'UserSkillListView',
   cls:'list-view',
   itemSelector:'div.userskilllist-item',
   scroll:'vertical',

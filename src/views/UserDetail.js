@@ -1,5 +1,5 @@
 app.UserDetailView = Ext.extend(Ext.DataView, {
-  name:'UserDetailView',
+  id:'UserDetailView',
   cls: 'userdetail-view',
   scroll:'vertical',
   loadingText: G_LOADING,

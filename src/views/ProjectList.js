@@ -1,5 +1,5 @@
 app.ProjectListView = Ext.extend(Ext.List, {
-  name:'ProjectListView',
+  id:'ProjectListView',
   cls: 'list-view',
   itemSelector: 'div.projectlist-item',
   scroll:'vertical',

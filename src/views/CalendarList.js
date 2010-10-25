@@ -1,5 +1,5 @@
 app.CalendarListView = Ext.extend(Ext.List, {
-  name:'CalendarListView',
+  id:'CalendarListView',
   cls: 'list-view',
   itemSelector: 'div.calendarlist-item',
   scroll:'vertical',

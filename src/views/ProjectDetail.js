@@ -1,5 +1,5 @@
 app.ProjectDetailView = Ext.extend(Ext.DataView, {
-  name:'ProjectDetailView',
+  id:'ProjectDetailView',
   cls:'projectdetail-view',
   scroll:'vertical',
   loadingText: G_LOADING,

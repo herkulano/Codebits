@@ -1,5 +1,5 @@
 app.LoginView = Ext.extend(Ext.form.FormPanel, {
-  name:'LoginView',
+  id:'LoginView',
   scroll:'vertical',
   standardSubmit:true,
   initComponent: function(){

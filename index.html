@@ -23,6 +23,7 @@
     <script type="text/javascript" src="src/Init.js"></script>
     <script type="text/javascript" src="src/Main.js"></script>
     <script type="text/javascript" src="src/CodebitsProxy.js"></script>
+    <script type="text/javascript" src="src/TwitterProxy.js"></script>
     <!-- Views -->
     <script type="text/javascript" src="src/views/Login.js"></script>
     <script type="text/javascript" src="src/views/Home.js"></script>
@@ -34,6 +35,7 @@
     <script type="text/javascript" src="src/views/CalendarList.js"></script>
     <script type="text/javascript" src="src/views/ProjectList.js"></script>
     <script type="text/javascript" src="src/views/ProjectDetail.js"></script>
+    <script type="text/javascript" src="src/views/TwitterView.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="src/models/Session.js"></script>
     <script type="text/javascript" src="src/models/SessionDetail.js"></script>
@@ -43,6 +45,7 @@
     <script type="text/javascript" src="src/models/Calendar.js"></script>
     <script type="text/javascript" src="src/models/Project.js"></script>
     <script type="text/javascript" src="src/models/ProjectDetail.js"></script>
+    <script type="text/javascript" src="src/models/Tweet.js"></script>
     
 </head>
 <body>
@@ -175,6 +178,22 @@
         <p><strong>{name}</strong></p>
       </div>
     </tpl>
+  </tpl>
+</textarea>
+<textarea id="twitterlist" class="x-hidden-display">
+  <tpl for=".">
+      <div class="tweet">
+          <img src="{profile_image_url}" />
+          <div class="x-tweetanchor"></div>
+              <div class="tweet-bubble">
+                  <div class="tweet-content">
+                      <h2>{from_user}</h2>
+                      <p>{text}</p><strong></strong>
+                      <span class="posted">{created_at}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
   </tpl>
 </textarea>
 </body>

@@ -1,5 +1,5 @@
 app.SessionListView = Ext.extend(Ext.List, {
-  name:'SessionListView',
+  id:'SessionListView',
   cls: 'list-view',
   itemSelector: 'div.sessionlist-item',
   scroll:'vertical',
@@ -25,15 +25,20 @@ app.SessionListView = Ext.extend(Ext.List, {
     
     app.SessionListView.superclass.initComponent.call(this);
   },
-  onUpdateData: function(user_id, refresh) {
+  onUpdateData: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
+    if(data === null)
+      data = this.user_id;
+    else
+      this.user_id = data;
+      
     var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
     this.store.read({
       params:{
-        url: 'usersessions/' + user_id,
+        url: 'usersessions/' + this.user_id,
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
@@ -47,7 +52,6 @@ app.SessionListView = Ext.extend(Ext.List, {
         }
       }
     });
-    this.user_id = user_id;
   },
   onListItemTap: function(view, index, item, e){
     var record = this.getRecord(item);

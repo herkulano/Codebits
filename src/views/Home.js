@@ -1,5 +1,5 @@
 app.HomeView = Ext.extend(Ext.DataView, {
-  name:'HomeView',
+  id:'HomeView',
   cls:'home-view',
   itemSelector:'li.home-item>div',
   sroll:'vertical',
@@ -26,7 +26,7 @@ app.HomeView = Ext.extend(Ext.DataView, {
         {title:'favorite',    card:'SessionListView',   img:'favorites'},
         {title:'projects',    card:'ProjectListView',   img:'projects'},
         {title:'calendar',    card:'CalendarListView',  img:'calendar'},
-        {title:'#codebits',   card:'CalendarListView',  img:'twitter'},
+        {title:'#codebits',   card:'TwitterView',       img:'twitter'},
         {title:'users',       card:'UserSkillListView', img:'users'},
         {title:'where?',      card:'CalendarListView',  img:'where'},
       ]
@@ -36,6 +36,7 @@ app.HomeView = Ext.extend(Ext.DataView, {
     this.tpl.compile();
     
     this.on('itemtap', this.onListItemTap);
+    this.on('hide', this.hideHandler);
     
     app.HomeView.superclass.initComponent.call(this);
   },
@@ -47,7 +48,10 @@ app.HomeView = Ext.extend(Ext.DataView, {
         };
     this.fireEvent('setCard', record.data.card, 3, anim);
     this.fireEvent('updateTitle', record.data.title);
-  }
+  },
+  hideHandler: function() {
+    this.select(null);
+  },
 });
 
 Ext.reg('HomeView', app.HomeView);

@@ -51,6 +51,7 @@ app.Main = Ext.extend(Ext.Panel, {
     this.calendarListView = new app.CalendarListView(cardOptions);
     this.projectListView = new app.ProjectListView(cardOptions);
     this.projectDetailView = new app.ProjectDetailView(cardOptions);
+    this.twitterView = new app.TwitterView(cardOptions);
     
     this.innerPanel = new Ext.Panel({
       name: 'InnerPanel',
@@ -67,6 +68,7 @@ app.Main = Ext.extend(Ext.Panel, {
         this.calendarListView,
         this.projectListView,
         this.projectDetailView,
+        this.twitterView,
       ],
       dockedItems: [this.navBar]
     });
@@ -86,50 +88,13 @@ app.Main = Ext.extend(Ext.Panel, {
   },
   onSetCard: function(cardName, data, anim, back){
     // choose card to set
-    switch(cardName) {
-      case 'LoginView':
-        card = this.loginView;
-        break;
-      case 'HomeView':
-        card = this.homeView;
-        this.homeView.select(null);
-        break;
-      case 'SessionListView':
-        card = this.sessionListView;
-        this.sessionListView.fireEvent('updateData', data);
-        break;
-      case 'SessionDetailView':
-        card = this.sessionDetailView;
-        this.sessionDetailView.fireEvent('updateData', data);
-        break;
-      case 'UserSkillListView':
-        card = this.userSkillListView;
-        break;
-      case 'UserListView':
-        card = this.userListView;
-        this.userListView.fireEvent('updateData', data);
-        break;
-      case 'UserDetailView':
-        card = this.userDetailView;
-        this.userDetailView.fireEvent('updateData', data);
-        break;
-      case 'CalendarListView':
-        card = this.calendarListView;
-        this.calendarListView.fireEvent('updateData', data);
-        break;
-      case 'ProjectListView':
-        card = this.projectListView;
-        this.projectListView.fireEvent('updateData', data);
-        break;
-      case 'ProjectDetailView':
-        card = this.projectDetailView;
-        this.projectDetailView.fireEvent('updateData', data);
-        break;
-        
-      default:
-        card = this.loginView;
-        break;
-    }
+    var card = Ext.getCmp(cardName);
+    card.fireEvent('updateData', data);
+    
+    if (card == this.sessionListView || card == this.twitterView)
+      this.refreshBt.show();
+    else
+      this.refreshBt.hide();
     
     // add or remove to card path
     // choose anim according to view and backBt
@@ -169,7 +134,8 @@ app.Main = Ext.extend(Ext.Panel, {
     );
   },
   onRefreshTap: function(){
-    this.getActiveItem().fireEvent('updateData', 3, true);
+    console.log('REFRESH');
+    this.getActiveItem().fireEvent('updateData', null, true);
   },
   onUpdateTitle: function(title){
     this.navBar.setTitle(title);
