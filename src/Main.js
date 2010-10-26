@@ -93,7 +93,7 @@ app.Main = Ext.extend(Ext.Panel, {
     var card = Ext.getCmp(cardName);
     card.fireEvent('updateData', data);
     
-    if (card == this.sessionListView || card == this.twitterView || card == this.MapView)
+    if (card == this.sessionListView || card == this.twitterView)
       this.refreshBt.show();
     else
       this.refreshBt.hide();
@@ -103,7 +103,7 @@ app.Main = Ext.extend(Ext.Panel, {
     if(back !== true && card != this.loginView) {
       this.cardPath.push(cardName); 
     }
-    else {
+    else if (card != this.loginView) {
       this.cardPath.pop();
       
       if (card == this.homeView)
@@ -111,18 +111,21 @@ app.Main = Ext.extend(Ext.Panel, {
       else
         anim = {type: 'slide', reverse: true};
     }
+    else if (card == this.loginView) {
+      this.cardPath = [];
+    }
     
     console.log('cardPath', this.cardPath, this.cardPath.length);
     console.log('onSetCard',card,data,anim);
     
     if(this.cardPath.length == 2 ) {
       this.setCard(this.innerPanel, anim);
-      this.innerPanel.setCard(card, anim);
+      this.innerPanel.setCard(card);
     }
     else if(this.cardPath.length > 2 ) {
       this.innerPanel.setCard(card, anim);
     }
-    else if(this.cardPath.length == 1) {
+    else if(this.cardPath.length <= 1) {
       this.setCard(card, anim);
     }
     

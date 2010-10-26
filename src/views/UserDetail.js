@@ -30,7 +30,7 @@ app.UserDetailView = Ext.extend(Ext.DataView, {
         var result = Ext.util.JSON.decode(operation.response.responseText);
         if(result.error){
           alert('Token expired!');
-          that.fireEvent('setCard', 'LoginForm', null, SLIDE_UP);
+          that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
         }
       }
     });

@@ -1,5 +1,10 @@
 CACHE MANIFEST
-#rev2
+#rev4
+
+#uncomment when complete
+#index.html
+
+#res/css/main.css
 
 res/imgs/bt-back.png
 res/imgs/bt-refresh.png
@@ -11,8 +16,5 @@ res/imgs/home_twitter.png
 res/imgs/home_users.png
 res/imgs/home_where.png
 
-#libs/css/ext-touch.css
-#libs/ext-touch.js
-
-#res/css/main.css
-
+NETWORK:
+#* ???
