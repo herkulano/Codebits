@@ -100,8 +100,8 @@ app.Main = Ext.extend(Ext.Panel, {
     
     // add or remove to card path
     // choose anim according to view and backBt
-    if(back !== true && card != this.loginView) {
-      this.cardPath.push(cardName); 
+    if(back != true && card != this.loginView) {
+      this.cardPath.push(cardName);
     }
     else if (card != this.loginView) {
       this.cardPath.pop();
@@ -115,21 +115,19 @@ app.Main = Ext.extend(Ext.Panel, {
       this.cardPath = [];
     }
     
-    console.log('cardPath', this.cardPath, this.cardPath.length);
-    console.log('onSetCard',card,data,anim);
-    
-    if(this.cardPath.length == 2 ) {
-      this.setCard(this.innerPanel, anim);
-      this.innerPanel.setCard(card);
+    if(this.cardPath.length == 2) {
+      if (back != true){
+        this.setCard(this.innerPanel, anim);
+        anim = null;
+      }
+      this.innerPanel.setCard(card, anim);
     }
-    else if(this.cardPath.length > 2 ) {
+    else if(this.cardPath.length > 2) {
       this.innerPanel.setCard(card, anim);
     }
     else if(this.cardPath.length <= 1) {
       this.setCard(card, anim);
     }
-    
-    console.log('lastOnSetCard');
   },
   onBackBtTap: function(){
     console.log('backBt', this.cardPath[this.cardPath.length-2]);

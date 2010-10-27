@@ -23,7 +23,7 @@ app.UserListView = Ext.extend(Ext.List, {
     app.UserListView.superclass.initComponent.call(this);
   },
   onUpdateData: function(skill) {
-    if (this.skill === null)
+    if (skill == null)
       return false;
       
     var that = this;

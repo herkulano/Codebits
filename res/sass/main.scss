@@ -3,16 +3,16 @@
 
 @import "compass/css3";
 
-$back_color: rgba(51, 51, 51, 1);
-$home_text_color: rgba(102, 102, 102, 1);
-$text_color: rgba(179, 179, 179, 1);
+$back_color: rgba(40, 40, 40, 1);
+$home_text_color: rgba(180, 180, 180, 1);
+$text_color: rgba(200, 200, 200, 1);
 $dark_color: rgba(31, 31, 31, 1);
-$divide_color: rgba(77, 77, 77, 1);
-$shadow_color: rgba(0,0,0,0.5);
-$bt_text_color: rgba(204,204,204,1);
+$divide_color: rgba(50, 50, 50, 1);
+$shadow_color: rgba(0, 0, 0, 0.5);
+$bt_text_color: rgba(204, 204, 204, 1);
 
 body {
-  background-color: $back_color;
+  background: $back_color url('../imgs/navBk.png') repeat;
 }
 
 .x-panel-body {
@@ -25,9 +25,9 @@ body {
 
 div.x-toolbar.home-toolbar {
   height: 85px;
-  background: $dark_color;
-  border-bottom: darken($dark_color, 5%) 1px none;
-  @include box-shadow($shadow_color, 0px, 1px, 16px);
+  background: $dark_color url('../imgs/home_header.png') center center no-repeat;
+  border-bottom: black 4px solid;
+  @include box-shadow(black, 0px, 2px, 16px);
   
   div.x-container {
     width:100%;
@@ -36,7 +36,6 @@ div.x-toolbar.home-toolbar {
     width: 300px;
     height: 75px;
     margin:auto;
-    background: url('../imgs/home_header.png') no-repeat;
   }
 }
 
@@ -52,7 +51,7 @@ div.home-view {
     padding: 10px 3px;
     
     div {
-      background-color: lighten($dark_color, 5%);
+      background-color: $dark_color;
       width: 90px;
       height: 120px;
       padding-top: 3px;
@@ -60,7 +59,7 @@ div.home-view {
       @include border-radius(8px);
       
       &.x-item-selected, &.x-item-pressed {
-        background-color: $dark_color;
+        background-color: darken($dark_color, 5%);
       }
     }
     
@@ -79,9 +78,9 @@ div.home-view {
 
 div.x-toolbar.navbar {
   height: 47px;
-  background: $dark_color;
-  border-bottom: darken($dark_color, 10%) 1px none;
-  @include box-shadow($shadow_color, 0px, 1px, 8px);
+  background: darken($back_color, 10%);
+  border-bottom: none;
+  @include box-shadow(black, 0px, 0px, 12px);
 }
 
 .x-toolbar .x-button.x-button-plain {
@@ -89,7 +88,7 @@ div.x-toolbar.navbar {
   background: $back_color;
   color: $bt_text_color;
   @include border-radius(0px);
-  height: 33px;
+  height: 35px;
   margin: 0px;
   padding: 0px 5px 0px 25px;
   
@@ -105,10 +104,10 @@ div.x-toolbar.navbar {
 }
 
 .x-toolbar .x-button.x-button-plain.back-bt {
-  background: $back_color url('../imgs/bt-back.png') no-repeat 3px 4px;
+  background: $back_color url('../imgs/bt-back.png') no-repeat 3px center;
   
   &.x-button-pressed {
-    background: darken($back_color, 5%) url('../imgs/bt-back.png') no-repeat 3px 4px;
+    background: darken($back_color, 5%) url('../imgs/bt-back.png') no-repeat 3px center;
   }
 }
 
@@ -118,30 +117,33 @@ div.x-toolbar.navbar {
     border-top: none;
     border-bottom: $divide_color 1px solid;
     color: $text_color;
+    background-color: transparentize($dark_color, 0.4);
   }
   
   & > .x-item-pressed {
-    background: darken($back_color, 5%);
+    background: darken($back_color, 10%);
     border-top: none;
   }
   
   & > .x-item-selected {
-    background: darken($back_color, 5%);
     border-top: none;
     border-bottom: $divide_color 1px solid;
     @include linear-gradient( 
       color-stops(
-        darken($back_color, 8%), 
-        darken($back_color, 5%) 30%,
-        darken($back_color, 5%) 70%,
-        darken($back_color, 8%) 100%
+        darken($back_color, 12%), 
+        darken($back_color, 10%) 30%,
+        darken($back_color, 10%) 70%,
+        darken($back_color, 12%) 100%
       ));
   }
 }
 
 .list-view {
-  background-color: $back-color;
-  color: $text_color;
+  background: black url('../imgs/navBk.png') repeat;
+  
+  div.userskilllist-item {
+    
+  }
   
   div.sessionlist-item {
     
@@ -151,3 +153,8 @@ div.x-toolbar.navbar {
     
   }
 }
+
+.x-panel .x-panel-body {
+  color: $text_color;
+}
+

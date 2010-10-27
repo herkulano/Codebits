@@ -9,11 +9,11 @@ app.MapView = Ext.extend(Ext.Panel, {
   initComponent: function() {
     var codebits = new google.maps.LatLng(38.775098,-9.095564);
     
+    
     var map = new Ext.Map({
       title: 'Map',
       getLocation: true,
       mapOptions: {
-        //zoom: 12,
         navigationControl: false,
         streetViewControl: false,
         scaleControl: false,
@@ -37,7 +37,7 @@ app.MapView = Ext.extend(Ext.Panel, {
     var initMap = function() {
       directionsService = new google.maps.DirectionsService();
       directionsDisplay = new google.maps.DirectionsRenderer();
-      directionsDisplay.setMap(map.map); 
+      directionsDisplay.setMap(map.map);
     }
     
     var where = new Ext.Panel({
@@ -61,9 +61,6 @@ app.MapView = Ext.extend(Ext.Panel, {
     }
     
     var getDirections = function() {
-      if (mapUpdated == true)
-        return false;
-      
       var coords = map.geo.coords;
       if (coords.latitude && coords.longitude) {
         var request = {
@@ -76,8 +73,7 @@ app.MapView = Ext.extend(Ext.Panel, {
             directionsDisplay.setDirections(response);
           }
         });
-        
-        mapUpdated = true;
+        map.geo.un('locationupdate', getDirections);
       }
       else {
         var codebitsMarker = new google.maps.Marker({
@@ -85,6 +81,8 @@ app.MapView = Ext.extend(Ext.Panel, {
           title: 'CODEBITS 2010',
           position: codebits
         });
+        map.map.setCenter(codebits);
+        map.map.setZoom(12);
       }
     }
     
