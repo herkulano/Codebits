@@ -27,7 +27,7 @@ app.UserDetailView = Ext.extend(Ext.DataView, {
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
-        var result = Ext.util.JSON.decode(operation.response.responseText);
+        var result = JSON.parse(operation.response.responseText);
         if(result.error){
           alert('Token expired!');
           that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);

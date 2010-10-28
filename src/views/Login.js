@@ -43,7 +43,7 @@ app.LoginView = Ext.extend(Ext.form.FormPanel, {
         password: that.getValues().password
       },
       success: function(response){
-        var result = Ext.util.JSON.decode(response.responseText);
+        var result = JSON.parse(response.responseText);
         if(!result.error){
           localStorage['token'] = result.token;
           localStorage['uid'] = result.uid;

@@ -59,7 +59,6 @@ if ( $toarr > 0 ) {
 }
 else {
   print $contents;
-}
-  
+} 
 
 ?>

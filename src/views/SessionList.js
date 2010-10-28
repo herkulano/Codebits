@@ -42,12 +42,12 @@ app.SessionListView = Ext.extend(Ext.List, {
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
-        var result = Ext.util.JSON.decode(operation.response.responseText);
-        if(result.error){
+        var result = JSON.parse(operation.response.responseText);
+        if (result.error) {
           alert('Token expired!');
           that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
         }
-        else{
+        else {
           that.dataUpdated = true;
         }
       }
