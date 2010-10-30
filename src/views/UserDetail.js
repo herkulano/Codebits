@@ -7,7 +7,6 @@ app.UserDetailView = Ext.extend(Ext.DataView, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       model: 'UserDetail',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('userdetail');

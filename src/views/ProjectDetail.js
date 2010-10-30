@@ -7,7 +7,6 @@ app.ProjectDetailView = Ext.extend(Ext.DataView, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       model: 'ProjectDetail',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('projectdetail');

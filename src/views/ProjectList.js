@@ -11,7 +11,6 @@ app.ProjectListView = Ext.extend(Ext.List, {
     
     this.store = new Ext.data.Store({
       model: 'Project',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('projectlist');

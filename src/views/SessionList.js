@@ -12,7 +12,6 @@ app.SessionListView = Ext.extend(Ext.List, {
     
     this.store = new Ext.data.Store({
       model: 'Session',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('sessionlist');

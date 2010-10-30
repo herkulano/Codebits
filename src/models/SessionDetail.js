@@ -9,12 +9,13 @@ Ext.regModel('SessionDetail', {
     {name: 'slideshare',  type: 'string'},
     {name: 'pfile',       type: 'string'},
     {name: 'video',       type: 'string'},
-    {name: 'lang',        type: 'string'},
-    {name: 'speakers',    type: 'array'}, // TODO: CHANGE TO hasMany
+    {name: 'lang',        type: 'string'}
   ],
-  /*
-  associations: [
-      {type: 'hasMany', model: 'Speaker', name: 'speakers'}
-  ]
-  */
+  
+  hasMany: {model: 'Speaker', name: 'speakers'},
+  
+  proxy: {
+    type: 'CodebitsProxy'
+  }
+  
 });

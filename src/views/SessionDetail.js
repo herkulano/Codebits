@@ -7,7 +7,6 @@ app.SessionDetailView = Ext.extend(Ext.DataView, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       model: 'SessionDetail',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('sessiondetail');

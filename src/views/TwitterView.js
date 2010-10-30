@@ -8,7 +8,6 @@ app.TwitterView = Ext.extend(Ext.List, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       model: 'Tweet',
-      proxy: 'TwitterProxy',
       autoLoad: false,
     });
     this.tpl = Ext.XTemplate.from('twitterlist');

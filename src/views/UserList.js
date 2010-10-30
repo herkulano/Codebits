@@ -9,7 +9,6 @@ app.UserListView = Ext.extend(Ext.List, {
   initComponent: function() {
     this.store = new Ext.data.Store({
       model: 'User',
-      proxy: 'CodebitsProxy',
       autoload: false
     });
     this.tpl = Ext.XTemplate.from('userlist');

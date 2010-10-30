@@ -12,7 +12,6 @@ app.CalendarListView = Ext.extend(Ext.List, {
     
     this.store = new Ext.data.Store({
       model: 'Calendar',
-      proxy: 'CodebitsProxy',
       sorters: 'day',
       getGroupString : function(record) {
         return record.get('day') +' '+ record.get('dayname');

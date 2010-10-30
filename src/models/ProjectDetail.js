@@ -12,12 +12,13 @@ Ext.regModel('ProjectDetail', {
     {name: 'presentation_position', type: 'string'},
     {name: 'location',              type: 'string'},
     {name: 'edition',               type: 'string'},
-    {name: 'video_offset',          type: 'string'},
-    {name: 'users',                 type: 'array'}, // TODO: CHANGE TO hasMany
+    {name: 'video_offset',          type: 'string'}
   ],
-  /*
-  associations: [
-      {type: 'hasMany', model: 'User', name: 'users'}
-  ]
-  */
+
+  hasMany: {model: 'User', name: 'users'},
+  
+  proxy: {
+    type: 'CodebitsProxy'
+  }
+  
 });

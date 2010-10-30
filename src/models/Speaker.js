@@ -5,5 +5,9 @@ Ext.regModel('Speaker', {
         {name: 'name',        type: 'string'},
         {name: 'twitter',     type: 'string'},
         {name: 'blog',        type: 'string'}
-    ]
+    ],
+    
+    proxy: {
+      type: 'CodebitsProxy'
+    }
 });
