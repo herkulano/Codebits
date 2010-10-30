@@ -1,9 +1,14 @@
-# require 'compass-colors' # no longer needed
+# Get the directory that this configuration file exists in
+dir = File.dirname(__FILE__)
 
-css_dir = "../css"
-sass_dir = "../sass"
+# Load the sencha-touch framework automatically.
+load File.join(dir, '..', '..', 'resources', 'themes')
+
+# Compass configurations
+sass_path = dir
+css_path = File.join(dir, "..", "css")
 
 # Require any additional compass plugins here.
-images_dir = '../res/imgs/'
+images_dir = File.join(dir, "..", "imgs")
 output_style = :compressed
 environment = :production

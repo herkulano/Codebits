@@ -1,6 +1,31 @@
 // This must be compiled after it is edited, for more information, see
 // http://www.sass-lang.org
 
+$include_default_icons: false;
+$include_default_uis: false;
+$base_color: #3E7AAD;
+$list_active_color: lighten($base_color, 10%);
+
+@import 'sencha-touch/default/all';
+
+@include sencha-panel;
+@include sencha-buttons;
+//@include sencha-sheet;
+//@include sencha-picker;
+//@include sencha-tabs;
+@include sencha-toolbar;
+@include sencha-toolbar-forms;
+//@include sencha-carousel;
+//@include sencha-indexbar;
+@include sencha-list;
+@include sencha-layout;
+@include sencha-form;
+//@include sencha-msgbox;
+
+@include sencha-toolbar-ui('dark', darken($base_color, 15%));
+
+// @include pictos-button-icon()
+
 @import "compass/css3";
 
 $back_color: rgba(40, 40, 40, 1);

@@ -1,214 +1,218 @@
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    
-	  <title>CODEBITS IV</title>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="libs/css/sencha-touch-debug.css" type="text/css">
-    <link rel="stylesheet" href="res/css/main.css" type="text/css">
-    
-    <!-- Libs -->
-  	<script type="text/javascript" src="libs/ext-touch-debug.js"></script>
-	
-    <!-- Main (init) / Controllers / Proxies -->
-    <script type="text/javascript" src="src/GlobalConst.js"></script>
-    <script type="text/javascript" src="src/Init.js"></script>
-    <script type="text/javascript" src="src/Main.js"></script>
-    <script type="text/javascript" src="src/CodebitsProxy.js"></script>
-    <script type="text/javascript" src="src/TwitterProxy.js"></script>
-    <!-- Views -->
-    <script type="text/javascript" src="src/views/Login.js"></script>
-    <script type="text/javascript" src="src/views/Home.js"></script>
-    <script type="text/javascript" src="src/views/SessionList.js"></script>
-    <script type="text/javascript" src="src/views/SessionDetail.js"></script>
-    <script type="text/javascript" src="src/views/UserSkillList.js"></script>
-    <script type="text/javascript" src="src/views/UserList.js"></script>
-    <script type="text/javascript" src="src/views/UserDetail.js"></script>
-    <script type="text/javascript" src="src/views/CalendarList.js"></script>
-    <script type="text/javascript" src="src/views/ProjectList.js"></script>
-    <script type="text/javascript" src="src/views/ProjectDetail.js"></script>
-    <script type="text/javascript" src="src/views/TwitterView.js"></script>
-    <script type="text/javascript" src="src/views/MapView.js"></script>
-    <!-- Models -->
-    <script type="text/javascript" src="src/models/Session.js"></script>
-    <script type="text/javascript" src="src/models/Speaker.js"></script>
-    <script type="text/javascript" src="src/models/SessionDetail.js"></script>
-    <script type="text/javascript" src="src/models/User.js"></script>
-    <script type="text/javascript" src="src/models/UserDetail.js"></script>
-    <script type="text/javascript" src="src/models/Calendar.js"></script>
-    <script type="text/javascript" src="src/models/Project.js"></script>
-    <script type="text/javascript" src="src/models/ProjectDetail.js"></script>
-    <script type="text/javascript" src="src/models/Tweet.js"></script>
-    
-    <!-- Google Maps JS -->
-    <!-- (Will not be necessary in final) -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <title>CODEBITS IV</title>
+  
+  <link rel="stylesheet" href="res/css/main.css" type="text/css">
 </head>
 <body>
-<textarea id="home" class="x-hidden-display">
-  <ul class="home-container">
-  <tpl for=".">
-    <li class="home-item">
-      <div>
-        <img src="res/imgs/home_{img}.png"/>
-        <p>{title}</p>
+  <script type="text/javascript" src="lib/ext-touch-debug.js"></script>
+  
+  <script type="text/javascript" src="lib/Const.js"></script>
+  
+  <script type="text/javascript" src="lib/TwitterProxy.js"></script>
+  <script type="text/javascript" src="lib/CodebitsProxy.js"></script>
+  
+  <!-- Google Maps JS -->
+  <!-- (Will not be necessary in final) -->
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  
+  <div id="sencha-app">
+    <script type="text/javascript" src="app/routes.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    
+    <!-- Place your view files here -->
+    <div id="sencha-views">
+      <script type="text/javascript" src="app/views/Viewport.js"></script>
+      
+      <script type="text/javascript" src="app/views/Home.js"></script>
+      <script type="text/javascript" src="app/views/Login.js"></script>
+      <script type="text/javascript" src="app/views/SessionList.js"></script>
+      <script type="text/javascript" src="app/views/SessionDetail.js"></script>
+
+    </div>
+    
+    <!-- Place your model files here -->
+    <div id="sencha-models">
+      <script type="text/javascript" src="app/models/Session.js"></script>
+      <script type="text/javascript" src="app/models/SessionDetail.js"></script>
+      <script type="text/javascript" src="app/models/Speaker.js"></script>
+
+    </div>
+    
+    <!-- Place your controller files here -->
+    <div id="sencha-controllers">
+      <script type="text/javascript" src="app/controllers/viewport.js"></script>
+        
+    </div>
+    
+    <!-- Place your store files here -->
+    <div id="sencha-controllers">
+      
+        
+    </div>
+  </div>
+  
+  <textarea id="home" class="x-hidden-display">
+    <ul class="home-container">
+    <tpl for=".">
+      <li class="home-item">
+        <div>
+          <img src="res/imgs/home_{img}.png"/>
+          <p>{title}</p>
+        </div>
+      </li>
+    </tpl>
+    </ul>
+  </textarea>
+  <textarea id="sessionlist" class="x-hidden-display">
+    <tpl for=".">
+      <div class="sessionlist-item" style="height:auto;">
+        <p>{id}<strong> {title} </strong></p>
+        <p>{place} {start}</p>
       </div>
-    </li>
-  </tpl>
-  </ul>
-</textarea>
-<textarea id="sessionlist" class="x-hidden-display">
-  <tpl for=".">
-    <div class="sessionlist-item" style="height:auto;">
-      <p>{id}<strong> {title} </strong></p>
-      <p>{place} {start}</p>
-    </div>
-  </tpl>
-</textarea>
-<textarea id="sessiondetail" class="x-hidden-display">
-  <tpl for=".">
-    <div class="sessiondetail-item" style="height:auto;">
-      <p>{id}</p>
-      <p><strong>{title}</strong></p>
-      <p>{place}</p>
-      <p>{placename}</p>
-      <p>{start}</p>
-      <p>{slideshare}</p>
-      <p>{pfile}</p>
-      <p>{video}</p>
-      <p>{lang}</p>
-    </div>
-    <tpl for="speakers">
-      <div class="speakers-item" style="height:auto;">
-        <p>------</p>
+    </tpl>
+  </textarea>
+  <textarea id="sessiondetail" class="x-hidden-display">
+    <tpl for=".">
+      <div class="sessiondetail-item" style="height:auto;">
+        <p>{id}</p>
+        <p><strong>{title}</strong></p>
+        <p>{place}</p>
+        <p>{placename}</p>
+        <p>{start}</p>
+        <p>{slideshare}</p>
+        <p>{pfile}</p>
+        <p>{video}</p>
+        <p>{lang}</p>
+      </div>
+      <tpl for="speakers">
+        <div class="speakers-item" style="height:auto;">
+          <p>------</p>
+          <p>{id}</p>
+          <p><strong>{name}</strong></p>
+          <p>{karma}</p>
+          <p>{twitter}</p>
+          <p>{blog}</p>
+        </div>
+      </tpl>
+    </tpl>
+  </textarea>
+  <textarea id="userskilllist" class="x-hidden-display">
+    <tpl for=".">
+      <div class="userskilllist-item" style="height:auto;">
+        <p>{skill}</p>
+      </div>
+    </tpl>
+  </textarea>
+  <textarea id="userlist" class="x-hidden-display">
+    <tpl for=".">
+      <div class="userlist-item" style="height:auto;">
         <p>{id}</p>
         <p><strong>{name}</strong></p>
-        <p>{karma}</p>
+        <p>{nick}</p>
         <p>{twitter}</p>
         <p>{blog}</p>
       </div>
     </tpl>
-  </tpl>
-</textarea>
-<textarea id="userskilllist" class="x-hidden-display">
-  <tpl for=".">
-    <div class="userskilllist-item" style="height:auto;">
-      <p>{skill}</p>
-    </div>
-  </tpl>
-</textarea>
-<textarea id="userlist" class="x-hidden-display">
-  <tpl for=".">
-    <div class="userlist-item" style="height:auto;">
-      <p>{id}</p>
-      <p><strong>{name}</strong></p>
-      <p>{nick}</p>
-      <p>{twitter}</p>
-      <p>{blog}</p>
-    </div>
-  </tpl>
-</textarea>
-<textarea id="userdetail" class="x-hidden-display">
-  <tpl for=".">
-    <div class="userdetail-item" style="height:auto;">
-      <p>{id}</p>
-      <p><strong>{name}</strong></p>
-      <p>{nick}</p>
-      <p>{karma}</p>
-      <p>{bio}</p>
-      <p>{twitter}</p>
-      <p>{blog}</p>
-      <p><tpl for="skills">{.} </tpl></p>
-    </div>
-  </tpl>
-</textarea>
-<textarea id="calendarlist" class="x-hidden-display">
-  <tpl for=".">
-    <tpl if="colspan == 1">
-      <div class="calendarlist-item" style="height:auto;">
+  </textarea>
+  <textarea id="userdetail" class="x-hidden-display">
+    <tpl for=".">
+      <div class="userdetail-item" style="height:auto;">
         <p>{id}</p>
-        <p>{hour}</p>
-        <p>{start} > {end}</p>
-        <p><strong>{title}</strong></p>
-        <p>{placename}</p>
-        <p><tpl for="speakers">{name}</tpl></p>
-      </div>
-    </tpl>
-    <tpl if="colspan == 4">
-      <div class="calendarlist-break-item" style="height:auto;">
-        <p>{hour}</p>
-        <p>{start} > {end}</p>
-        <p><strong>{title}</strong></p>
-      </div>
-    </tpl>
-  </tpl>
-</textarea>
-<textarea id="projectlist" class="x-hidden-display">
-  <tpl for=".">
-    <div class="projectlist-item" style="height:auto;">
-      <p>{id} <strong>{title}</strong></p>
-      <p>{status}</p>
-    </div>
-  </tpl>
-</textarea>
-<textarea id="projectdetail" class="x-hidden-display">
-  <tpl for=".">
-    <div class="projectdetail-item" style="height:auto;">
-      <p>{id}</p>
-      <p>{owner_id}</p>
-      <p><strong>{title}</strong></p>
-      <p>{abstract}</p>
-      <p>{description}</p>
-      <p>{url}</p>
-      <p>{date_created}</p>
-      <p>{date_modified}</p>
-      <p>{presentation_position}</p>
-      <p>{location}</p>
-      <p>{edition}</p>
-      <p>{video_offset}</p>
-    </div>
-    <tpl for="users">
-      <div class="users-item" style="height:auto;">
-        <p>------</p>
-        <p>{user_id}</p>
         <p><strong>{name}</strong></p>
+        <p>{nick}</p>
+        <p>{karma}</p>
+        <p>{bio}</p>
+        <p>{twitter}</p>
+        <p>{blog}</p>
+        <p><tpl for="skills">{.} </tpl></p>
       </div>
     </tpl>
-  </tpl>
-</textarea>
-<textarea id="twitterlist" class="x-hidden-display">
-  <tpl for=".">
-      <div class="tweet">
-          <img src="{profile_image_url}" />
-          <div class="x-tweetanchor"></div>
-              <div class="tweet-bubble">
-                  <div class="tweet-content">
-                      <h2>{from_user}</h2>
-                      <p>{text}</p><strong></strong>
-                      <span class="posted">{created_at}</span>
-                  </div>
-              </div>
-          </div>
+  </textarea>
+  <textarea id="calendarlist" class="x-hidden-display">
+    <tpl for=".">
+      <tpl if="colspan == 1">
+        <div class="calendarlist-item" style="height:auto;">
+          <p>{id}</p>
+          <p>{hour}</p>
+          <p>{start} > {end}</p>
+          <p><strong>{title}</strong></p>
+          <p>{placename}</p>
+          <p><tpl for="speakers">{name}</tpl></p>
+        </div>
+      </tpl>
+      <tpl if="colspan == 4">
+        <div class="calendarlist-break-item" style="height:auto;">
+          <p>{hour}</p>
+          <p>{start} > {end}</p>
+          <p><strong>{title}</strong></p>
+        </div>
+      </tpl>
+    </tpl>
+  </textarea>
+  <textarea id="projectlist" class="x-hidden-display">
+    <tpl for=".">
+      <div class="projectlist-item" style="height:auto;">
+        <p>{id} <strong>{title}</strong></p>
+        <p>{status}</p>
       </div>
-  </tpl>
-</textarea>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2323428-8']);
-  _gaq.push(['_trackPageview']);
+    </tpl>
+  </textarea>
+  <textarea id="projectdetail" class="x-hidden-display">
+    <tpl for=".">
+      <div class="projectdetail-item" style="height:auto;">
+        <p>{id}</p>
+        <p>{owner_id}</p>
+        <p><strong>{title}</strong></p>
+        <p>{abstract}</p>
+        <p>{description}</p>
+        <p>{url}</p>
+        <p>{date_created}</p>
+        <p>{date_modified}</p>
+        <p>{presentation_position}</p>
+        <p>{location}</p>
+        <p>{edition}</p>
+        <p>{video_offset}</p>
+      </div>
+      <tpl for="users">
+        <div class="users-item" style="height:auto;">
+          <p>------</p>
+          <p>{user_id}</p>
+          <p><strong>{name}</strong></p>
+        </div>
+      </tpl>
+    </tpl>
+  </textarea>
+  <textarea id="twitterlist" class="x-hidden-display">
+    <tpl for=".">
+      <div class="tweet">
+        <img src="{profile_image_url}" />
+        <div class="x-tweetanchor"></div>
+          <div class="tweet-bubble">
+            <div class="tweet-content">
+              <h2>{from_user}</h2>
+              <p>{text}</p><strong></strong>
+              <span class="posted">{created_at}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tpl>
+  </textarea>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2323428-8']);
+    _gaq.push(['_trackPageview']);
+  
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>
