@@ -14,6 +14,14 @@ codebits.Viewport = Ext.extend(Ext.Panel, {
         {xtype: 'loginView'},
         {xtype: 'sessionListView'},
         {xtype: 'sessionDetailView'},
+        {xtype: 'projectListView'},
+        {xtype: 'projectDetailView'},
+        {xtype: 'calendarListView'},
+        {xtype: 'twitterView'},
+        {xtype: 'userSkillListView'},
+        {xtype: 'userListView'},
+        {xtype: 'userDetailView'},
+        {xtype: 'mapView'},
       ]
     });
 

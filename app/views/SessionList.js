@@ -12,7 +12,7 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
   itemSelector: 'div.sessionlist-item',
   
   loadingText: G_LOADING,
-  emptyText: G_EMPTY,
+  emptyText: 'You have not selected any favorite sessions!',
   
   initComponent: function() {
     this.dataUpdated = false;
@@ -22,6 +22,12 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
         model: 'Session',
         autoload: false
       }),
+      
+      dockedItems: {
+        xtype:'navBar',
+        title:'favorites',
+        refresh: true
+      },
       
       listeners:{
         scope: this,
@@ -37,12 +43,13 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
     
     codebits.views.SessionList.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function(refresh) {
+  onUpdateData: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
     var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
+    
     this.store.read({
       params:{
         url: 'usersessions/' + localStorage['uid'],
@@ -52,7 +59,7 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
         var result = JSON.parse(operation.response.responseText);
         if (result.error) {
           alert('Token expired!');
-          that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
+          Ext.redirect('login');
         }
         else {
           that.dataUpdated = true;
@@ -60,11 +67,19 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
       }
     });
   },
+  
   onListItemTap: function(view, index, item, e){
     var record = this.getRecord(item);
     
-    Ext.redirect('favorite'+ '/' +  record.data.id);
-  }
+    Ext.dispatch({
+      controller: 'viewport',
+      action: 'favorites',
+      next: true,
+      id: record.data.id,
+      historyUrl: 'favorites/' + record.data.id
+    });
+  },
+  
 });
 
 Ext.reg('sessionListView', codebits.views.SessionList);

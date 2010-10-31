@@ -25,11 +25,21 @@
     <!-- Place your view files here -->
     <div id="sencha-views">
       <script type="text/javascript" src="app/views/Viewport.js"></script>
+
+      <script type="text/javascript" src="app/views/NavBar.js"></script>
       
       <script type="text/javascript" src="app/views/Home.js"></script>
       <script type="text/javascript" src="app/views/Login.js"></script>
       <script type="text/javascript" src="app/views/SessionList.js"></script>
       <script type="text/javascript" src="app/views/SessionDetail.js"></script>
+      <script type="text/javascript" src="app/views/ProjectList.js"></script>
+      <script type="text/javascript" src="app/views/ProjectDetail.js"></script>
+      <script type="text/javascript" src="app/views/CalendarList.js"></script>
+      <script type="text/javascript" src="app/views/Twitter.js"></script>
+      <script type="text/javascript" src="app/views/UserSkillList.js"></script>
+      <script type="text/javascript" src="app/views/UserList.js"></script>
+      <script type="text/javascript" src="app/views/UserDetail.js"></script>
+      <script type="text/javascript" src="app/views/Map.js"></script>
 
     </div>
     
@@ -38,6 +48,12 @@
       <script type="text/javascript" src="app/models/Session.js"></script>
       <script type="text/javascript" src="app/models/SessionDetail.js"></script>
       <script type="text/javascript" src="app/models/Speaker.js"></script>
+      <script type="text/javascript" src="app/models/Project.js"></script>
+      <script type="text/javascript" src="app/models/ProjectDetail.js"></script>
+      <script type="text/javascript" src="app/models/Calendar.js"></script>
+      <script type="text/javascript" src="app/models/Tweet.js"></script>
+      <script type="text/javascript" src="app/models/User.js"></script>
+      <script type="text/javascript" src="app/models/UserDetail.js"></script>
 
     </div>
     
@@ -135,7 +151,7 @@
     <tpl for=".">
       <tpl if="colspan == 1">
         <div class="calendarlist-item" style="height:auto;">
-          <p>{id}</p>
+          <p class="session-id">{id}</p>
           <p>{hour}</p>
           <p>{start} > {end}</p>
           <p><strong>{title}</strong></p>

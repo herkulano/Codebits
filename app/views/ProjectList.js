@@ -1,34 +1,56 @@
-app.ProjectListView = Ext.extend(Ext.List, {
-  id:'ProjectListView',
-  cls: 'list-view',
-  itemSelector: 'div.projectlist-item',
+/**
+ * @class codebits.views.ProjectList
+ * @extends Ext.List
+ * @xtype projectListView
+ */
+codebits.views.ProjectList = Ext.extend(Ext.List, {
+  id:'projectListView',
+
   scroll:'vertical',
   singleSelect: true,
+  cls: 'list-view',
+  itemSelector: 'div.projectlist-item',
+  
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
+  
   initComponent: function() {
     this.dataUpdated = false;
     
-    this.store = new Ext.data.Store({
-      model: 'Project',
-      autoload: false
+    Ext.apply(this, {
+      store: new Ext.data.Store({
+        model: 'Project',
+        autoload: false
+      }),
+      
+      dockedItems: {
+        xtype:'navBar',
+        title:'projects',
+        refresh: true
+      },
+      
+      listeners:{
+        scope: this,
+        itemtap: this.onListItemTap
+      }
     });
+    
     this.tpl = Ext.XTemplate.from('projectlist');
     this.tpl.compile();
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);
     
-    this.on('itemtap', this.onListItemTap);
-    
-    app.ProjectListView.superclass.initComponent.call(this);
+    codebits.views.ProjectList.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function() {
-    if (this.dataUpdated === true)
+  
+  onUpdateData: function(data, refresh) {
+    if (this.dataUpdated === true && refresh !== true)
       return false;
     
     var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
+    
     this.store.read({
       params:{
         url: 'projects/',
@@ -38,7 +60,7 @@ app.ProjectListView = Ext.extend(Ext.List, {
         var result = JSON.parse(operation.response.responseText);
         if(result.error){
           alert('Token expired!');
-          that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
+          Ext.redirect('login');
         }
         else{
           that.dataUpdated = true;
@@ -46,10 +68,18 @@ app.ProjectListView = Ext.extend(Ext.List, {
       }
     });
   },
+  
   onListItemTap: function(view, index, item, e){
     var record = this.getRecord(item);
-    this.fireEvent('setCard', 'ProjectDetailView', record.data.id, 'slide');
+    
+    Ext.dispatch({
+      controller: 'viewport',
+      action: 'projects',
+      next: true,
+      id: record.data.id,
+      historyUrl: 'projects/' + record.data.id
+    });
   }
 });
 
-Ext.reg('ProjectListView', app.ProjectListView);
+Ext.reg('projectListView', codebits.views.ProjectList);

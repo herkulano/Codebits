@@ -1,39 +1,56 @@
-app.UserDetailView = Ext.extend(Ext.DataView, {
-  id:'UserDetailView',
-  cls: 'userdetail-view',
+/**
+ * @class codebits.views.UserDetail
+ * @extends Ext.DataView
+ * @xtype userDetailView
+ */
+codebits.views.UserDetail = Ext.extend(Ext.DataView, {
+  id:'userDetailView',
+  
   scroll:'vertical',
+  cls: 'userdetail-view',
+  
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
+  
   initComponent: function() {
-    this.store = new Ext.data.Store({
-      model: 'UserDetail',
-      autoload: false
+    Ext.apply(this, {
+      store: new Ext.data.Store({
+        model: 'UserDetail',
+        autoload: false
+      }),
+      
+      dockedItems: {
+        xtype:'navBar',
+        title:'user info'
+      },
     });
+    
     this.tpl = Ext.XTemplate.from('userdetail');
     this.tpl.compile();
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);
     
-    app.UserDetailView.superclass.initComponent.call(this);
+    codebits.views.UserDetail.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function(user_id) {
+  onUpdateData: function(data, refresh) {
     var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
+    
     this.store.read({
       params:{
-        url: 'user/' + user_id,
+        url: 'user/' + data,
         token: localStorage['token']
       },
       callback: function(records, operation, success) {
         var result = JSON.parse(operation.response.responseText);
-        if(result.error){
+        if (result.error) {
           alert('Token expired!');
-          that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
+          Ext.redirect('login');
         }
       }
     });
   }
 });
 
-Ext.reg('UserDetailView', app.UserDetailView);
+Ext.reg('userDetailView', codebits.views.UserDetail);

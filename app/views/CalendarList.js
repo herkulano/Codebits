@@ -1,34 +1,48 @@
-app.CalendarListView = Ext.extend(Ext.List, {
-  id:'CalendarListView',
-  cls: 'list-view',
-  itemSelector: 'div.calendarlist-item',
+codebits.views.CalendarList = Ext.extend(Ext.List, {
+  id:'calendarListView',
+  
   scroll:'vertical',
   singleSelect: true,
   grouped: true,
+  cls: 'list-view',
+  itemSelector: 'div.calendarlist-item',
+  
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
+  
   initComponent: function() {
     this.dataUpdated = false;
     
-    this.store = new Ext.data.Store({
-      model: 'Calendar',
-      sorters: 'day',
-      getGroupString : function(record) {
-        return record.get('day') +' '+ record.get('dayname');
+    Ext.apply(this, {
+      store: new Ext.data.Store({
+        model: 'Calendar',
+        sorters: 'day',
+        getGroupString : function(record) {
+          return record.get('day') +' '+ record.get('dayname');
+        },
+        autoload: false
+      }),
+      
+      dockedItems: {
+        xtype:'navBar',
+        title:'calendar'
       },
-      autoload: false
+      
+      listeners:{
+        scope: this,
+        itemtap: this.onListItemTap
+      }
     });
+    
     this.tpl = Ext.XTemplate.from('calendarlist');
     this.tpl.compile();
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);
     
-    this.on('itemtap', this.onListItemTap);
-    
-    app.CalendarListView.superclass.initComponent.call(this);
+    codebits.views.CalendarList.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function(empty, refresh) {
+  onUpdateData: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
@@ -38,13 +52,26 @@ app.CalendarListView = Ext.extend(Ext.List, {
         url: 'calendar'
       }
     });
+    
     this.dataUpdated = true;
   },
   onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
-    console.log(record.data.id);
-    this.fireEvent('setCard', 'SessionDetailView', record.data.id, 'slide');
+    //var record = this.getRecord(item);
+    
+    // HACK : Ext should return record.data.id
+    var el = new Ext.Element(item);
+    var recordID = el.down('p.session-id').getHTML();
+    
+    if (recordID) {
+      Ext.dispatch({
+        controller: 'viewport',
+        action: 'calendar',
+        next: true,
+        id: recordID,
+        historyUrl: 'calendar/' + recordID
+      });
+    }
   }
 });
 
-Ext.reg('CalendarListView', app.CalendarListView);
+Ext.reg('calendarListView', codebits.views.CalendarList);

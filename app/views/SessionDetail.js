@@ -17,7 +17,12 @@ codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
       store: new Ext.data.Store({
         model: 'SessionDetail',
         autoload: false
-      })
+      }),
+      
+      dockedItems: {
+        xtype:'navBar',
+        title:'session'
+      },
     });
     
     this.tpl = Ext.XTemplate.from('sessiondetail');
@@ -39,7 +44,7 @@ codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
         var result = JSON.parse(operation.response.responseText);
         if(result.error){
           alert('Token expired!');
-          that.fireEvent('setCard', 'LoginView', null, SLIDE_UP);
+          Ext.redirect('login');
         }
       }
     });

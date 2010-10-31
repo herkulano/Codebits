@@ -12,6 +12,8 @@ Ext.regModel('Calendar', {
     {name: 'speakers',    type: 'array'}
   ],
   
+  //hasMany: {model: 'Speaker', name: 'speakers'},
+  
   proxy: {
     type: 'CodebitsProxy'
   }

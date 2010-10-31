@@ -1,14 +1,21 @@
-app.MapView = Ext.extend(Ext.Panel, {
-  id: 'MapView',
+/**
+ * @class codebits.views.GMap
+ * @extends Ext.Panel
+ * @xtype mapView
+ */
+codebits.views.GMap = Ext.extend(Ext.Panel, {
+  id: 'mapView',
+  
   cls: 'map-view',
   scroll: false,
+  
   layout: {
     type:'vbox',
     align: 'stretch'
   },
+  
   initComponent: function() {
-    var codebits = new google.maps.LatLng(38.775098,-9.095564);
-    
+    var codebitsPos = new google.maps.LatLng(38.775098,-9.095564);
     
     var map = new Ext.Map({
       title: 'Map',
@@ -19,7 +26,7 @@ app.MapView = Ext.extend(Ext.Panel, {
         scaleControl: false,
         mapTypeControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: codebits
+        center: codebitsPos
       },
       listeners: {
         maprender: function(mapC, map) {
@@ -65,7 +72,7 @@ app.MapView = Ext.extend(Ext.Panel, {
       if (coords.latitude && coords.longitude) {
         var request = {
             origin: new google.maps.LatLng(coords.latitude, coords.longitude), 
-            destination: codebits,
+            destination: codebitsPos,
             travelMode: google.maps.DirectionsTravelMode.DRIVING
         };
         directionsService.route(request, function(response, status) {
@@ -79,17 +86,24 @@ app.MapView = Ext.extend(Ext.Panel, {
         var codebitsMarker = new google.maps.Marker({
           map: map.map,
           title: 'CODEBITS 2010',
-          position: codebits
+          position: codebitsPos
         });
-        map.map.setCenter(codebits);
+        map.map.setCenter(codebitsPos);
         map.map.setZoom(12);
       }
     }
     
-    this.items = [map, where];
+    Ext.apply(this, {
+      dockedItems: {
+        xtype:'navBar',
+        title:'where is it?',
+        refresh: false
+      },
+      items: [map, where]
+    });
     
-    app.MapView.superclass.initComponent.call(this);
+    codebits.views.GMap.superclass.initComponent.apply(this, arguments);
   }
 });
 
-Ext.reg('MapView', app.MapView);
+Ext.reg('mapView', codebits.views.GMap);

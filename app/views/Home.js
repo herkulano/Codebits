@@ -28,12 +28,12 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
       store: new Ext.data.Store({
         fields: ['card','title','img'],
         data: [
-          {title:'favorite',    card:'favorite',      img:'favorites'},
-          {title:'projects',    card:'projectList',   img:'projects'},
-          {title:'calendar',    card:'calendarList',  img:'calendar'},
-          {title:'#codebits',   card:'twitter',       img:'twitter'},
-          {title:'users',       card:'userSkillList', img:'users'},
-          {title:'where?',      card:'map',           img:'where'},
+          {title:'favorites',   card:'favorites',   img:'favorites'},
+          {title:'projects',    card:'projects',    img:'projects'},
+          {title:'calendar',    card:'calendar',    img:'calendar'},
+          {title:'#codebits',   card:'twitter',     img:'twitter'},
+          {title:'users',       card:'skills',      img:'users'},
+          {title:'where?',      card:'map',         img:'where'},
         ]
       }),
       
@@ -52,7 +52,12 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
   onListItemTap: function(view, index, item, e) {
     var record = this.getRecord(item);
     
-    Ext.redirect(record.data.card);
+    Ext.dispatch({
+      controller: 'viewport',
+      action: record.data.card,
+      next: true,
+      historyUrl: record.data.card
+    });
   },
   hideHandler: function() {
     this.select(null);
