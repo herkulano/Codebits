@@ -159,6 +159,19 @@ div.x-toolbar.navbar {
   }
 }
 
+.x-toolbar.x-docked-bottom.info-toolbar {
+  border: none;
+  
+  .x-button.x-button-plain.info-bt {
+    width: 35px;
+    background: $back_color url('../imgs/bt-info.png') no-repeat center center;
+    
+    &.x-button-pressed {
+      background: darken($back_color, 5%) url('../imgs/bt-info.png') no-repeat center center;
+    }
+  }
+}
+
 .x-list .x-list-group-items, .x-list.x-list-flat .x-list-parent {
   
   & > * {
@@ -503,6 +516,25 @@ div.detail-view {
   }
 }
 
+.info-content .x-toolbar-title {
+  color: $text_color;
+}
+
+.info-content .x-panel-body .x-html {
+  padding: 5px;
+}
+
+#more-info {
+  p {
+    margin: 2px;
+    text-align: center;
+  }
+  
+  .share {
+    margin: 12px 0px;
+  }
+}
+
 .x-panel .x-panel-body {
   color: $text_color;
 }
@@ -518,11 +550,11 @@ div.detail-view {
   
   width: 100%;
   padding: 1em;
-  background: none; //rgba(0,0,0,1) center center no-repeat;
+  background: rgba(0,0,0,0.5) center center no-repeat;
   
   &.x-mask-gray {
     @include bodyBack();
-    //background-color: rgba(0, 0, 0, 1);
+    //background-color: rgba(0, 0, 0, 0.2);
   }
   
   .x-mask-loading {

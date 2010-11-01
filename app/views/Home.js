@@ -22,6 +22,24 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
           xtype: 'toolbar',
           cls: 'home-toolbar',
           html:'<div class="home-toolbar-img"></div>'
+        },
+        {
+          dock: 'bottom',
+          xtype: 'toolbar',
+          cls: 'info-toolbar',
+          items: [
+            { xtype:'spacer' },
+            {
+              xtype: 'button',
+              ui: 'plain',
+              cls: 'info-bt',
+              listeners: {
+                scope: this,
+                tap: this.showInfo
+              }
+            },
+            { xtype:'spacer' }
+          ]
         }
       ],
       
@@ -48,6 +66,23 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
     this.tpl.compile();
     
     codebits.views.Home.superclass.initComponent.apply(this, arguments);
+    
+    this.overlay = new Ext.Panel({
+        floating: true,
+        modal: true,
+        centered: false,
+        width: 270,
+        height: 220,
+        styleHtmlContent: true,
+        dockedItems: {
+          xtype: 'toolbar',
+          dock: 'top',
+          title: 'about'
+        },
+        scroll: 'vertical',
+        contentEl: 'more-info',
+        cls: 'info-content',
+    });
   },
   onListItemTap: function(view, index, item, e) {
     var record = this.getRecord(item);
@@ -62,6 +97,10 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
   hideHandler: function() {
     this.select(null);
   },
+  showInfo: function() {
+    this.overlay.setCentered(true);
+    this.overlay.show();
+  }
 });
 
 Ext.reg('homeView', codebits.views.Home);
