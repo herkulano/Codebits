@@ -102,8 +102,6 @@ Ext.regController("viewport", {
   },
   
   setCard: function(cardName, data, anim, refresh) {
-    console.log(cardName, data);
-    
     var card = Ext.getCmp(cardName + 'View');
     Ext.getCmp('viewport').setCard(card, anim);
     card.fireEvent('updateData', data, refresh);
