@@ -12,7 +12,7 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
   itemSelector: 'div.sessionlist-item',
   
   loadingText: G_LOADING,
-  emptyText: 'You have not selected any favorite sessions!',
+  emptyText: G_NO_FAV,
   
   initComponent: function() {
     this.dataUpdated = false;

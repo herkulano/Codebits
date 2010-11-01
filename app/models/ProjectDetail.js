@@ -12,10 +12,9 @@ Ext.regModel('ProjectDetail', {
     {name: 'presentation_position', type: 'string'},
     {name: 'location',              type: 'string'},
     {name: 'edition',               type: 'string'},
-    {name: 'video_offset',          type: 'string'}
+    {name: 'video_offset',          type: 'string'},
+    {name: 'users',                 type: 'array'},
   ],
-
-  hasMany: {model: 'User', name: 'users'},
   
   proxy: {
     type: 'CodebitsProxy'

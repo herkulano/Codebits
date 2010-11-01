@@ -82,39 +82,56 @@
     </tpl>
     </ul>
   </textarea>
+  
   <textarea id="sessionlist" class="x-hidden-display">
     <tpl for=".">
-      <div class="sessionlist-item" style="height:auto;">
-        <p>{id}<strong> {title} </strong></p>
-        <p>{place} {start}</p>
+      <div class="sessionlist-item">
+        <div class="date">{start}</div>
+        <div class="place">{place}</div>
+        <p class="title">{title}</p>
       </div>
     </tpl>
   </textarea>
+  
   <textarea id="sessiondetail" class="x-hidden-display">
     <tpl for=".">
-      <div class="sessiondetail-item" style="height:auto;">
-        <p>{id}</p>
-        <p><strong>{title}</strong></p>
-        <p>{place}</p>
-        <p>{placename}</p>
-        <p>{start}</p>
-        <p>{slideshare}</p>
-        <p>{pfile}</p>
-        <p>{video}</p>
-        <p>{lang}</p>
+      <div class="sessiondetail-item dataview-item">
+        <div class="date">{start}</div>
+        <div class="place">{placename}</div>
+        
+        <p class="title">{title} [{lang}]</p>
+        <br/>
+        <p><b>Description</b></p>
+        <p class="info">{description}</p>
+        
+        <tpl if="slideshare">
+          <p>{slideshare}</p>
+        </tpl>
+        <tpl if="slideshare">
+          <p><a href="{slideshare}"></a>{slideshare}</a></p>
+        </tpl>
+        <tpl if="pfile">
+          <p><a href="{pfile}"></a>{pfile}</a></p>
+        </tpl>
+        <tpl if="video">
+          <p><a href="{video}"></a>{video}</a></p>
+        </tpl>
+        <tpl for="speakers">
+          <div class="speakers-item detail-item">
+            <p class="name">{name}</p>
+            <p>Karma: {karma}</p>
+            <tpl if="twitter">
+              <p>Twitter: <a href="http://twitter.com/{twitter}"></a>@{twitter}</a></p>
+            </tpl>
+            <tpl if="blog">
+              <p>Blog: <a href="{blog}"></a>{blog}</a></p>
+            </tpl>
+          </div>
+        </tpl>
       </div>
-      <tpl for="speakers">
-        <div class="speakers-item" style="height:auto;">
-          <p>------</p>
-          <p>{id}</p>
-          <p><strong>{name}</strong></p>
-          <p>{karma}</p>
-          <p>{twitter}</p>
-          <p>{blog}</p>
-        </div>
-      </tpl>
     </tpl>
   </textarea>
+  
   <textarea id="userskilllist" class="x-hidden-display">
     <tpl for=".">
       <div class="userskilllist-item" style="height:auto;">
@@ -122,6 +139,7 @@
       </div>
     </tpl>
   </textarea>
+  
   <textarea id="userlist" class="x-hidden-display">
     <tpl for=".">
       <div class="userlist-item" style="height:auto;">
@@ -133,6 +151,7 @@
       </div>
     </tpl>
   </textarea>
+  
   <textarea id="userdetail" class="x-hidden-display">
     <tpl for=".">
       <div class="userdetail-item" style="height:auto;">
@@ -147,60 +166,74 @@
       </div>
     </tpl>
   </textarea>
+  
   <textarea id="calendarlist" class="x-hidden-display">
     <tpl for=".">
       <tpl if="colspan == 1">
-        <div class="calendarlist-item" style="height:auto;">
-          <p class="session-id">{id}</p>
-          <p>{hour}</p>
-          <p>{start} > {end}</p>
-          <p><strong>{title}</strong></p>
-          <p>{placename}</p>
-          <p><tpl for="speakers">{name}</tpl></p>
+        <div class="calendarlist-item">
+          <div class="date">{hour}<p class="session-id x-hidden-display">{id}</p></div>
+          <div class="right-cell">
+            <div class="title">{title}</div>
+            <p class="info"><span class="place">{placename}</span> <tpl for="speakers">{name} </tpl></p>
+          </div>
         </div>
       </tpl>
       <tpl if="colspan == 4">
-        <div class="calendarlist-break-item" style="height:auto;">
-          <p>{hour}</p>
-          <p>{start} > {end}</p>
-          <p><strong>{title}</strong></p>
+        <div class="calendarlist-break-item">
+          <div class="date">{hour}</div>
+          <div class="right-cell">
+            <div class="title">{title}</div>
+          </div>
         </div>
       </tpl>
     </tpl>
   </textarea>
+  
   <textarea id="projectlist" class="x-hidden-display">
     <tpl for=".">
-      <div class="projectlist-item" style="height:auto;">
-        <p>{id} <strong>{title}</strong></p>
-        <p>{status}</p>
+      <div class="projectlist-item">
+        <div class="title">{title}</div>
+        <div class="right-box {status}">{id}</div>
       </div>
     </tpl>
   </textarea>
+  
   <textarea id="projectdetail" class="x-hidden-display">
     <tpl for=".">
-      <div class="projectdetail-item" style="height:auto;">
-        <p>{id}</p>
-        <p>{owner_id}</p>
-        <p><strong>{title}</strong></p>
-        <p>{abstract}</p>
-        <p>{description}</p>
-        <p>{url}</p>
-        <p>{date_created}</p>
-        <p>{date_modified}</p>
-        <p>{presentation_position}</p>
-        <p>{location}</p>
-        <p>{edition}</p>
-        <p>{video_offset}</p>
-      </div>
-      <tpl for="users">
-        <div class="users-item" style="height:auto;">
-          <p>------</p>
-          <p>{user_id}</p>
-          <p><strong>{name}</strong></p>
+      <div class="projectdetail-item dataview-item">
+        <div class="date">
+          <p>{date_modified}</p>
+          <p>{location}</p>
         </div>
-      </tpl>
+        
+        <div class="right-box {status}">{id}</div>
+        <p class="title">{title}</p>
+        <br/>
+        <p><b>Abstract</b></p>
+        <p class="info">{abstract}</p>
+        <br/>
+        <p><b>Description</b></p>
+        <p class="info">{description}</p>
+        <br/>
+        <div class="info">
+          <tpl if="url">
+            <p><a href="{url}"></a>{url}</a></p>
+          </tpl>
+          <p>Position: {presentation_position} ~ Edition: {edition} ~ Video Offset: {video_offset}</p>
+        </div>
+        
+        <tpl for="users">
+          <div class="users-item detail-item">
+            <p class="name">{name} <tpl if="owner == 1">[owner]</tpl></p>
+            <tpl if="status">
+              <p>{status}</a></p>
+            </tpl>
+          </div>
+        </tpl>
+      </div>
     </tpl>
   </textarea>
+  
   <textarea id="twitterlist" class="x-hidden-display">
     <tpl for=".">
       <div class="tweet">

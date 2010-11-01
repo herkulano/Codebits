@@ -6,8 +6,8 @@
 codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
   id:'sessionDetailView',
   
-  cls:'sessiondetail-view',
   scroll:'vertical',
+  cls:'detail-view',
   
   loadingText: G_LOADING,
   emptyText: G_EMPTY,

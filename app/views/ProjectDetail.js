@@ -6,7 +6,7 @@
 codebits.views.ProjectDetail = Ext.extend(Ext.DataView, {
   id:'projectDetailView',
   
-  cls:'projectdetail-view',
+  cls:'detail-view',
   scroll:'vertical',
   
   loadingText: G_LOADING,

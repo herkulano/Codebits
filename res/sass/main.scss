@@ -3,8 +3,18 @@
 
 $include_default_icons: false;
 $include_default_uis: false;
-$base_color: #3E7AAD;
+
+$base_color: rgba(31, 31, 31, 1);
 $list_active_color: lighten($base_color, 10%);
+
+$back_color: lighten($base_color, 2%);
+$text_color: rgba(200, 200, 200, 1);
+
+$divide_color: lighten($base_color, 10%);
+$shadow_color: rgba(0, 0, 0, 0.5);
+
+$green_color: rgba(0, 100, 0, 0.4);
+$red_color: rgba(100, 0, 0, 0.4);
 
 @import 'sencha-touch/default/all';
 
@@ -22,22 +32,24 @@ $list_active_color: lighten($base_color, 10%);
 @include sencha-form;
 //@include sencha-msgbox;
 
-@include sencha-toolbar-ui('dark', darken($base_color, 15%));
-
-// @include pictos-button-icon()
+//@include pictos-button-icon();
 
 @import "compass/css3";
 
-$back_color: rgba(40, 40, 40, 1);
-$home_text_color: rgba(180, 180, 180, 1);
-$text_color: rgba(200, 200, 200, 1);
-$dark_color: rgba(31, 31, 31, 1);
-$divide_color: rgba(50, 50, 50, 1);
-$shadow_color: rgba(0, 0, 0, 0.5);
-$bt_text_color: rgba(204, 204, 204, 1);
+@mixin bodyBack() {
+  background: $back_color url('../imgs/navBk.png') repeat;
+}
+
+@mixin loading() {
+  font-size: 1.2em;
+  padding: 1em;
+  padding-left: 2.5em;
+  display:block;
+  background: transparentize($base_color, 0.2) url('../imgs/loading.gif') 0.6em center no-repeat;
+}
 
 body {
-  background: $back_color url('../imgs/navBk.png') repeat;
+  @include bodyBack();
 }
 
 .x-fullscreen {
@@ -50,7 +62,7 @@ body {
 
 div.x-toolbar.home-toolbar {
   height: 85px;
-  background: $dark_color url('../imgs/home_header.png') center center no-repeat;
+  background: $base_color url('../imgs/home_header.png') center center no-repeat;
   border-bottom: black 4px solid;
   @include box-shadow(black, 0px, 2px, 16px);
   
@@ -76,7 +88,7 @@ div.home-view {
     padding: 10px 3px;
     
     div {
-      background-color: $dark_color;
+      background-color: $base_color;
       width: 90px;
       height: 120px;
       padding-top: 3px;
@@ -84,12 +96,12 @@ div.home-view {
       @include border-radius(8px);
       
       &.x-item-selected, &.x-item-pressed {
-        background-color: darken($dark_color, 5%);
+        background-color: darken($base_color, 5%);
       }
     }
     
     p {
-      color: $home_text_color;
+      color: darken($text_color, 10%);
       text-align: center;
       line-height: 1em;
     }
@@ -111,8 +123,8 @@ div.x-toolbar.navbar {
 .x-toolbar .x-button.x-button-plain {
   border: $divide_color 1px solid;
   background: $back_color;
-  color: $bt_text_color;
-  @include border-radius(0px);
+  color: $text_color;
+  @include border-radius(0);
   height: 35px;
   margin: 0px;
   padding: 0px 5px 0px 25px;
@@ -142,7 +154,7 @@ div.x-toolbar.navbar {
     border-top: none;
     border-bottom: $divide_color 1px solid;
     color: $text_color;
-    background-color: transparentize($dark_color, 0.4);
+    background-color: transparentize($base_color, 0.4);
   }
   
   & > .x-item-pressed {
@@ -151,6 +163,7 @@ div.x-toolbar.navbar {
   }
   
   & > .x-item-selected {
+    color: $text_color;
     border-top: none;
     border-bottom: $divide_color 1px solid;
     @include linear-gradient( 
@@ -161,21 +174,195 @@ div.x-toolbar.navbar {
         darken($back_color, 12%) 100%
       ));
   }
+  
+  & div.loading-indicator {
+    @include loading();
+  }
+}
+
+div.msg {
+  font-size: 1.2em;
+  padding: 1em;
+  display:block;
 }
 
 .list-view {
-  background: black url('../imgs/navBk.png') repeat;
-  
-  div.userskilllist-item {
-    
-  }
+  @include bodyBack();
   
   div.sessionlist-item {
+    overflow: auto;
     
+    & .title {
+      clear: both;
+      font-size: 1.2em;
+      padding-top: 5px;
+    }
+    & .place, & .date {
+      color: darken($text_color, 10%);
+      font-size: 1em;
+      background-color: darken($base_color, 8%);
+      padding: 1px;
+    }
+    & .place {
+      float: right;
+    }
+    & .date {
+      float: left;
+    }
+    & .info {
+      //
+    }
+  }
+  
+  div.calendarlist-item, div.calendarlist-break-item {
+    overflow: auto;
+    display: table;
+    width: 100%;
+    padding: 0;
+    
+    & > div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    & > .right-cell {
+      padding: 0.6em;
+    }
+    
+    & .title {
+      clear: both;
+      font-size: 1.2em;
+    }
+    
+    & .place {
+      color: darken($text_color, 10%);
+      background-color: darken($base_color, 8%);
+      padding: 1px;
+    }
+    & .date {
+      color: darken($text_color, 10%);
+      background-color: darken($base_color, 8%);
+      width: 70px;
+      text-align: center;
+    }
+    & .info {
+      margin-top: 5px;
+    }
+  }
+  
+  div.projectlist-item {
+    overflow: auto;
+    display: table;
+    width: 100%;
+    
+    & .title {
+      font-size: 1.2em;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    & .right-box {
+      font-size: 1.4em;
+      border: darken(transparentize($base_color, 0.2), 8%) 2px solid;
+      @include border-radius(8px);
+      padding: 5px;
+      
+      display: table-cell;
+      vertical-align: middle;
+      width: 50px;
+      text-align: center;
+      
+      &.open {
+        background-color: $green_color;
+      }
+      &.closed {
+        background-color: $red_color;
+      }
+    }
   }
   
   div.userskilllist-item {
     
+  }
+  
+  & div.loading-indicator {
+    @include loading();
+    border-bottom: $divide_color 1px solid;
+  }
+  
+  & .x-list-header {
+    background: lighten($base_color, 20%);
+    @include box-shadow(black, 0px, 0px, 8px);
+    padding: 0.4em 0.6em;
+    font-size: 0.9em;
+  }
+}
+
+.detail-view {
+  
+  .dataview-item {
+    background-color: transparentize($base_color, 0.4);
+    border: darken($base_color, 10%) 2px solid;
+    @include border-radius(8px);
+    margin: 0.6em;
+    padding: 0.6em;
+    font-weight: normal;
+    
+    overflow: auto;
+    
+    & .title {
+      clear: left;
+      font-size: 1.2em;
+      padding-top: 10px;
+      font-weight: bold;
+    }
+    & .place, & .date {
+      color: darken($text_color, 10%);
+      font-size: 1em;
+      background-color: darken($base_color, 8%);
+      padding: 1px;
+    }
+    & .place {
+      float: right;
+    }
+    & .date {
+      float: left;
+    }
+    
+    & .info {
+      font-size: 0.9em;
+      line-height: 1.5em;
+    }
+    
+    & .detail-item {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: $divide_color 1px solid;
+      font-size: 0.9em;
+      line-height: 1.5em;
+      
+      & .name {
+        font-size: 1.1em;
+      }
+    }
+    
+    & .right-box {
+      float: right;
+      font-size: 1.2em;
+      border: darken(transparentize($base_color, 0.2), 8%) 2px solid;
+      @include border-radius(8px);
+      padding: 5px;
+      
+      &.open {
+        background-color: $green_color;
+      }
+      &.closed {
+        background-color: $red_color;
+      }
+    }
+  }
+  
+  & div.loading-indicator {
+    @include loading();
+    border-bottom: $divide_color 1px solid;
   }
 }
 
