@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <title>CODEBITS IV</title>
   
   <link rel="stylesheet" href="res/css/main.css" type="text/css">
@@ -63,11 +64,6 @@
         
     </div>
     
-    <!-- Place your store files here -->
-    <div id="sencha-controllers">
-      
-        
-    </div>
   </div>
   
   <textarea id="home" class="x-hidden-display">
@@ -101,40 +97,41 @@
         
         <p class="title">{title} [{lang}]</p>
         <br/>
-        <p><b>Description</b></p>
         <p class="info">{description}</p>
-        
-        <tpl if="slideshare">
-          <p>{slideshare}</p>
-        </tpl>
-        <tpl if="slideshare">
-          <p><a href="{slideshare}"></a>{slideshare}</a></p>
-        </tpl>
-        <tpl if="pfile">
-          <p><a href="{pfile}"></a>{pfile}</a></p>
-        </tpl>
-        <tpl if="video">
-          <p><a href="{video}"></a>{video}</a></p>
-        </tpl>
-        <tpl for="speakers">
-          <div class="speakers-item detail-item">
-            <p class="name">{name}</p>
-            <p>Karma: {karma}</p>
-            <tpl if="twitter">
-              <p>Twitter: <a href="http://twitter.com/{twitter}"></a>@{twitter}</a></p>
-            </tpl>
-            <tpl if="blog">
-              <p>Blog: <a href="{blog}"></a>{blog}</a></p>
-            </tpl>
-          </div>
-        </tpl>
+        <br/>
+        <div class="info">
+          <tpl if="slideshare">
+            <p>{slideshare}</p>
+          </tpl>
+          <tpl if="slideshare">
+            <p><a target="_blank" href="{slideshare}">{slideshare}</a></p>
+          </tpl>
+          <tpl if="pfile">
+            <p><a target="_blank" href="{pfile}">{pfile}</a></p>
+          </tpl>
+          <tpl if="video">
+            <p><a target="_blank" href="{video}">{video}</a></p>
+          </tpl>
+          <tpl for="speakers">
+            <div class="speakers-item detail-item">
+              <p class="name">{name}</p>
+              <p>Karma: {karma}</p>
+              <tpl if="twitter">
+                <p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>
+              </tpl>
+              <tpl if="blog">
+                <p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>
+              </tpl>
+            </div>
+          </tpl>
+        </div>
       </div>
     </tpl>
   </textarea>
   
   <textarea id="userskilllist" class="x-hidden-display">
     <tpl for=".">
-      <div class="userskilllist-item" style="height:auto;">
+      <div class="userskilllist-item">
         <p>{skill}</p>
       </div>
     </tpl>
@@ -142,28 +139,45 @@
   
   <textarea id="userlist" class="x-hidden-display">
     <tpl for=".">
-      <div class="userlist-item" style="height:auto;">
-        <p>{id}</p>
-        <p><strong>{name}</strong></p>
-        <p>{nick}</p>
-        <p>{twitter}</p>
-        <p>{blog}</p>
+      <div class="userlist-item">
+        <p>{name}</p>
       </div>
     </tpl>
   </textarea>
   
   <textarea id="userdetail" class="x-hidden-display">
     <tpl for=".">
-      <div class="userdetail-item" style="height:auto;">
-        <p>{id}</p>
-        <p><strong>{name}</strong></p>
-        <p>{nick}</p>
-        <p>{karma}</p>
-        <p>{bio}</p>
-        <p>{twitter}</p>
-        <p>{blog}</p>
-        <p><tpl for="skills">{.} </tpl></p>
-      </div>
+      <div class="userdetail-item dataview-item">
+        <div class="date">{nick}</div>
+        <div class="place">{id}</div>
+        
+        <p class="title">{name} [{nick}]</p>
+        <br/>
+        <p class="info">{bio}</p>
+        <br/>
+        <div class="info">
+          <tpl if="slideshare">
+            <p>{slideshare}</p>
+          </tpl>
+          <tpl if="slideshare">
+            <p><a target="_blank" href="{slideshare}">{slideshare}</a></p>
+          </tpl>
+          <tpl if="pfile">
+            <p><a target="_blank" href="{pfile}">{pfile}</a></p>
+          </tpl>
+          <tpl if="video">
+            <p><a target="_blank" href="{video}">{video}</a></p>
+          </tpl>
+          <p>Karma: {karma}</p>
+          <tpl if="twitter">
+            <p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>
+          </tpl>
+          <tpl if="blog">
+            <p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>
+          </tpl>
+          <br/>
+          <p><tpl for="skills">{.} </tpl></p>
+        </div>
     </tpl>
   </textarea>
   
@@ -217,16 +231,17 @@
         <br/>
         <div class="info">
           <tpl if="url">
-            <p><a href="{url}"></a>{url}</a></p>
+            <p><a target="_blank" href="{url}">{url}</a></p>
           </tpl>
-          <p>Position: {presentation_position} ~ Edition: {edition} ~ Video Offset: {video_offset}</p>
+          <p>Position: {presentation_position}</p>
+          <p>Edition: {edition} ~ Video Offset: {video_offset}</p>
         </div>
         
         <tpl for="users">
           <div class="users-item detail-item">
             <p class="name">{name} <tpl if="owner == 1">[owner]</tpl></p>
             <tpl if="status">
-              <p>{status}</a></p>
+              <p>{status}</p>
             </tpl>
           </div>
         </tpl>
@@ -238,13 +253,11 @@
     <tpl for=".">
       <div class="tweet">
         <img src="{profile_image_url}" />
-        <div class="x-tweetanchor"></div>
-          <div class="tweet-bubble">
-            <div class="tweet-content">
-              <h2>{from_user}</h2>
-              <p>{text}</p><strong></strong>
-              <span class="posted">{created_at}</span>
-            </div>
+        <div class="tweet-bubble">
+          <div class="tweet-content">
+            <p class="user">{from_user}</p>
+            <p class="date">{created_at:this.formatDate}</p>
+            <h1>{text:this.linkify}</h1>
           </div>
         </div>
       </div>

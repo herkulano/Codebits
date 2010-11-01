@@ -19,7 +19,7 @@ Ext.regApplication({
     });
     
     Ext.defer(function() {
-      if (!localStorage['uid'] && !localStorage['token']) {
+      if (!localStorage['uid'] || !localStorage['token']) {
         Ext.redirect('login');
       }
     }, 10, Ext);

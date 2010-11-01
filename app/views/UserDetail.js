@@ -1,24 +1,19 @@
 /**
  * @class codebits.views.UserDetail
- * @extends Ext.DataView
+ * @extends Ext.Panel
  * @xtype userDetailView
  */
-codebits.views.UserDetail = Ext.extend(Ext.DataView, {
+codebits.views.UserDetail = Ext.extend(Ext.Panel, {
   id:'userDetailView',
   
   scroll:'vertical',
-  cls: 'userdetail-view',
+  cls: 'detail-view',
   
   loadingText: G_LOADING,
   emptyText: G_EMPTY,
   
   initComponent: function() {
     Ext.apply(this, {
-      store: new Ext.data.Store({
-        model: 'UserDetail',
-        autoload: false
-      }),
-      
       dockedItems: {
         xtype:'navBar',
         title:'user info'
@@ -34,20 +29,27 @@ codebits.views.UserDetail = Ext.extend(Ext.DataView, {
     codebits.views.UserDetail.superclass.initComponent.apply(this, arguments);
   },
   onUpdateData: function(data, refresh) {
-    var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
+    this.setLoading({msg:G_LOADING}, true);
     
-    this.store.read({
+    Ext.util.JSONP.request({
+      url: G_URL + 'user/' + data,
+      callbackKey: 'callback',
+      scope: this,
+      
       params:{
-        url: 'user/' + data,
         token: localStorage['token']
       },
-      callback: function(records, operation, success) {
-        var result = JSON.parse(operation.response.responseText);
-        if (result.error) {
+      
+      callback: function(result) {
+        if (!result.error) {
+          this.update(this.tpl.applyTemplate(result));
+        }
+        else {
           alert('Token expired!');
           Ext.redirect('login');
         }
+        this.setLoading(false);
       }
     });
   }

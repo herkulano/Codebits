@@ -50,10 +50,13 @@ codebits.views.CalendarList = Ext.extend(Ext.List, {
     this.store.read({
       params:{
         url: 'calendar'
+      },
+      callback: function(result, opretation, success) {
+        if (result) {
+          this.dataUpdated = true;    
+        }
       }
     });
-    
-    this.dataUpdated = true;
   },
   onListItemTap: function(view, index, item, e){
     //var record = this.getRecord(item);

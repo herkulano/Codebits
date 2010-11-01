@@ -16,7 +16,13 @@ $shadow_color: rgba(0, 0, 0, 0.5);
 $green_color: rgba(0, 100, 0, 0.4);
 $red_color: rgba(100, 0, 0, 0.4);
 
+$loading_font: 1.2em;
+$title_font: 1.1em;
+$info_font: 0.9em;
+$date_font: 0.9em;
+
 @import 'sencha-touch/default/all';
+@import "compass/css3";
 
 @include sencha-panel;
 @include sencha-buttons;
@@ -32,16 +38,12 @@ $red_color: rgba(100, 0, 0, 0.4);
 @include sencha-form;
 //@include sencha-msgbox;
 
-//@include pictos-button-icon();
-
-@import "compass/css3";
-
 @mixin bodyBack() {
   background: $back_color url('../imgs/navBk.png') repeat;
 }
 
 @mixin loading() {
-  font-size: 1.2em;
+  font-size: $loading_font;
   padding: 1em;
   padding-left: 2.5em;
   display:block;
@@ -148,6 +150,15 @@ div.x-toolbar.navbar {
   }
 }
 
+.x-toolbar .x-button.x-button-plain.refresh-bt {
+  width: 35px;
+  background: $back_color url('../imgs/bt-refresh.png') no-repeat center center;
+  
+  &.x-button-pressed {
+    background: darken($back_color, 5%) url('../imgs/bt-refresh.png') no-repeat center center;
+  }
+}
+
 .x-list .x-list-group-items, .x-list.x-list-flat .x-list-parent {
   
   & > * {
@@ -175,47 +186,93 @@ div.x-toolbar.navbar {
       ));
   }
   
-  & div.loading-indicator {
+  div.loading-indicator {
     @include loading();
   }
 }
 
 div.msg {
-  font-size: 1.2em;
-  padding: 1em;
+  font-size: $title_font;
+  padding: 0.8em;
   display:block;
+  background: transparentize($base_color, 0.2);
+  border-bottom: $divide_color 1px solid;
 }
 
-.list-view {
+a {
+  color: $text_color;
+}
+
+div.list-view {
   @include bodyBack();
   
-  div.sessionlist-item {
-    overflow: auto;
+  div.loading-indicator {
+    @include loading();
+    border-bottom: $divide_color 1px solid;
+  }
+  
+  .x-list-header {
+    background: lighten($base_color, 20%);
+    @include box-shadow(black, 0px, 0px, 8px);
+    padding: 0.2em 0.9em;
+    font-size: 0.8em;
+  }
+  
+  .searchBar {
+    @include linear-gradient( 
+      color-stops(
+        lighten($base_color, 2%),
+        darken($base_color, 3%) 100%
+      ));
+    //border-bottom: darken($base_color, 40%) 1px solid;
+    font-size: $title_font;
+    border: none;
     
-    & .title {
+    .x-field {
+      margin: 0 0.2em;
+    }
+    
+    .x-input-search {
+      border: none;
+      padding: 0.5em;
+      @include linear-gradient( 
+        color-stops(
+          lighten($base_color, 65%),
+          lighten($base_color, 80%) 100%
+        ));
+    }
+  }
+}
+
+#sessionListView {
+  div.sessionlist-item {
+    
+    .title {
       clear: both;
-      font-size: 1.2em;
+      font-size: $title_font;
       padding-top: 5px;
     }
-    & .place, & .date {
+    .place, .date {
       color: darken($text_color, 10%);
-      font-size: 1em;
+      font-size: $date_font;
       background-color: darken($base_color, 8%);
       padding: 1px;
     }
-    & .place {
+    .place {
       float: right;
     }
-    & .date {
+    .date {
       float: left;
     }
-    & .info {
+    .info {
       //
     }
   }
-  
+}
+
+#calendarListView {
+
   div.calendarlist-item, div.calendarlist-break-item {
-    overflow: auto;
     display: table;
     width: 100%;
     padding: 0;
@@ -228,39 +285,43 @@ div.msg {
       padding: 0.6em;
     }
     
-    & .title {
+    .title {
       clear: both;
-      font-size: 1.2em;
+      font-size: $title_font;
     }
     
-    & .place {
+    .place {
       color: darken($text_color, 10%);
       background-color: darken($base_color, 8%);
       padding: 1px;
+      font-size: $date_font;
     }
-    & .date {
+    .date {
       color: darken($text_color, 10%);
       background-color: darken($base_color, 8%);
-      width: 70px;
+      width: 60px;
       text-align: center;
+      font-size: $date_font;
     }
-    & .info {
+    .info {
       margin-top: 5px;
     }
   }
+}
+
+#projectListView {
   
   div.projectlist-item {
-    overflow: auto;
     display: table;
     width: 100%;
     
-    & .title {
-      font-size: 1.2em;
+    .title {
+      font-size: $title_font;
       display: table-cell;
       vertical-align: middle;
     }
-    & .right-box {
-      font-size: 1.4em;
+    .right-box {
+      font-size: 1.2em;
       border: darken(transparentize($base_color, 0.2), 8%) 2px solid;
       @include border-radius(8px);
       padding: 5px;
@@ -278,27 +339,104 @@ div.msg {
       }
     }
   }
-  
-  div.userskilllist-item {
+}
+
+#twitterView {
+
+  div.tweet {
+    @include display-box;
+    @include box-orient(horizontal);
+    border: none;
+    padding: 8px;
     
-  }
-  
-  & div.loading-indicator {
-    @include loading();
-    border-bottom: $divide_color 1px solid;
-  }
-  
-  & .x-list-header {
-    background: lighten($base_color, 20%);
-    @include box-shadow(black, 0px, 0px, 8px);
-    padding: 0.4em 0.6em;
-    font-size: 0.9em;
+    & > img {
+      padding: 2px;
+      margin-top: 1px;
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+    }
+    
+    .tweet-bubble {
+      @include box-flex(1);
+    }
+    
+    .tweet-bubble > div {
+      @include border-radius(4px);
+      margin: 0px 0px 0px 10px;
+    }
+    
+    .tweet-content {
+      padding: 5px;
+      background: $back_color;
+      
+      h1 {
+        clear: both;
+        font-size: $title_font - 0.2;
+        padding-top: 5px;
+      }
+      p {
+        color: darken($text_color, 10%);
+        font-size: $date_font - 0.1;
+        background-color: darken($base_color, 2%);
+        padding: 1px;
+      }
+      .user {
+        float: left;
+      }
+      .date {
+        float: right;
+      }
+    }
   }
 }
 
-.detail-view {
+form.form-view.x-form > .x-panel-body {
+  @include bodyBack();
   
-  .dataview-item {
+  .x-form-fieldset-title {
+    font-size: $title_font + 0.1;
+    color: lighten($text_color, 10%);
+    text-shadow: none;
+  }
+  
+  .x-form-fieldset {
+  
+    & > .x-panel-body {
+      border: none;
+    }
+    
+  }
+  
+  .x-field > input {
+    font-size: $title_font;
+    background-color: lighten($base_color, 90%);
+  }
+  
+  .x-button {
+    font-size: $title_font;
+    color: $base_color;
+    border: lighten($base_color, 50%) 2px solid;
+    @include linear-gradient( 
+      color-stops(
+        lighten($base_color, 70%),
+        lighten($base_color, 50%) 100%
+      ));
+      
+    &.x-button-pressed {
+      border: lighten($base_color, 30%) 2px solid;
+      @include linear-gradient( 
+        color-stops(
+          lighten($base_color, 50%),
+          lighten($base_color, 30%) 100%
+        ));
+    }
+  }
+}
+
+div.detail-view {
+  
+  div.dataview-item {
     background-color: transparentize($base_color, 0.4);
     border: darken($base_color, 10%) 2px solid;
     @include border-radius(8px);
@@ -306,45 +444,44 @@ div.msg {
     padding: 0.6em;
     font-weight: normal;
     
-    overflow: auto;
-    
-    & .title {
+    .title {
       clear: left;
-      font-size: 1.2em;
-      padding-top: 10px;
+      font-size: $title_font + 0.1;
+      padding-top: 0.8em;
       font-weight: bold;
     }
-    & .place, & .date {
+    .place, .date {
       color: darken($text_color, 10%);
-      font-size: 1em;
+      font-size: $date_font;
       background-color: darken($base_color, 8%);
       padding: 1px;
     }
-    & .place {
+    .place {
       float: right;
     }
-    & .date {
+    .date {
       float: left;
     }
     
-    & .info {
-      font-size: 0.9em;
+    .info {
+      font-size: $info_font;
       line-height: 1.5em;
     }
     
-    & .detail-item {
+    .detail-item {
       margin-top: 16px;
       padding-top: 12px;
       border-top: $divide_color 1px solid;
       font-size: 0.9em;
       line-height: 1.5em;
       
-      & .name {
-        font-size: 1.1em;
+      & > .name {
+        font-size: 1.2em;
+        font-weight: bold; 
       }
     }
     
-    & .right-box {
+    .right-box {
       float: right;
       font-size: 1.2em;
       border: darken(transparentize($base_color, 0.2), 8%) 2px solid;
@@ -360,7 +497,7 @@ div.msg {
     }
   }
   
-  & div.loading-indicator {
+  div.loading-indicator {
     @include loading();
     border-bottom: $divide_color 1px solid;
   }
@@ -368,5 +505,38 @@ div.msg {
 
 .x-panel .x-panel-body {
   color: $text_color;
+}
+
+.x-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8000;
+  display: -webkit-box;
+  -webkit-box-align: start;
+  -webkit-box-pack: center;
+  
+  width: 100%;
+  padding: 1em;
+  background: none; //rgba(0,0,0,1) center center no-repeat;
+  
+  &.x-mask-gray {
+    @include bodyBack();
+    //background-color: rgba(0, 0, 0, 1);
+  }
+  
+  .x-mask-loading {
+    -webkit-border-radius: .5em;
+    color: darken($text_color, 10%);
+    border: $shadow_color 2px solid;
+    text-align: left;
+    padding: 1em 1em 1em 3em;
+    font-size: $loading_font;
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    height: 3em;
+    background: $base_color url('../imgs/loading.gif') 0.9em center no-repeat;
+  }
 }
 

@@ -1,9 +1,9 @@
 /**
  * @class codebits.views.SessionDetail
- * @extends Ext.DataView
+ * @extends Ext.Panel
  * @xtype sessionDetailView
  */
-codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
+codebits.views.SessionDetail = Ext.extend(Ext.Panel, {
   id:'sessionDetailView',
   
   scroll:'vertical',
@@ -14,11 +14,6 @@ codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
   
   initComponent: function() {
     Ext.apply(this, {
-      store: new Ext.data.Store({
-        model: 'SessionDetail',
-        autoload: false
-      }),
-      
       dockedItems: {
         xtype:'navBar',
         title:'session'
@@ -34,18 +29,23 @@ codebits.views.SessionDetail = Ext.extend(Ext.DataView, {
     codebits.views.SessionDetail.superclass.initComponent.apply(this, arguments);
   },
   onUpdateData: function(session_id) {
-    var that = this;
     this.scroller.scrollTo({x: 0, y: 0});
-    this.store.read({
-      params:{
-        url: 'session/' + session_id
-      },
-      callback: function(records, operation, success) {
-        var result = JSON.parse(operation.response.responseText);
-        if(result.error){
+    this.setLoading({msg:G_LOADING}, true);
+    
+    Ext.util.JSONP.request({
+      url: G_URL + 'session/' + session_id,
+      callbackKey: 'callback',
+      scope: this,
+      
+      callback: function(result) {
+        if (!result.error) {
+          this.update(this.tpl.applyTemplate(result));
+        }
+        else {
           alert('Token expired!');
           Ext.redirect('login');
         }
+        this.setLoading(false);
       }
     });
   }

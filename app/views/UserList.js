@@ -6,8 +6,9 @@
 codebits.views.UserList = Ext.extend(Ext.List, {
   id:'userListView',
   
+  grouped:true,
   scroll:'vertical',
-  singleSelect: true,
+  singleSelect:true,
   cls:'list-view',
   itemSelector:'div.userlist-item',
   
@@ -20,18 +21,41 @@ codebits.views.UserList = Ext.extend(Ext.List, {
     Ext.apply(this, {
       store: new Ext.data.Store({
         model: 'User',
+        sorters: 'name',
+        getGroupString : function(record) {
+            return record.get('name')[0];
+        },
         autoload: false
       }),
       
-      dockedItems: {
-        xtype:'navBar',
-        title:'skill'
-      },
+      dockedItems: [
+        {
+          xtype:'navBar',
+          title:'skill'
+        },
+        {
+          xtype:'toolbar',
+          dock:'top',
+          cls:'searchBar',
+          items:[
+            {
+              xtype: 'searchfield',
+              showClear: true,
+              placeHolder: 'Search...',
+              listeners: {
+                scope: this,
+                keyup: this.onFilterSearch
+              },
+              flex: 1
+            }
+          ]
+        }
+      ],
       
       listeners:{
         scope: this,
         itemtap: this.onListItemTap
-      }
+      },
     });
     
     this.tpl = Ext.XTemplate.from('userlist');
@@ -59,14 +83,13 @@ codebits.views.UserList = Ext.extend(Ext.List, {
         url: 'users/' + this.data,
         token: localStorage['token']
       },
-      callback: function(records, operation, success) {
-        var result = JSON.parse(operation.response.responseText);
-        if (result.error) {
+      callback: function(result, operation, success) {
+        if (result) {
+          that.dataUpdated = true;
+        }
+        else if (operation.response.error) {
           alert('Token expired!');
           Ext.redirect('login');
-        }
-        else {
-          that.dataUpdated = true;
         }
       }
     });
@@ -81,7 +104,48 @@ codebits.views.UserList = Ext.extend(Ext.List, {
       id: record.data.id,
       historyUrl: 'skills/'+ this.data +'/'+ record.data.id
     });
+  },
+  
+  onFilterSearch: function(field) {
+    var value = field.getValue();
+                  
+    if (!value) {
+      this.store.filterBy(function() {
+        return true;
+      });
+    } 
+    else {
+      var searches = value.split(' '),
+        regexps  = [],
+        i;
+    
+      for (i = 0; i < searches.length; i++) {
+        if (!searches[i]) 
+          return;
+        regexps.push(new RegExp(searches[i], 'i'));
+      };
+      
+      this.store.filterBy(function(record) {
+        var matched = [];
+        
+        for (i = 0; i < regexps.length; i++) {
+          var search = regexps[i];
+          
+          if (record.get('name').match(search))
+            matched.push(true);
+          else 
+            matched.push(false);
+        };
+        
+        if (regexps.length > 1 && matched.indexOf(false) != -1) {
+          return false;
+        } else {
+          return matched[0];
+        }
+      });
+    }
   }
+  
 });
 
 Ext.reg('userListView', codebits.views.UserList);

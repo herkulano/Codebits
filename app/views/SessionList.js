@@ -55,14 +55,13 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
         url: 'usersessions/' + localStorage['uid'],
         token: localStorage['token']
       },
-      callback: function(records, operation, success) {
-        var result = JSON.parse(operation.response.responseText);
-        if (result.error) {
+      callback: function(result, operation, success) {
+        if (result) {
+          that.dataUpdated = true;
+        }
+        else if (operation.response.error) {
           alert('Token expired!');
           Ext.redirect('login');
-        }
-        else {
-          that.dataUpdated = true;
         }
       }
     });
