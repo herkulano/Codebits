@@ -6,8 +6,8 @@ Ext.regApplication({
   
   icon: 'res/imgs/icon.png',
   glossOnIcon: false,
+  statusBarStyle: 'black',
   phoneStartupScreen: 'res/imgs/phone_startup.png',
-  //tabletStartupScreen: 'res/imgs/tablet_startup.png', //not ready for tablet
   
   /**
    * This is called automatically when the page loads. 

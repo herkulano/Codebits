@@ -367,7 +367,7 @@ div.list-view {
       margin-top: 1px;
       width: 40px;
       height: 40px;
-      background-color: #fff;
+      background-color: $text_color;
     }
     
     .tweet-bubble {
@@ -516,12 +516,27 @@ div.detail-view {
   }
 }
 
+.info-content.x-panel {
+  background: lighten($base_color, 10%);
+  
+  .x-toolbar {
+    @include box-shadow($base_color, 0px, 0px, 0px);
+  }
+}
+
 .info-content .x-toolbar-title {
   color: $text_color;
 }
 
 .info-content .x-panel-body .x-html {
   padding: 5px;
+}
+
+#add-info {
+  h4 {
+    font-size: 1.4em;
+    margin: 10px;
+  }
 }
 
 #more-info {

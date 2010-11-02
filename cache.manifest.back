@@ -1,7 +1,9 @@
 CACHE MANIFEST
-#v004
+#v002
 
 # Explicitly cached entries
+#index.html
+
 res/css/main.css
 
 res/imgs/bt-back.png
@@ -60,4 +62,34 @@ app/views/Viewport.js
 
 # All other resources (e.g. sites) require the user to be online. 
 NETWORK:
-*
+
+# Facebook
+http://static.ak.facebook.com/
+http://static.ak.connect.facebook.com/
+http://www.facebook.com/
+http://touch.facebook.com/
+http://m.facebook.com/
+http://api.facebook.com/
+
+# Google Analytics
+http://www.google-analytics.com/
+
+# Google Maps
+http://maps.googleapis.com/
+http://mt0.google.com/
+http://mt1.google.com/
+http://mt2.google.com/
+http://mt3.google.com/
+http://maps.google.com/
+http://maps.gstatic.com/
+http://gg.google.com/
+
+#Twitter
+http://www.twitter.com/
+http://api.twitter.com/
+http://search.twitter.com/
+http://urls.api.twitter.com/
+http://platform.twitter.com/
+
+#Codebits
+https://services.sapo.pt/

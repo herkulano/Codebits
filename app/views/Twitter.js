@@ -65,8 +65,6 @@ codebits.views.Twitter = Ext.extend(Ext.List, {
           txt = minutes + ' '+ (minutes == 1 ? 'minute' : 'minutes') +' ago';
         }
         
-        console.log(minutes, hours, days);
-        
         return txt;
       },
     });

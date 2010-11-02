@@ -11,7 +11,8 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
   
   layout: {
     type:'vbox',
-    align: 'stretch'
+    align: 'fit',
+    pack: 'start'
   },
   
   initComponent: function() {

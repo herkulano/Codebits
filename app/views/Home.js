@@ -67,22 +67,46 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
     
     codebits.views.Home.superclass.initComponent.apply(this, arguments);
     
-    this.overlay = new Ext.Panel({
+    this.aboutOverlay = new Ext.Panel({
+      floating: true,
+      modal: true,
+      centered: false,
+      width: 270,
+      height: 220,
+      styleHtmlContent: true,
+      dockedItems: {
+        xtype: 'toolbar',
+        dock: 'top',
+        title: 'about'
+      },
+      scroll: 'vertical',
+      contentEl: 'more-info',
+      cls: 'info-content',
+    });
+    
+    if (Ext.is.iOS && !localStorage['addToHomeScreenInfo']) {
+      this.addOverlay = new Ext.Panel({
         floating: true,
         modal: true,
         centered: false,
-        width: 270,
-        height: 220,
+        width: 300,
+        height: 165,
         styleHtmlContent: true,
         dockedItems: {
           xtype: 'toolbar',
           dock: 'top',
-          title: 'about'
+          title: 'Add to Home Screen'
         },
         scroll: 'vertical',
-        contentEl: 'more-info',
+        contentEl: 'add-info',
         cls: 'info-content',
-    });
+      });
+      
+      this.addOverlay.setCentered(true);
+      this.addOverlay.show();
+      
+      localStorage['addToHomeScreenInfo'] = true;
+    }
   },
   onListItemTap: function(view, index, item, e) {
     var record = this.getRecord(item);
@@ -98,8 +122,8 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
     this.select(null);
   },
   showInfo: function() {
-    this.overlay.setCentered(true);
-    this.overlay.show();
+    this.aboutOverlay.setCentered(true);
+    this.aboutOverlay.show();
   }
 });
 
