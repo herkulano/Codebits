@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#v004
+#v0.8
 
 # Explicitly cached entries
 res/css/main.css
@@ -22,7 +22,6 @@ res/imgs/navBk.png
 res/imgs/phone_startup.png
 
 lib/ext-touch.js
-lib/ext-touch-debug.js
 
 lib/CodebitsProxy.js
 lib/TwitterProxy.js

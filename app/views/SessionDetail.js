@@ -20,8 +20,44 @@ codebits.views.SessionDetail = Ext.extend(Ext.Panel, {
       },
     });
     
-    this.tpl = Ext.XTemplate.from('sessiondetail');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="sessiondetail-item dataview-item">',
+          '<div class="date">{start}</div>',
+          '<div class="place">{placename}</div>',
+          '<p class="title">{title} [{lang}]</p>',
+          '<br/>',
+          '<p class="info">{description}</p>',
+          '<br/>',
+          '<div class="info">',
+            '<tpl if="slideshare">',
+              '<p>{slideshare}</p>',
+            '</tpl>',
+            '<tpl if="slideshare">',
+              '<p><a target="_blank" href="{slideshare}">{slideshare}</a></p>',
+            '</tpl>',
+            '<tpl if="pfile">',
+              '<p><a target="_blank" href="{pfile}">{pfile}</a></p>',
+            '</tpl>',
+            '<tpl if="video">',
+              '<p><a target="_blank" href="{video}">{video}</a></p>',
+            '</tpl>',
+            '<tpl for="speakers">',
+              '<div class="speakers-item detail-item">',
+                '<p class="name">{name}</p>',
+                '<p>Karma: {karma}</p>',
+                '<tpl if="twitter">',
+                  '<p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>',
+                '</tpl>',
+                '<tpl if="blog">',
+                  '<p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>',
+                '</tpl>',
+              '</div>',
+            '</tpl>',
+          '</div>',
+        '</div>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

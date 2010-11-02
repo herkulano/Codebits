@@ -34,8 +34,27 @@ codebits.views.CalendarList = Ext.extend(Ext.List, {
       }
     });
     
-    this.tpl = Ext.XTemplate.from('calendarlist');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<tpl if="colspan == 1">',
+          '<div class="calendarlist-item">',
+            '<div class="date">{hour}<p class="session-id x-hidden-display">{id}</p></div>',
+            '<div class="right-cell">',
+              '<div class="title">{title}</div>',
+              '<p class="info"><span class="place">{placename}</span> <tpl for="speakers">{name} </tpl></p>',
+            '</div>',
+          '</div>',
+        '</tpl>',
+        '<tpl if="colspan == 4">',
+          '<div class="calendarlist-break-item">',
+            '<div class="date">{hour}</div>',
+            '<div class="right-cell">',
+              '<div class="title">{title}</div>',
+            '</div>',
+          '</div>',
+        '</tpl>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

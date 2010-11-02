@@ -58,8 +58,13 @@ codebits.views.UserList = Ext.extend(Ext.List, {
       },
     });
     
-    this.tpl = Ext.XTemplate.from('userlist');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="userlist-item">',
+          '<p>{name}</p>',
+        '</div>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

@@ -35,8 +35,14 @@ codebits.views.ProjectList = Ext.extend(Ext.List, {
       }
     });
     
-    this.tpl = Ext.XTemplate.from('projectlist');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="projectlist-item">',
+          '<div class="title">{title}</div>',
+          '<div class="right-box {status}">{id}</div>',
+        '</div>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

@@ -62,8 +62,18 @@ codebits.views.Home = Ext.extend(Ext.DataView, {
       }
     });
     
-    this.tpl = Ext.XTemplate.from('home');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<ul class="home-container">',
+        '<tpl for=".">',
+          '<li class="home-item">',
+            '<div>',
+              '<img src="res/imgs/home_{img}.png"/>',
+              '<p>{title}</p>',
+            '</div>',
+          '</li>',
+        '</tpl>',
+       '</ul>'
+    );
     
     codebits.views.Home.superclass.initComponent.apply(this, arguments);
     

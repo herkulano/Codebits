@@ -35,8 +35,15 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
       }
     });
     
-    this.tpl = Ext.XTemplate.from('sessionlist');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="sessionlist-item">',
+          '<div class="date">{start}</div>',
+          '<div class="place">{place}</div>',
+          '<p class="title">{title}</p>',
+        '</div>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

@@ -28,7 +28,20 @@ codebits.views.Twitter = Ext.extend(Ext.List, {
       }
     });
 
-    this.tpl = Ext.XTemplate.from('twitterlist', {
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="tweet">',
+          '<img src="{profile_image_url}" />',
+          '<div class="tweet-bubble">',
+            '<div class="tweet-content">',
+              '<p class="user">{from_user}</p>',
+              '<p class="date">{created_at:this.formatDate}</p>',
+              '<h1>{text:this.linkify}</h1>',
+            '</div>',
+          '</div>',
+        '</div>',
+      '</tpl>',
+    {
       /**
        * Simply wraps a link tag around each detected url
        */
@@ -66,9 +79,8 @@ codebits.views.Twitter = Ext.extend(Ext.List, {
         }
         
         return txt;
-      },
+      }
     });
-    this.tpl.compile();
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

@@ -20,8 +20,41 @@ codebits.views.UserDetail = Ext.extend(Ext.Panel, {
       },
     });
     
-    this.tpl = Ext.XTemplate.from('userdetail');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="userdetail-item dataview-item">',
+          '<div class="date">{nick}</div>',
+          '<div class="place">{id}</div>',
+          '<p class="title">{name} [{nick}]</p>',
+          '<br/>',
+          '<p class="info">{bio}</p>',
+          '<br/>',
+          '<div class="info">',
+            '<tpl if="slideshare">',
+              '<p>{slideshare}</p>',
+            '</tpl>',
+            '<tpl if="slideshare">',
+              '<p><a target="_blank" href="{slideshare}">{slideshare}</a></p>',
+            '</tpl>',
+            '<tpl if="pfile">',
+              '<p><a target="_blank" href="{pfile}">{pfile}</a></p>',
+            '</tpl>',
+            '<tpl if="video">',
+              '<p><a target="_blank" href="{video}">{video}</a></p>',
+            '</tpl>',
+            '<p>Karma: {karma}</p>',
+            '<tpl if="twitter">',
+              '<p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>',
+            '</tpl>',
+            '<tpl if="blog">',
+              '<p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>',
+            '</tpl>',
+            '<br/>',
+            '<p><tpl for="skills">{.} </tpl></p>',
+          '</div>',
+        '</div>',
+      '</tpl>'
+    );
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

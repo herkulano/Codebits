@@ -22,7 +22,6 @@
     <script type="text/javascript" src="app/routes.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
     
-    <!-- Place your view files here -->
     <div id="sencha-views">
       <script type="text/javascript" src="app/views/Viewport.js"></script>
 
@@ -42,7 +41,6 @@
       <script type="text/javascript" src="app/views/Map.js"></script>
     </div>
     
-    <!-- Place your model files here -->
     <div id="sencha-models">
       <script type="text/javascript" src="app/models/Session.js"></script>
       <script type="text/javascript" src="app/models/SessionDetail.js"></script>
@@ -55,7 +53,6 @@
       <script type="text/javascript" src="app/models/UserDetail.js"></script>
     </div>
     
-    <!-- Place your controller files here -->
     <div id="sencha-controllers">
       <script type="text/javascript" src="app/controllers/viewport.js"></script>
     </div>
@@ -80,209 +77,11 @@
       <p><small>with the CODEBITS API and Sencha Touch</small></p>
     </div>
   </div>
-    
-  <textarea id="home" class="x-hidden-display">
-    <ul class="home-container">
-    <tpl for=".">
-      <li class="home-item">
-        <div>
-          <img src="res/imgs/home_{img}.png"/>
-          <p>{title}</p>
-        </div>
-      </li>
-    </tpl>
-    </ul>
-  </textarea>
-  
-  <textarea id="sessionlist" class="x-hidden-display">
-    <tpl for=".">
-      <div class="sessionlist-item">
-        <div class="date">{start}</div>
-        <div class="place">{place}</div>
-        <p class="title">{title}</p>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="sessiondetail" class="x-hidden-display">
-    <tpl for=".">
-      <div class="sessiondetail-item dataview-item">
-        <div class="date">{start}</div>
-        <div class="place">{placename}</div>
-        
-        <p class="title">{title} [{lang}]</p>
-        <br/>
-        <p class="info">{description}</p>
-        <br/>
-        <div class="info">
-          <tpl if="slideshare">
-            <p>{slideshare}</p>
-          </tpl>
-          <tpl if="slideshare">
-            <p><a target="_blank" href="{slideshare}">{slideshare}</a></p>
-          </tpl>
-          <tpl if="pfile">
-            <p><a target="_blank" href="{pfile}">{pfile}</a></p>
-          </tpl>
-          <tpl if="video">
-            <p><a target="_blank" href="{video}">{video}</a></p>
-          </tpl>
-          <tpl for="speakers">
-            <div class="speakers-item detail-item">
-              <p class="name">{name}</p>
-              <p>Karma: {karma}</p>
-              <tpl if="twitter">
-                <p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>
-              </tpl>
-              <tpl if="blog">
-                <p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>
-              </tpl>
-            </div>
-          </tpl>
-        </div>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="userskilllist" class="x-hidden-display">
-    <tpl for=".">
-      <div class="userskilllist-item">
-        <p>{skill}</p>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="userlist" class="x-hidden-display">
-    <tpl for=".">
-      <div class="userlist-item">
-        <p>{name}</p>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="userdetail" class="x-hidden-display">
-    <tpl for=".">
-      <div class="userdetail-item dataview-item">
-        <div class="date">{nick}</div>
-        <div class="place">{id}</div>
-        
-        <p class="title">{name} [{nick}]</p>
-        <br/>
-        <p class="info">{bio}</p>
-        <br/>
-        <div class="info">
-          <tpl if="slideshare">
-            <p>{slideshare}</p>
-          </tpl>
-          <tpl if="slideshare">
-            <p><a target="_blank" href="{slideshare}">{slideshare}</a></p>
-          </tpl>
-          <tpl if="pfile">
-            <p><a target="_blank" href="{pfile}">{pfile}</a></p>
-          </tpl>
-          <tpl if="video">
-            <p><a target="_blank" href="{video}">{video}</a></p>
-          </tpl>
-          <p>Karma: {karma}</p>
-          <tpl if="twitter">
-            <p>Twitter: <a target="_blank" href="http://twitter.com/{twitter}">@{twitter}</a></p>
-          </tpl>
-          <tpl if="blog">
-            <p>Blog: <a target="_blank" href="{blog}">{blog}</a></p>
-          </tpl>
-          <br/>
-          <p><tpl for="skills">{.} </tpl></p>
-        </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="calendarlist" class="x-hidden-display">
-    <tpl for=".">
-      <tpl if="colspan == 1">
-        <div class="calendarlist-item">
-          <div class="date">{hour}<p class="session-id x-hidden-display">{id}</p></div>
-          <div class="right-cell">
-            <div class="title">{title}</div>
-            <p class="info"><span class="place">{placename}</span> <tpl for="speakers">{name} </tpl></p>
-          </div>
-        </div>
-      </tpl>
-      <tpl if="colspan == 4">
-        <div class="calendarlist-break-item">
-          <div class="date">{hour}</div>
-          <div class="right-cell">
-            <div class="title">{title}</div>
-          </div>
-        </div>
-      </tpl>
-    </tpl>
-  </textarea>
-  
-  <textarea id="projectlist" class="x-hidden-display">
-    <tpl for=".">
-      <div class="projectlist-item">
-        <div class="title">{title}</div>
-        <div class="right-box {status}">{id}</div>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="projectdetail" class="x-hidden-display">
-    <tpl for=".">
-      <div class="projectdetail-item dataview-item">
-        <div class="date">
-          <p>{date_modified}</p>
-          <p>{location}</p>
-        </div>
-        
-        <div class="right-box {status}">{id}</div>
-        <p class="title">{title}</p>
-        <br/>
-        <p><b>Abstract</b></p>
-        <p class="info">{abstract}</p>
-        <br/>
-        <p><b>Description</b></p>
-        <p class="info">{description}</p>
-        <br/>
-        <div class="info">
-          <tpl if="url">
-            <p><a target="_blank" href="{url}">{url}</a></p>
-          </tpl>
-          <p>Position: {presentation_position}</p>
-          <p>Edition: {edition} ~ Video Offset: {video_offset}</p>
-        </div>
-        
-        <tpl for="users">
-          <div class="users-item detail-item">
-            <p class="name">{name} <tpl if="owner == 1">[owner]</tpl></p>
-            <tpl if="status">
-              <p>{status}</p>
-            </tpl>
-          </div>
-        </tpl>
-      </div>
-    </tpl>
-  </textarea>
-  
-  <textarea id="twitterlist" class="x-hidden-display">
-    <tpl for=".">
-      <div class="tweet">
-        <img src="{profile_image_url}" />
-        <div class="tweet-bubble">
-          <div class="tweet-content">
-            <p class="user">{from_user}</p>
-            <p class="date">{created_at:this.formatDate}</p>
-            <h1>{text:this.linkify}</h1>
-          </div>
-        </div>
-      </div>
-    </tpl>
-  </textarea>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-2323428-8']);
-    _gaq.push(['_trackPageview']);
+    _gaq.push(['_setAccount', 'UA-2323428-9']);
+    //_gaq.push(['_trackPageview']);
   
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

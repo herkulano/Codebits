@@ -40,8 +40,13 @@ codebits.views.UserSkillList = Ext.extend(Ext.List, {
       }
     });
     
-    this.tpl = Ext.XTemplate.from('userskilllist');
-    this.tpl.compile();
+    this.tpl = new Ext.XTemplate(
+      '<tpl for=".">',
+        '<div class="userskilllist-item">',
+          '<p>{skill}</p>',
+        '</div>',
+      '</tpl>'
+    );
     
     codebits.views.UserSkillList.superclass.initComponent.apply(this, arguments);
   },
