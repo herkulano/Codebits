@@ -71,7 +71,7 @@ codebits.views.CalendarList = Ext.extend(Ext.List, {
         url: 'calendar'
       },
       callback: function(result, opretation, success) {
-        if (result) {
+        if (!operation.response.error) {
           this.dataUpdated = true;    
         }
       }

@@ -89,10 +89,10 @@ codebits.views.UserList = Ext.extend(Ext.List, {
         token: localStorage['token']
       },
       callback: function(result, operation, success) {
-        if (result) {
+        if (!operation.response.error) {
           that.dataUpdated = true;
         }
-        else if (operation.response.error) {
+        else {
           alert('Token expired!');
           Ext.redirect('login');
         }

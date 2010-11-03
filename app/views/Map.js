@@ -92,6 +92,7 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
         map.map.setCenter(codebitsPos);
         map.map.setZoom(12);
       }
+      this.doComponentLayout();
     }
     
     Ext.apply(this, {
