@@ -36,14 +36,13 @@ $date_font: 0.9em;
 @include sencha-list;
 @include sencha-layout;
 @include sencha-form;
-//@include sencha-msgbox;
 
 @mixin bodyBack() {
   background: $back_color url('../imgs/navBk.png') repeat;
 }
 
 @mixin loading() {
-  font-size: $loading_font;
+  font-size: $title_font;
   padding: 1em;
   padding-left: 2.5em;
   display:block;
@@ -174,33 +173,39 @@ div.x-toolbar.navbar {
 
 .x-list .x-list-group-items, .x-list.x-list-flat .x-list-parent {
   
-  & > * {
+  & > .x-list-item {
+    padding: 0.2em;
     border-top: none;
     border-bottom: $divide_color 1px solid;
     color: $text_color;
     background-color: transparentize($base_color, 0.4);
-  }
-  
-  & > .x-item-pressed {
-    background: darken($back_color, 10%);
-    border-top: none;
-  }
-  
-  & > .x-item-selected {
-    color: $text_color;
-    border-top: none;
-    border-bottom: $divide_color 1px solid;
-    @include linear-gradient( 
-      color-stops(
-        darken($back_color, 12%), 
-        darken($back_color, 10%) 30%,
-        darken($back_color, 10%) 70%,
-        darken($back_color, 12%) 100%
-      ));
-  }
-  
-  div.loading-indicator {
-    @include loading();
+    min-height: 0px;
+    
+    .x-list-item-body {
+      padding: 0.6em;
+    }
+    
+    &.x-item-pressed {
+      background: darken($back_color, 10%);
+      border-top: none;
+    }
+    
+    &.x-item-selected {
+      color: $text_color;
+      border-top: none;
+      border-bottom: $divide_color 1px solid;
+      @include linear-gradient( 
+        color-stops(
+          darken($back_color, 12%), 
+          darken($back_color, 10%) 30%,
+          darken($back_color, 10%) 70%,
+          darken($back_color, 12%) 100%
+        ));
+    }
+    
+    div.loading-indicator {
+      @include loading();
+    }
   }
 }
 
@@ -230,36 +235,54 @@ div.list-view {
     padding: 0.2em 0.9em;
     font-size: 0.8em;
   }
+}
+
+#userListView {
   
-  .searchBar {
+  .searchBar > div {
+    padding:0.4em;
+    
     @include linear-gradient( 
       color-stops(
         lighten($base_color, 2%),
         darken($base_color, 3%) 100%
       ));
-    //border-bottom: darken($base_color, 40%) 1px solid;
     font-size: $title_font;
     border: none;
+    @include box-shadow(black, 0px, 0px, 8px);
     
     .x-field {
-      margin: 0 0.2em;
+      @include border-radius(0.9em);
+      padding: 0;
+      margin: 0;
+      min-height: 1.8em;
+      background: #f2f2f2;
     }
     
-    .x-input-search {
+    .x-input-text, .x-input-search {
       border: none;
-      padding: 0.5em;
-      @include linear-gradient( 
-        color-stops(
-          lighten($base_color, 65%),
-          lighten($base_color, 80%) 100%
-        ));
+      padding: 0 0.5em;
+      min-height: 1.8em;
+      @include border-radius(0.9em);
+      background: #f2f2f2;
+    }
+    
+    .x-field-clear-container {
+      min-height: 1.8em;
+      @include border-radius(0.9em);
+      background: #f2f2f2;
+      
+      .x-field-clear {
+        font-size: 1.2em;
+        line-height: 1em;
+      }
     }
   }
 }
 
 #sessionListView {
-  div.sessionlist-item {
-    
+
+  div.sessionlist-item {    
     .title {
       clear: both;
       font-size: $title_font;
@@ -284,7 +307,19 @@ div.list-view {
 }
 
 #calendarListView {
-
+  
+  .x-list-header {
+    padding: 0.3em 0.5em;
+  }
+  
+  .x-list-item {
+    padding: 0px;
+    
+    .x-list-item-body {
+      padding: 0px;
+    }
+  }
+  
   div.calendarlist-item, div.calendarlist-break-item {
     display: table;
     width: 100%;
@@ -292,7 +327,7 @@ div.list-view {
     
     & > div {
       display: table-cell;
-      vertical-align: middle;
+      //vertical-align: middle;
     }
     & > .right-cell {
       padding: 0.6em;
@@ -300,7 +335,6 @@ div.list-view {
     
     .title {
       clear: both;
-      font-size: $title_font;
     }
     
     .place {
@@ -312,12 +346,14 @@ div.list-view {
     .date {
       color: darken($text_color, 10%);
       background-color: darken($base_color, 8%);
-      width: 60px;
+      width: 58px;
       text-align: center;
       font-size: $date_font;
+      height: auto;
     }
     .info {
       margin-top: 5px;
+      font-size: $date_font;
     }
   }
 }
@@ -574,7 +610,7 @@ div.detail-view {
   
   .x-mask-loading {
     -webkit-border-radius: .5em;
-    color: darken($text_color, 10%);
+    color: $text_color;
     border: $shadow_color 2px solid;
     text-align: left;
     padding: 1em 1em 1em 3em;
@@ -582,7 +618,7 @@ div.detail-view {
     font-weight: normal;
     display: block;
     width: 100%;
-    height: 3em;
+    height: 3.3em;
     background: $base_color url('../imgs/loading.gif') 0.9em center no-repeat;
   }
 }

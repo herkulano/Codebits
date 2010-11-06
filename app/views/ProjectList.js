@@ -1,70 +1,77 @@
 /**
  * @class codebits.views.ProjectList
- * @extends Ext.List
+ * @extends Ext.Panel
  * @xtype projectListView
  */
-codebits.views.ProjectList = Ext.extend(Ext.List, {
+codebits.views.ProjectList = Ext.extend(Ext.Panel, {
   id:'projectListView',
-
-  scroll:'vertical',
-  singleSelect: true,
-  cls: 'list-view',
-  itemSelector: 'div.projectlist-item',
-  
-  loadingText: G_LOADING,
-  emptyText: G_EMPTY,
+  layout: 'fit',
   
   initComponent: function() {
     this.dataUpdated = false;
     
-    Ext.apply(this, {
+    this.list = new Ext.List({
+      cls: 'list-view',
+      scroll:'vertical',
+      singleSelect: true,
+      
+      loadingText: G_LOADING,
+      emptyText: G_EMPTY,
+      
       store: new Ext.data.Store({
         model: 'Project',
         autoload: false
       }),
       
-      dockedItems: {
-        xtype:'navBar',
-        title:'projects',
-        refresh: true
-      },
+      itemTpl: [
+        '<tpl for=".">',
+          '<div class="projectlist-item">',
+            '<div class="title">{title}</div>',
+            '<div class="right-box {status}">{id}</div>',
+          '</div>',
+        '</tpl>'
+      ],
       
-      listeners:{
+      listeners: {
         scope: this,
-        itemtap: this.onListItemTap
+        itemtap: this.itemTapHandler,
       }
     });
     
-    this.tpl = new Ext.XTemplate(
-      '<tpl for=".">',
-        '<div class="projectlist-item">',
-          '<div class="title">{title}</div>',
-          '<div class="right-box {status}">{id}</div>',
-        '</div>',
-      '</tpl>'
-    );
+    this.toolbar = new codebits.views.NavBar({
+      title:'projects',
+      refresh: true
+    });
+    
+    Ext.apply(this, {
+      dockedItems: [this.toolbar],
+      items: [this.list],
+      listeners:{
+        scope:this,
+        deactivate: this.deactivateHandler
+      }
+    });
     
     this.addEvents('updateData');
-    this.on('updateData', this.onUpdateData, this);
+    this.on('updateData', this.updateDataHandler, this);
     
     codebits.views.ProjectList.superclass.initComponent.apply(this, arguments);
   },
   
-  onUpdateData: function(data, refresh) {
+  updateDataHandler: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
-    var that = this;
-    this.scroller.scrollTo({x: 0, y: 0});
-    
-    this.store.read({
+    this.list.scroller.scrollTo({x: 0, y: 0});
+    this.list.store.read({
+      scope:this,
       params:{
         url: 'projects/',
         token: localStorage['token']
       },
       callback: function(result, operation, success) {
         if (!operation.response.error) {
-          that.dataUpdated = true;
+          this.dataUpdated = true;
         }
         else {
           alert('Token expired!');
@@ -74,8 +81,8 @@ codebits.views.ProjectList = Ext.extend(Ext.List, {
     });
   },
   
-  onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
+  itemTapHandler: function(subList, subIdx, el, e) {
+    var record = subList.getRecord(el);
     
     Ext.dispatch({
       controller: 'viewport',
@@ -84,6 +91,10 @@ codebits.views.ProjectList = Ext.extend(Ext.List, {
       id: record.data.id,
       historyUrl: 'projects/' + record.data.id
     });
+  },
+  
+  deactivateHandler: function(){
+    this.list.getSelectionModel().deselectAll();
   }
 });
 

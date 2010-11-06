@@ -1,24 +1,24 @@
 /**
  * @class codebits.views.UserList
- * @extends Ext.List
+ * @extends Ext.Panel
  * @xtype UserListView
  */
-codebits.views.UserList = Ext.extend(Ext.List, {
+codebits.views.UserList = Ext.extend(Ext.Panel, {
   id:'userListView',
-  
-  grouped:true,
-  scroll:'vertical',
-  singleSelect:true,
-  cls:'list-view',
-  itemSelector:'div.userlist-item',
-  
-  loadingText: G_LOADING,
-  emptyText: G_EMPTY,
+  layout: 'fit',
   
   initComponent: function() {
     this.dataUpdated = false;
     
-    Ext.apply(this, {
+    this.list = new Ext.List({
+      grouped:true,
+      scroll:'vertical',
+      singleSelect:true,
+      cls: 'list-view',
+      
+      loadingText: G_LOADING,
+      emptyText: G_EMPTY,
+      
       store: new Ext.data.Store({
         model: 'User',
         sorters: 'name',
@@ -28,69 +28,77 @@ codebits.views.UserList = Ext.extend(Ext.List, {
         autoload: false
       }),
       
+      itemTpl: [
+        '<tpl for=".">',
+          '<div class="userlist-item">',
+            '<p>{name}</p>',
+          '</div>',
+        '</tpl>'
+      ],
+      
+      listeners: {
+        scope: this,
+        itemtap: this.itemTapHandler,
+      }
+    });
+    
+    this.toolbar = new codebits.views.NavBar({
+      title:'skill',
+    });
+    
+    Ext.apply(this, {
       dockedItems: [
+        this.toolbar,
         {
-          xtype:'navBar',
-          title:'skill'
-        },
-        {
-          xtype:'toolbar',
+          xtype:'form',
           dock:'top',
           cls:'searchBar',
           items:[
             {
-              xtype: 'searchfield',
+              xtype: 'textfield',
               showClear: true,
               placeHolder: 'Search...',
               listeners: {
-                scope: this,
-                keyup: this.onFilterSearch
+                scope: this.list,
+                keyup: this.filterSearchHandler
               },
               flex: 1
             }
           ]
         }
       ],
-      
+      items: [this.list],
       listeners:{
-        scope: this,
-        itemtap: this.onListItemTap
-      },
+        scope:this,
+        deactivate: this.deactivateHandler
+      }
     });
     
-    this.tpl = new Ext.XTemplate(
-      '<tpl for=".">',
-        '<div class="userlist-item">',
-          '<p>{name}</p>',
-        '</div>',
-      '</tpl>'
-    );
-    
     this.addEvents('updateData');
-    this.on('updateData', this.onUpdateData, this);
+    this.on('updateData', this.updateDataHandler, this);
     
     codebits.views.UserList.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function(data, refresh) {
+  updateDataHandler: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
     if (data) {
       this.data = data;
-      this.dockedItems.items[0].setTitle(data);
+      this.toolbar.setTitle(data);
     }
     
-    var that = this;
-    this.scroller.scrollTo({x: 0, y: 0});
+    this.list.scroller.scrollTo({x: 0, y: 0});
     
-    this.store.read({
+    this.list.store.read({
+      scope:this,
       params:{
         url: 'users/' + this.data,
         token: localStorage['token']
       },
       callback: function(result, operation, success) {
         if (!operation.response.error) {
-          that.dataUpdated = true;
+          this.dataUpdated = true;
         }
         else {
           alert('Token expired!');
@@ -99,8 +107,8 @@ codebits.views.UserList = Ext.extend(Ext.List, {
       }
     });
   },
-  onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
+  itemTapHandler: function(subList, subIdx, el, e) {
+    var record = subList.getRecord(el);
     
     Ext.dispatch({
       controller: 'viewport',
@@ -111,8 +119,14 @@ codebits.views.UserList = Ext.extend(Ext.List, {
     });
   },
   
-  onFilterSearch: function(field) {
+  filterSearchHandler: function(field, e) {
     var value = field.getValue();
+    var key = e.browserEvent.keyCode;
+    
+    // blur field when user presses enter/search which will trigger a change if necessary.
+    if (key === 13) {
+        field.blur();
+    }
                   
     if (!value) {
       this.store.filterBy(function() {
@@ -149,6 +163,10 @@ codebits.views.UserList = Ext.extend(Ext.List, {
         }
       });
     }
+  },
+  
+  deactivateHandler: function(){
+    this.list.getSelectionModel().deselectAll();
   }
   
 });

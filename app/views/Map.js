@@ -95,12 +95,12 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
       this.doLayout();
     }
     
+    this.toolbar = new codebits.views.NavBar({
+      title:'where is it?',
+    });
+    
     Ext.apply(this, {
-      dockedItems: {
-        xtype:'navBar',
-        title:'where is it?',
-        refresh: false
-      },
+      dockedItems: [this.toolbar],
       items: [map, where]
     });
     

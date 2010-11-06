@@ -1,21 +1,21 @@
 /**
  * @class codebits.views.UserSkillList
- * @extends Ext.List
+ * @extends Ext.Panel
  * @xtype projectListView
  */
-codebits.views.UserSkillList = Ext.extend(Ext.List, {
+codebits.views.UserSkillList = Ext.extend(Ext.Panel, {
   id:'userSkillListView',
-  
-  scroll:'vertical',
-  singleSelect: true,
-  cls:'list-view',
-  itemSelector:'div.userskilllist-item',
-  
-  loadingText: G_LOADING,
-  emptyText: G_EMPTY,
+  layout: 'fit',
   
   initComponent: function() {
-    Ext.apply(this, {
+    this.list = new Ext.List({
+      scroll:'vertical',
+      singleSelect: true,
+      cls:'list-view',
+      
+      loadingText: G_LOADING,
+      emptyText: G_EMPTY,
+      
       store: new Ext.data.Store({
         fields: ['skill'],
         data: [
@@ -29,29 +29,38 @@ codebits.views.UserSkillList = Ext.extend(Ext.List, {
         ]
       }),
       
-      dockedItems: {
-        xtype:'navBar',
-        title:'users by skill'
-      },
+      itemTpl: [
+        '<tpl for=".">',
+          '<div class="userskilllist-item">',
+            '<p>{skill}</p>',
+          '</div>',
+        '</tpl>'
+      ],
       
-      listeners:{
+      listeners: {
         scope: this,
-        itemtap: this.onListItemTap
+        itemtap: this.itemTapHandler,
       }
     });
     
-    this.tpl = new Ext.XTemplate(
-      '<tpl for=".">',
-        '<div class="userskilllist-item">',
-          '<p>{skill}</p>',
-        '</div>',
-      '</tpl>'
-    );
+    this.toolbar = new codebits.views.NavBar({
+      title:'users by skill'
+    });
+    
+    Ext.apply(this, {
+      dockedItems: [this.toolbar],
+      items: [this.list],
+      listeners:{
+        scope:this,
+        deactivate: this.deactivateHandler
+      }
+    });
     
     codebits.views.UserSkillList.superclass.initComponent.apply(this, arguments);
   },
-  onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
+  
+  itemTapHandler: function(subList, subIdx, el, e) {
+    var record = subList.getRecord(el);
     
     Ext.dispatch({
       controller: 'viewport',
@@ -60,6 +69,10 @@ codebits.views.UserSkillList = Ext.extend(Ext.List, {
       skill: record.data.skill,
       historyUrl: 'skills/' + record.data.skill
     });
+  },
+  
+  deactivateHandler: function(){
+    this.list.getSelectionModel().deselectAll();
   }
 });
 

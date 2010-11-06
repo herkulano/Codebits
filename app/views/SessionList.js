@@ -1,70 +1,77 @@
 /**
  * @class codebits.views.SessionList
- * @extends Ext.List
+ * @extends Ext.Panel
  * @xtype sessionListView
  */
-codebits.views.SessionList = Ext.extend(Ext.List, {
+codebits.views.SessionList = Ext.extend(Ext.Panel, {
   id:'sessionListView',
-  
-  scroll:'vertical',
-  singleSelect: true,
-  cls: 'list-view',
-  itemSelector: 'div.sessionlist-item',
-  
-  loadingText: G_LOADING,
-  emptyText: G_NO_FAV,
+  layout: 'fit',
   
   initComponent: function() {
     this.dataUpdated = false;
     
-    Ext.apply(this, {
+    this.list = new Ext.List({
+      cls: 'list-view',
+      scroll:'vertical',
+      singleSelect: true,
+      
+      loadingText: G_LOADING,
+      emptyText: G_NO_FAV,
+      
       store: new Ext.data.Store({
         model: 'Session',
         autoload: false
       }),
       
-      dockedItems: {
-        xtype:'navBar',
-        title:'favorites',
-        refresh: true
-      },
+      itemTpl: [
+        '<tpl for=".">',
+          '<div class="sessionlist-item">',
+            '<div class="date">{start}</div>',
+            '<div class="place">{place}</div>',
+            '<p class="title">{title}</p>',
+          '</div>',
+        '</tpl>'
+      ],
       
-      listeners:{
+      listeners: {
         scope: this,
-        itemtap: this.onListItemTap
+        itemtap: this.itemTapHandler,
       }
     });
     
-    this.tpl = new Ext.XTemplate(
-      '<tpl for=".">',
-        '<div class="sessionlist-item">',
-          '<div class="date">{start}</div>',
-          '<div class="place">{place}</div>',
-          '<p class="title">{title}</p>',
-        '</div>',
-      '</tpl>'
-    );
+    this.toolbar = new codebits.views.NavBar({
+      title:'favorites',
+      refresh: true
+    });
+    
+    Ext.apply(this, {
+      dockedItems: [this.toolbar],
+      items: [this.list],
+      listeners:{
+        scope:this,
+        deactivate: this.deactivateHandler
+      }
+    });
     
     this.addEvents('updateData');
-    this.on('updateData', this.onUpdateData, this);
+    this.on('updateData', this.updateDataHandler, this);
     
     codebits.views.SessionList.superclass.initComponent.apply(this, arguments);
   },
-  onUpdateData: function(data, refresh) {
+  updateDataHandler: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
-    var that = this;
-    this.scroller.scrollTo({x: 0, y: 0});
-    
-    this.store.read({
+    this.list.scroller.scrollTo({x: 0, y: 0});
+    this.list.store.read({
+      scope:this,
       params:{
         url: 'usersessions/' + localStorage['uid'],
         token: localStorage['token']
       },
       callback: function(result, operation, success) {
         if (!operation.response.error) {
-          that.dataUpdated = true;
+          this.dataUpdated = true;
         }
         else {
           alert('Token expired!');
@@ -74,8 +81,8 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
     });
   },
   
-  onListItemTap: function(view, index, item, e){
-    var record = this.getRecord(item);
+  itemTapHandler: function(subList, subIdx, el, e) {
+    var record = subList.getRecord(el);
     
     Ext.dispatch({
       controller: 'viewport',
@@ -85,6 +92,10 @@ codebits.views.SessionList = Ext.extend(Ext.List, {
       historyUrl: 'favorites/' + record.data.id
     });
   },
+  
+  deactivateHandler: function(){
+    this.list.getSelectionModel().deselectAll();
+  }
   
 });
 

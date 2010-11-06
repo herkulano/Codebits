@@ -5,8 +5,6 @@
  */
 codebits.views.CalendarList = Ext.extend(Ext.Panel, {
   id: 'calendarListView',
-  
-  cls: 'list-view',
   layout: 'fit',
   
   loadingText: G_LOADING,
@@ -16,11 +14,10 @@ codebits.views.CalendarList = Ext.extend(Ext.Panel, {
     this.dataUpdated = false;
     
     this.list = new Ext.List({
+      cls: 'list-view',
       scroll:'vertical',
       singleSelect: true,
       grouped: true,
-      cls: 'list-view',
-      itemSelector: 'div.calendarlist-item',
       
       loadingText: G_LOADING,
       emptyText: G_EMPTY,
@@ -56,35 +53,41 @@ codebits.views.CalendarList = Ext.extend(Ext.Panel, {
       
       listeners: {
         scope: this,
-        itemtap: this.onListItemTap,
+        itemtap: this.itemTapHandler,
       }
-      
-    })
+    });
+    
+    this.toolbar = new codebits.views.NavBar({
+      title:'calendar'
+    });
     
     Ext.apply(this, {
-      dockedItems: {
-        xtype:'navBar',
-        title:'calendar'
-      },
-      items: [this.list]
+      dockedItems: [this.toolbar],
+      items: [this.list],
+      listeners:{
+        scope:this,
+        deactivate: this.deactivateHandler
+      }
     });
     
     this.addEvents('updateData');
-    this.on('updateData', this.onUpdateData, this);
+    this.on('updateData', this.updateDataHandler, this);
     
     codebits.views.CalendarList.superclass.initComponent.apply(this, arguments);
   },
   
-  onUpdateData: function(data, refresh) {
+  updateDataHandler: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
     
     this.list.scroller.scrollTo({x: 0, y: 0});
     this.list.store.read({
+      scope:this,
       params:{
         url: 'calendar'
       },
       callback: function(result, operation, success) {
+        console.log(this);
         if (!operation.response.error) {
           this.dataUpdated = true;    
         }
@@ -92,8 +95,8 @@ codebits.views.CalendarList = Ext.extend(Ext.Panel, {
     });
   },
   
-  onListItemTap: function(view, index, item, e) {
-    var record = view.getRecord(item);
+  itemTapHandler: function(subList, subIdx, el, e) {
+    var record = subList.getRecord(el);
     
     if (record.data.id > 0) {
       Ext.dispatch({
@@ -105,8 +108,12 @@ codebits.views.CalendarList = Ext.extend(Ext.Panel, {
       });
     }
     else {
-      view.select(null);
+      subList.getSelectionModel().deselectAll();
     }
+  },
+  
+  deactivateHandler: function(){
+    this.list.getSelectionModel().deselectAll();
   }
 });
 

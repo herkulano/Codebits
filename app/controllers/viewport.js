@@ -80,7 +80,7 @@ Ext.regController("viewport", {
   
   skills: function(options) {
     this.setCard('userSkillList', 
-      null, 
+      null,
       options.next ? this.anims.POP : this.anims.SLIDE_BACK
     );
   },
