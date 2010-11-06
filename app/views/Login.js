@@ -1,5 +1,5 @@
 /**
- * @class codebits.views.Home
+ * @class codebits.views.Login
  * @extends Ext.form.FormPanel
  * @xtype loginView
  */
@@ -7,7 +7,6 @@ codebits.views.Login = Ext.extend(Ext.form.FormPanel, {
   id:'loginView',
   
   scroll:'vertical',
-  standardSubmit:true,
   cls:'form-view',
   
   initComponent: function(){

@@ -20,7 +20,7 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
     
     var map = new Ext.Map({
       title: 'Map',
-      getLocation: true,
+      useCurrentLocation: true,
       mapOptions: {
         navigationControl: false,
         streetViewControl: false,
@@ -92,7 +92,7 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
         map.map.setCenter(codebitsPos);
         map.map.setZoom(12);
       }
-      this.doComponentLayout();
+      this.doLayout();
     }
     
     Ext.apply(this, {

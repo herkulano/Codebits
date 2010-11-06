@@ -102,8 +102,11 @@ Ext.regController("viewport", {
   },
   
   setCard: function(cardName, data, anim, refresh) {
+  	// Analytics
+  	_gaq.push(['_trackPageview', cardName]);
+  	// Control Card Views
     var card = Ext.getCmp(cardName + 'View');
-    Ext.getCmp('viewport').setCard(card, anim);
+    Ext.getCmp('viewport').setActiveItem(card, anim);
     card.fireEvent('updateData', data, refresh);
   },
   
