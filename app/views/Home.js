@@ -27,8 +27,8 @@ codebits.views.Home = Ext.extend(Ext.Panel, {
           {title:'#codebits',   card:'twitter',     img:'twitter'},
           {title:'users',       card:'skills',      img:'users'},
           {title:'where?',      card:'map',         img:'where'},
-          {title:'vote',        card:'vote',        img:'projects'},
-          {title:'gps',         card:'gps',         img:'where'},
+          {title:'vote',        card:'vote',        img:'vote'},
+          {title:'gps',         card:'gps',         img:'gps'},
         ]
       }),
       

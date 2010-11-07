@@ -37,7 +37,9 @@ return array(
 		'//app/views/UserList.js',
 		'//app/views/UserDetail.js',
 		'//app/views/Map.js',
-		
+		'//app/views/GPS.js',
+		'//app/views/ProjectVote.js',
+    
 		'//app/models/Session.js',
 		'//app/models/SessionDetail.js',
 		'//app/models/Speaker.js',

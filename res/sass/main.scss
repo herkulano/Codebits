@@ -91,7 +91,7 @@ div.home-view {
     div {
       background-color: $base_color;
       width: 90px;
-      height: 120px;
+      height: 80px;
       padding-top: 3px;
       margin: auto;
       @include border-radius(8px);
@@ -613,8 +613,8 @@ div.detail-view {
     &.x-button-pressed {
       @include radial-gradient( 
         color-stops(
-          rgba(255,255,255,0.4),
-          rgba(255,255,255,0) 70%
+          rgba(255,255,255,0.3),
+          rgba(255,255,255,0)
         ));
     }
   }
