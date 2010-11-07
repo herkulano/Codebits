@@ -14,7 +14,7 @@ codebits.views.GPS = Ext.extend(Ext.Panel, {
       id: 'gpscontainer',
       layout: 'fit',
       scroll: false,
-      html: '<div id="gpspoint" style="position:absolute;z-index:10;background:url(res/imgs/marker.png) center no-repeat;width:30px;height:30px;"></div><div id="gpsmap" style="background:url(res/imgs/planta2010.jpg) center no-repeat;"></div>',
+      html: '<div id="gpspoint" style="position:absolute;z-index:10;background:url(http://codebits.eu/imgs/marker.png) center no-repeat;width:30px;height:30px;"></div><div id="gpsmap" style="background:url(http://codebits.eu/imgs/planta2010.jpg) center no-repeat;"></div>',
     });
     
     this.coords = new Ext.Panel({
