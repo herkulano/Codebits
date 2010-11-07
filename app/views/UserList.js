@@ -71,7 +71,7 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
       items: [this.list],
       listeners:{
         scope:this,
-        deactivate: this.deactivateHandler
+        deactivate: this.deactivateHandler,
       }
     });
     
@@ -80,9 +80,12 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
     
     codebits.views.UserList.superclass.initComponent.apply(this, arguments);
   },
+  
   updateDataHandler: function(data, refresh) {
     if (this.dataUpdated === true && refresh !== true)
       return false;
+      
+    this.searchField.reset();
     
     if (data) {
       this.data = data;
@@ -108,6 +111,7 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
       }
     });
   },
+  
   itemTapHandler: function(subList, subIdx, el, e) {
     var record = subList.getRecord(el);
     
@@ -141,8 +145,6 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
   
   doFilterStore: function(field, store) {
     var value = field.getValue();
-    
-    console.log('doFilterStore', value, this);
     
     if (!value) {
       store.filterBy(function() {
