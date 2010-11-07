@@ -586,6 +586,47 @@ div.detail-view {
   }
 }
 
+.vote-bar.x-toolbar {
+  background: darken($back_color, 10%);
+  @include box-shadow(black, 0px, 0px, 8px);
+  font-size: $title_font + 0.2;
+  
+  .vote-txt {
+    text-align: center;
+    font-size: $title_font + 0.3;
+  }
+  
+  
+  .x-button.x-button-plain {
+    padding: 0px 5px;
+    
+    //-webkit-gradient(radial, 50% 50%, 0, 50% 50%, 24, from(rgba(200, 66, 66, 0.699219)), to(rgba(200, 66, 66, 0)));
+    
+    &.vote-yes-bt {
+      background-color: $green_color;
+    }
+    
+    &.vote-no-bt {
+      background-color: $red_color;
+    }
+    
+    &.x-button-pressed {
+      @include radial-gradient( 
+        color-stops(
+          rgba(255,255,255,0.4),
+          rgba(255,255,255,0) 70%
+        ));
+    }
+  }
+}
+
+.gps-coords {
+  background: darken($back_color, 10%);
+  @include box-shadow(black, 0px, 0px, 8px);
+  font-size: $title_font;
+  padding: 0.5em;
+}
+
 .x-panel .x-panel-body {
   color: $text_color;
 }

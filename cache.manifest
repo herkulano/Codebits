@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#v0.12 2010-11-06
+#v003 2010-11-06
 
 # Explicitly cached entries
 res/css/main.css
@@ -20,8 +20,8 @@ res/imgs/loading.gif
 res/imgs/navBk.png
 res/imgs/phone_startup.png
 
-min/?g=jsA
-min/?g=jsB
+min/?g=jsC
+min/?g=jsD
 
 # All other resources (e.g. sites) require the user to be online. 
 NETWORK:

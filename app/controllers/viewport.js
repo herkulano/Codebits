@@ -78,6 +78,20 @@ Ext.regController("viewport", {
     );
   },
   
+  gps: function(options) {
+    this.setCard('gps', 
+      null, 
+      this.anims.POP
+    );
+  },
+  
+  vote: function(options) {
+    this.setCard('projectVote',
+      null, 
+      this.anims.POP
+    );
+  },
+  
   skills: function(options) {
     this.setCard('userSkillList', 
       null,

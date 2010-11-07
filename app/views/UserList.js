@@ -46,6 +46,18 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
       title:'skill',
     });
     
+    this.searchField = new Ext.form.SearchField({
+      showClear: true,
+      placeHolder: 'Search...',
+      listeners: {
+        scope: this,
+        change: this.searchChangeHandler,
+        keyup: this.searchKeyHandler,
+        blur: this.searchBlurHandler
+      },
+      flex: 1
+    });
+    
     Ext.apply(this, {
       dockedItems: [
         this.toolbar,
@@ -53,18 +65,7 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
           xtype:'form',
           dock:'top',
           cls:'searchBar',
-          items:[
-            {
-              xtype: 'textfield',
-              showClear: true,
-              placeHolder: 'Search...',
-              listeners: {
-                scope: this.list,
-                keyup: this.filterSearchHandler
-              },
-              flex: 1
-            }
-          ]
+          items:[this.searchField]
         }
       ],
       items: [this.list],
@@ -119,17 +120,32 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
     });
   },
   
-  filterSearchHandler: function(field, e) {
-    var value = field.getValue();
+  searchKeyHandler: function (field, e) {
     var key = e.browserEvent.keyCode;
     
     // blur field when user presses enter/search which will trigger a change if necessary.
     if (key === 13) {
         field.blur();
     }
-                  
+    
+    Ext.defer(this.doFilterStore, 100, this, [field, this.list.store]);
+  },
+  
+  searchChangeHandler: function(field, newVal, oldVal) {
+    Ext.defer(this.doFilterStore, 100, this, [field, this.list.store]);
+  },
+  
+  searchBlurHandler: function(e) {
+    Ext.defer(this.doFilterStore, 100, this, [this.searchField, this.list.store]);
+  },
+  
+  doFilterStore: function(field, store) {
+    var value = field.getValue();
+    
+    console.log('doFilterStore', value, this);
+    
     if (!value) {
-      this.store.filterBy(function() {
+      store.filterBy(function() {
         return true;
       });
     } 
@@ -144,7 +160,7 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
         regexps.push(new RegExp(searches[i], 'i'));
       };
       
-      this.store.filterBy(function(record) {
+      store.filterBy(function(record) {
         var matched = [];
         
         for (i = 0; i < regexps.length; i++) {

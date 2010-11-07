@@ -11,8 +11,8 @@
  * See http://code.google.com/p/minify/wiki/CustomSource for other ideas
  **/
 return array(
-    'jsA' => array(
-		'//lib/ext-touch.js', 
+  'jsC' => array(
+		'//lib/sencha-touch.js', 
 		'//lib/Const.js',
 		'//lib/TwitterProxy.js',
 		'//lib/CodebitsProxy.js',
@@ -20,7 +20,7 @@ return array(
 		'//app/routes.js',
 		'//app/app.js'),
 		
-	'jsB' => array(
+	'jsD' => array(
 		'//app/views/Viewport.js',
 		
 		'//app/views/NavBar.js',

@@ -68,6 +68,7 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
       directionsDisplay.setPanel(document.getElementById("mapview-panel"));
     }
     
+    var view = this;
     var getDirections = function() {
       var coords = map.geo.coords;
       if (coords.latitude && coords.longitude) {
@@ -92,7 +93,7 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
         map.map.setCenter(codebitsPos);
         map.map.setZoom(12);
       }
-      this.doLayout();
+      view.doLayout();
     }
     
     this.toolbar = new codebits.views.NavBar({

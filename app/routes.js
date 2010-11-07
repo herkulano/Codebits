@@ -19,5 +19,9 @@ Ext.Router.draw(function(map) {
     map.connect("skills/:skill/:id", {controller: 'viewport', action: 'users'});
     
     map.connect("map", {controller: 'viewport', action: 'map'});
+    
+    map.connect("vote", {controller: 'viewport', action: 'vote'});
+    
+    map.connect("gps", {controller: 'viewport', action: 'gps'});
 
 });
