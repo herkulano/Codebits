@@ -1,5 +1,5 @@
 <!doctype html>
-<html manifest="cache.manifest">
+<html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>CODEBITS IV</title>
@@ -7,6 +7,58 @@
   <link rel="stylesheet" href="res/css/main.css" type="text/css">
 </head>
 <body>
+  <script type="text/javascript" src="lib/sencha-touch.js"></script>
+  
+  <script type="text/javascript" src="lib/Const.js"></script>
+  
+  <script type="text/javascript" src="lib/TwitterProxy.js"></script>
+  <script type="text/javascript" src="lib/CodebitsProxy.js"></script>
+  
+  <!-- Google Maps JS -->
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>  
+  
+  <div id="sencha-app">
+    <script type="text/javascript" src="app/routes.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    
+    <div id="sencha-views">
+      <script type="text/javascript" src="app/views/Viewport.js"></script>
+
+      <script type="text/javascript" src="app/views/NavBar.js"></script>
+      
+      <script type="text/javascript" src="app/views/Home.js"></script>
+      <script type="text/javascript" src="app/views/Login.js"></script>
+      <script type="text/javascript" src="app/views/SessionList.js"></script>
+      <script type="text/javascript" src="app/views/SessionDetail.js"></script>
+      <script type="text/javascript" src="app/views/ProjectList.js"></script>
+      <script type="text/javascript" src="app/views/ProjectDetail.js"></script>
+      <script type="text/javascript" src="app/views/CalendarList.js"></script>
+      <script type="text/javascript" src="app/views/Twitter.js"></script>
+      <script type="text/javascript" src="app/views/UserSkillList.js"></script>
+      <script type="text/javascript" src="app/views/UserList.js"></script>
+      <script type="text/javascript" src="app/views/UserDetail.js"></script>
+      <script type="text/javascript" src="app/views/Map.js"></script>
+      <script type="text/javascript" src="app/views/ProjectVote.js"></script>
+      <script type="text/javascript" src="app/views/GPS.js"></script>
+    </div>
+    
+    <div id="sencha-models">
+      <script type="text/javascript" src="app/models/Session.js"></script>
+      <script type="text/javascript" src="app/models/SessionDetail.js"></script>
+      <script type="text/javascript" src="app/models/Speaker.js"></script>
+      <script type="text/javascript" src="app/models/Project.js"></script>
+      <script type="text/javascript" src="app/models/ProjectDetail.js"></script>
+      <script type="text/javascript" src="app/models/Calendar.js"></script>
+      <script type="text/javascript" src="app/models/Tweet.js"></script>
+      <script type="text/javascript" src="app/models/User.js"></script>
+      <script type="text/javascript" src="app/models/UserDetail.js"></script>
+    </div>
+    
+    <div id="sencha-controllers">
+      <script type="text/javascript" src="app/controllers/viewport.js"></script>
+    </div>
+    
+  </div>
   
   <div class="x-hidden-display">
     <div id="add-info"> 
@@ -26,10 +78,6 @@
       <p><small>with the CODEBITS API and Sencha Touch</small></p>
     </div>
   </div>
-  
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="min/?g=jsC"></script>
-  <script type="text/javascript" src="min/?g=jsD"></script>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];

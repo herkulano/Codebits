@@ -127,6 +127,7 @@ Ext.regController("viewport", {
   anims: {
     SLIDE_UP: {
       type: 'slide',
+      cover: true,
       direction:'up',
       easing:'ease-out'
     },

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#rev016 2010-11-07
+#rev025 2010-11-09
 
 # Explicitly cached entries
 res/css/main.css
@@ -27,8 +27,42 @@ res/imgs/phone_startup.png
 http://codebits.eu/imgs/marker.png
 http://codebits.eu/imgs/planta2010.jpg
 
-min/?g=jsC
-min/?g=jsD
+#lib/sencha-touch.js
+
+#lib/CodebitsProxy.js
+#lib/Const.js
+#lib/TwitterProxy.js
+
+#app/app.js
+#app/routes.js
+
+#app/controllers/viewport.js
+
+#app/models/Calendar.js
+#app/models/Project.js
+#app/models/ProjectDetail.js
+#app/models/Session.js
+#app/models/SessionDetail.js
+#app/models/Speaker.js
+#app/models/Tweet.js
+#app/models/User.js
+#app/models/UserDetail.js
+
+#app/views/CalendarList.js
+#app/views/GPS.js
+#app/views/Home.js
+#app/views/Map.js
+#app/views/NavBar.js
+#app/views/ProjectDetail.js
+#app/views/ProjectList.js
+#app/views/ProjectVote.js
+#app/views/SessionDetail.js
+#app/views/SessionList.js
+#app/views/Twitter.js
+#app/views/UserDetail.js
+#app/views/UserList.js
+#app/views/UserSkillList.js
+#app/views/Viewport.js
 
 # All other resources (e.g. sites) require the user to be online. 
 NETWORK:

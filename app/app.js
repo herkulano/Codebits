@@ -9,6 +9,8 @@ Ext.regApplication({
   statusBarStyle: 'black',
   phoneStartupScreen: 'res/imgs/phone_startup.png',
   
+  //useLoadMask: true,
+  
   /**
    * This is called automatically when the page loads. 
    * Here we set up the main component on the page - the Viewport

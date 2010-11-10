@@ -44,6 +44,7 @@ codebits.views.SessionDetail = Ext.extend(Ext.Panel, {
             '</tpl>',
             '<tpl for="speakers">',
               '<div class="speakers-item detail-item">',
+                '<img src="http://www.gravatar.com/avatar/{md5mail}?s=100&d=retro" />',
                 '<p class="name">{name}</p>',
                 '<p>Karma: {karma}</p>',
                 '<tpl if="twitter">',

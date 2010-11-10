@@ -16,85 +16,25 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
   },
   
   initComponent: function() {
-    var codebitsPos = new google.maps.LatLng(38.775098,-9.095564);
+    this.codebitsPos = new google.maps.LatLng(38.775098,-9.095564);
     
-    var map = new Ext.Map({
+    this.map = new Ext.Map({
       title: 'Map',
-      useCurrentLocation: true,
       mapOptions: {
         navigationControl: false,
-        streetViewControl: false,
+        streetViewControl: true,
         scaleControl: false,
-        mapTypeControl: false,
+        mapTypeControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: codebitsPos
+        center: this.codebitsPos
       },
       listeners: {
-        maprender: function(mapC, map) {
-          initMap();
-          this.geo.on('locationupdate', getDirections);
-        }
+        scope: this,
+        maprender: this.mapRenderHandler
       },
       flex: 1
     });
     
-    var mapUpdated = false;
-    var directionsService;
-    var directionsDisplay;
-    
-    var initMap = function() {
-      directionsService = new google.maps.DirectionsService();
-      directionsDisplay = new google.maps.DirectionsRenderer();
-      directionsDisplay.setMap(map.map);
-    }
-    
-    var where = new Ext.Panel({
-      cls: 'list-view',
-      scroll: 'vertical',
-      itemSelector: 'div.direction-item',
-      singleSelect: true,
-      loadingText: G_LOADING,
-      emptyText: G_EMPTY,
-      html: '<div id="mapview-panel"></div>',
-      listeners: {
-        afterrender: function() {
-          initPanel();
-        }
-      },
-      flex: 1
-    });
-    
-    var initPanel = function() {
-      directionsDisplay.setPanel(document.getElementById("mapview-panel"));
-    }
-    
-    var view = this;
-    var getDirections = function() {
-      var coords = map.geo.coords;
-      if (coords.latitude && coords.longitude) {
-        var request = {
-            origin: new google.maps.LatLng(coords.latitude, coords.longitude), 
-            destination: codebitsPos,
-            travelMode: google.maps.DirectionsTravelMode.DRIVING
-        };
-        directionsService.route(request, function(response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          }
-        });
-        map.geo.un('locationupdate', getDirections);
-      }
-      else {
-        var codebitsMarker = new google.maps.Marker({
-          map: map.map,
-          title: 'CODEBITS 2010',
-          position: codebitsPos
-        });
-        map.map.setCenter(codebitsPos);
-        map.map.setZoom(12);
-      }
-      view.doLayout();
-    }
     
     this.toolbar = new codebits.views.NavBar({
       title:'where is it?',
@@ -102,11 +42,36 @@ codebits.views.GMap = Ext.extend(Ext.Panel, {
     
     Ext.apply(this, {
       dockedItems: [this.toolbar],
-      items: [map, where]
+      items: [this.map]
     });
     
     codebits.views.GMap.superclass.initComponent.apply(this, arguments);
+  },
+  
+  mapRenderHandler: function(mapC, map) {
+    var codebitsMarker = new google.maps.Marker({
+      map: map,
+      title: 'CODEBITS 2010',
+      icon: 'http://codebits.eu/imgs/marker.png',
+      position: this.codebitsPos
+    });
+    
+    var infoContent = '<div style="color:#333">' +
+      '<p>Pavilhão Atlântico, Sala Tejo<br/>'+
+      'Parque das Nações<br/>'+
+      '<a style="color:#00C" href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=38.775098,-9.095564&sll=41.165581,-8.625007&sspn=0.009466,0.018282&ie=UTF8&t=h&z=16">'+
+      'Link to Google Maps</a>'
+      '</div>';
+    
+    var infowindow = new google.maps.InfoWindow({
+        content: infoContent
+    });
+    
+    google.maps.event.addListener(codebitsMarker, 'click', function() {
+      infowindow.open(map,codebitsMarker);
+    });
   }
+  
 });
 
 Ext.reg('mapView', codebits.views.GMap);

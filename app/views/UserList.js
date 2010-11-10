@@ -46,7 +46,7 @@ codebits.views.UserList = Ext.extend(Ext.Panel, {
       title:'skill',
     });
     
-    this.searchField = new Ext.form.SearchField({
+    this.searchField = new Ext.form.Search({
       showClear: true,
       placeHolder: 'Search...',
       listeners: {

@@ -8,6 +8,7 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
   layout: 'fit',
   
   initComponent: function() {
+    this.timeout = null;
     this.doUpdateVotes = false;
     this.updateInterval = 5000;
     
@@ -66,7 +67,10 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
       text:'YES',
       ui: 'plain',
       cls: 'vote-yes-bt',
-      handler: this.voteHandler,
+      listeners: {
+        scope: this,
+        tap: this.voteHandler
+      },
       flex:3
     });
     this.voteNo = new Ext.Button({
@@ -74,7 +78,10 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
       text:'NO',
       ui: 'plain',
       cls: 'vote-no-bt',
-      handler: this.voteHandler,
+      listeners: {
+        scope: this,
+        tap: this.voteHandler
+      },
       flex:3,
       
     });
@@ -95,7 +102,8 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
       dockedItems:[
         {
           xtype:'navBar',
-          title:'vote'
+          title:'vote',
+          refresh: true,
         },
         this.voteBar
       ],
@@ -112,9 +120,14 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
     
     codebits.views.ProjectVote.superclass.initComponent.apply(this, arguments);
   },
+  
   onUpdateData: function(data) {
     this.detail.scroller.scrollTo({x: 0, y: 0});
     this.detail.setLoading({msg:G_LOADING}, true);
+    
+    clearTimeout(this.timeout);
+    this.voteNo.enable();
+    this.voteYes.enable();
     
     Ext.util.JSONP.request({
       url: G_URL + 'votes',
@@ -127,7 +140,7 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
           
           this.doUpdateVotes = true;
           this.updateVotesHTML(result);
-          Ext.defer(this.updateVotes, this.updateInterval, this);
+          this.timeout = Ext.defer(this.updateVotes, this.updateInterval, this);
         }
       }
     });
@@ -166,7 +179,7 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
         callback: function(result) {
           if (!result.error) {
             this.updateVotesHTML(result);
-            Ext.defer(this.updateVotes, this.updateInterval, this);
+            this.timeout = Ext.defer(this.updateVotes, this.updateInterval, this);
           }
         }
       });
@@ -174,12 +187,22 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
   },
   
   updateVotesHTML: function(data) {
+    //console.log(data.yes, data.no);
     this.yesVotes.getEl().setHTML(data.yes);
     this.noVotes.getEl().setHTML(data.no);
   },
   
   voteHandler: function(el, e) {
     var vote = el.name == 'voteYes' ? 1 : 0;
+    
+    if (vote) {
+      this.voteNo.enable();
+      this.voteYes.disable();
+    }
+    else {
+      this.voteYes.enable();
+      this.voteNo.disable();
+    }
     
     Ext.util.JSONP.request({
       url: G_URL + 'vote/' + vote,
@@ -189,12 +212,13 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
         token: localStorage['token']
       },
       callback: function(result) {
-        console.log(result);
+        //console.log(result);
       }
     });
   },
   
   hideHandler: function() {
+    clearTimeout(this.timeout);
     this.doUpdateVotes = false;
   }
   
