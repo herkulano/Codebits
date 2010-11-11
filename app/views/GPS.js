@@ -47,8 +47,6 @@ codebits.views.GPS = Ext.extend(Ext.Panel, {
   },
   
   onUpdateData: function(data, init) {
-    console.log('GPS', init);
-    
     if(init) {
       this.navBar.init = true;
       this.navBar.backBt.setText('home');
