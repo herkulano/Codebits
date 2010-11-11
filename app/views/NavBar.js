@@ -10,16 +10,17 @@ codebits.views.NavBar = Ext.extend(Ext.Toolbar, {
   constructor: function(config) {
     config = config || {};
     
+    this.backBt = new Ext.Button({
+      text: 'back',
+      ui: 'plain',
+      cls: 'back-bt',
+      handler: this.onBackBtTap,
+      scope: this
+    })
+    
     Ext.applyIf(config, {
       items: [
-        {
-          xtype: 'button',
-          text: 'back',
-          ui: 'plain',
-          cls: 'back-bt',
-          handler: this.onBackBtTap,
-          scope: this
-        },
+        this.backBt,
         {
           flex: 1, 
           xtype: 'spacer'
@@ -32,7 +33,7 @@ codebits.views.NavBar = Ext.extend(Ext.Toolbar, {
           handler: this.onRefreshTap,
           scope: this
         },
-      ]
+      ],
     });
     
     this.addEvents('updateData');
@@ -42,7 +43,13 @@ codebits.views.NavBar = Ext.extend(Ext.Toolbar, {
   },
   
   onBackBtTap: function() {
-    window.history.back();
+    if(this.init) {
+      Ext.redirect('home');
+    }
+    else {
+      window.history.back();
+    }
+    
   },
   
   onRefreshTap: function(){

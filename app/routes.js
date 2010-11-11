@@ -23,5 +23,8 @@ Ext.Router.draw(function(map) {
     map.connect("vote", {controller: 'viewport', action: 'vote'});
     
     map.connect("gps", {controller: 'viewport', action: 'gps'});
+    map.connect("gps/:coords", {controller: 'viewport', action: 'gps'});
+    
+    map.connect("g/:coords", {controller: 'viewport', action: 'coords'});
 
 });

@@ -40,8 +40,16 @@ codebits.views.Twitter = Ext.extend(Ext.Panel, {
            * Simply wraps a link tag around each detected url
            */
           linkify: function(value) {
-            return value.replace(/(http[s]*:\/\/[^\s]*)/g, "<a target=\"_blank\" href=\"$1\">$1</a>");
+            var coords = new RegExp(/\#codebits\ coords\(\ \-(0|328)\,(0)\,([0-9]{1,3})\,([0-9]{1,3})\ \)\ /g);
+            if(value.match(coords) == null) {
+              return value.replace(/(http[s]*:\/\/[^\s]*)/g, "<a target=\"_blank\" href=\"$1\">$1</a>");
+            }
+            else {
+              return value.replace(coords, "#codebits <a class=\"gps-link\" target=\"_self\" href=\"#gps/$1,$2,$3,$4\">view me on the map</a>");
+            }
+            
           },
+          
           /**
            * Format Date to twitter style
            */
@@ -80,7 +88,7 @@ codebits.views.Twitter = Ext.extend(Ext.Panel, {
     Ext.apply(this, {
       dockedItems: {
         xtype:'navBar',
-        title:'projects',
+        title:'#codebits',
         refresh: true
       },
       items: [this.list]

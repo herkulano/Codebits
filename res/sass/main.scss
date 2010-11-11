@@ -16,8 +16,8 @@ $shadow_color: rgba(0, 0, 0, 0.5);
 $green_color: rgba(0, 100, 0, 0.4);
 $red_color: rgba(100, 0, 0, 0.4);
 
-$loading_font: 1.2em;
-$title_font: 1.1em;
+$loading_font: 1.1em;
+$title_font: 1.0em;
 $info_font: 0.9em;
 $date_font: 0.9em;
 
@@ -620,11 +620,27 @@ div.detail-view {
   }
 }
 
-.gps-coords {
+div.x-toolbar.gps-coords {
+  border-top: none;
   background: darken($back_color, 10%);
   @include box-shadow(black, 0px, 0px, 8px);
   font-size: $title_font;
   padding: 0.5em;
+  
+  .x-button.x-button-plain {
+    padding: 0px;
+    margin: 0px;
+    font-size: $title_font - 0.1;
+    height: 30px;
+    
+    &.x-button-pressed {
+      @include radial-gradient( 
+        color-stops(
+          rgba(255,255,255,0.3),
+          rgba(255,255,255,0)
+        ));
+    }
+  }
 }
 
 .x-panel .x-panel-body {

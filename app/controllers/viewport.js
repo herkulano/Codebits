@@ -12,9 +12,17 @@ Ext.regController("viewport", {
     );
   },
   
+  coords: function(options) {
+    this.setCard('gps', 
+      options.coords,
+      this.anims.POP,
+      true
+    );
+  },
+  
   login: function(options) {
     this.setCard(options.action, 
-      null, 
+      null,
       this.anims.SLIDE_UP
     );
   },
@@ -67,7 +75,7 @@ Ext.regController("viewport", {
   twitter: function(options) {
     this.setCard('twitter', 
       null, 
-      this.anims.POP
+      options.next ? this.anims.POP : this.anims.SLIDE_BACK
     );
   },
   
@@ -79,10 +87,20 @@ Ext.regController("viewport", {
   },
   
   gps: function(options) {
-    this.setCard('gps', 
-      null, 
-      this.anims.POP
-    );
+    if (!options.coords) {
+      this.setCard('gps', 
+        null, 
+        this.anims.POP,
+        false
+      );
+    }
+    else if (options.coords) {
+      this.setCard('gps', 
+        options.coords,
+        'slide',
+        false
+      );
+    }
   },
   
   vote: function(options) {
