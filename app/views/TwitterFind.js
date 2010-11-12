@@ -1,10 +1,10 @@
 /**
  * @class codebits.views.Panel
  * @extends Ext.List
- * @xtype twitterView
+ * @xtype twitterFindView
  */
-codebits.views.Twitter = Ext.extend(Ext.Panel, {
-  id: 'twitterView',
+codebits.views.TwitterFind = Ext.extend(Ext.Panel, {
+  id: 'twitterFindView',
   layout: 'fit',
   
   initComponent: function() {
@@ -88,7 +88,7 @@ codebits.views.Twitter = Ext.extend(Ext.Panel, {
     Ext.apply(this, {
       dockedItems: {
         xtype:'navBar',
-        title:'#codebits',
+        title:'find them',
         refresh: true
       },
       items: [this.list]
@@ -97,11 +97,15 @@ codebits.views.Twitter = Ext.extend(Ext.Panel, {
     this.addEvents('updateData');
     this.on('updateData', this.updateDataHandler, this);
 
-    codebits.views.Twitter.superclass.initComponent.apply(this, arguments);
+    codebits.views.TwitterFind.superclass.initComponent.apply(this, arguments);
   },
   updateDataHandler: function(data, refresh) {
     try {
-      this.list.store.read();
+      this.list.store.read({
+        params: {
+          q: '#codebits coords'
+        } 
+      });
     }
     catch(err) {
       console.log(err);
@@ -109,4 +113,4 @@ codebits.views.Twitter = Ext.extend(Ext.Panel, {
   }
 });
 
-Ext.reg('twitterView', codebits.views.Twitter);
+Ext.reg('twitterFindView', codebits.views.TwitterFind);

@@ -24,6 +24,7 @@ codebits.Viewport = Ext.extend(Ext.Panel, {
         {xtype: 'mapView'},
         {xtype: 'projectVoteView'},
         {xtype: 'gpsView'},
+        {xtype: 'twitterFindView'},
       ]
     });
 

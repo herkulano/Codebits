@@ -12,6 +12,7 @@ Ext.Router.draw(function(map) {
     map.connect("calendar/:id", {controller: 'viewport', action: 'calendar'});
     
     map.connect("twitter", {controller: 'viewport', action: 'twitter'});
+    map.connect("twitterfind", {controller: 'viewport', action: 'twitterfind'});
     
     map.connect("skills", {controller: 'viewport', action: 'skills'});
     

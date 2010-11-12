@@ -79,6 +79,13 @@ Ext.regController("viewport", {
     );
   },
   
+  twitterfind: function(options) {
+    this.setCard('twitterFind', 
+      null, 
+      options.next ? this.anims.POP : this.anims.SLIDE_BACK
+    );
+  },
+  
   map: function(options) {
     this.setCard('map', 
       null, 

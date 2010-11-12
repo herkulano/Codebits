@@ -390,7 +390,7 @@ div.list-view {
   }
 }
 
-#twitterView {
+#twitterView, #twitterFindView {
 
   div.tweet {
     @include display-box;
