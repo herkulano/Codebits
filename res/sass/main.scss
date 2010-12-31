@@ -45,7 +45,7 @@ $date_font: 0.9em;
   font-size: $title_font;
   padding: 1em;
   padding-left: 2.5em;
-  display:block;
+  display: block;
   background: transparentize($base_color, 0.2) url('../imgs/loading.gif') 0.6em center no-repeat;
 }
 
@@ -68,12 +68,12 @@ div.x-toolbar.home-toolbar {
   @include box-shadow(black, 0px, 2px, 16px);
   
   div.x-container {
-    width:100%;
+    width: 100%;
   }
   div.home-toolbar-img {
     width: 300px;
     height: 75px;
-    margin:auto;
+    margin: auto;
   }
 }
 
@@ -212,7 +212,7 @@ div.x-toolbar.navbar {
 div.msg {
   font-size: $title_font;
   padding: 0.8em;
-  display:block;
+  display: block;
   background: transparentize($base_color, 0.2);
   border-bottom: $divide_color 1px solid;
 }
@@ -240,7 +240,7 @@ div.list-view {
 #userListView {
   
   .searchBar > div {
-    padding:0.4em;
+    padding: 0.4em;
     
     @include linear-gradient( 
       color-stops(
