@@ -158,6 +158,7 @@ codebits.views.ProjectVote = Ext.extend(Ext.Panel, {
         callback: function(result) {
           if (!result.error) {
             this.detail.update(this.detail.tpl.applyTemplate(result));
+			this.doLayout();
           }
           else {
             alert('Token expired!');

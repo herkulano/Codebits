@@ -43,7 +43,7 @@ codebits.views.Home = Ext.extend(Ext.Panel, {
           '<tpl for=".">',
             '<li class="home-item">',
               '<div>',
-                '<img src="res/imgs/home_{img}.png"/>',
+                '<img src="resources/imgs/home_{img}.png"/>',
                 '<p>{title}</p>',
               '</div>',
             '</li>',

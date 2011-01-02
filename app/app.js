@@ -4,7 +4,7 @@ Ext.regApplication({
   defaultUrl: 'home',
   defaultTarget: 'viewport',
   
-  icon: 'res/imgs/icon.png',
+  icon: 'resources/imgs/icon.png',
   glossOnIcon: false,
   statusBarStyle: 'black',
   phoneStartupScreen: 'res/imgs/phone_startup.png',

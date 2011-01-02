@@ -77,6 +77,7 @@ codebits.views.UserDetail = Ext.extend(Ext.Panel, {
       callback: function(result) {
         if (!result.error) {
           this.update(this.tpl.applyTemplate(result));
+		  this.doLayout();
         }
         else {
           alert('Token expired!');

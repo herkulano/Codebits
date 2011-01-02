@@ -1,0 +1,26 @@
+{
+    "projectName": "Codebits 2010",
+    "builds": [
+        {
+            "name": "App",
+            "target": "app/codebits-app.js",
+            "debug": true,
+            "files": [
+            	{"path":"resources/strings/*"},
+				{"path":"app/app.js"},
+				{"path":"app/routes.js"},
+				{"path":"app/proxys/*"},
+				{"path":"app/controllers/*"},
+				{"path":"app/models/*"},
+				{"path":"app/views/*"}
+            ]
+        }
+    ],
+    "resources": [
+        {"src": "resources/css/"},
+		{"src": "resources/imgs/"},
+        {"src": "lib/"},
+        {"src": "index.html"},
+		{"src": "cache.manifest"}
+    ]
+}
