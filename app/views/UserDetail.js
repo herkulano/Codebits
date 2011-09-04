@@ -27,7 +27,7 @@ codebits.views.UserDetail = Ext.extend(Ext.Panel, {
           '<div class="place">{id}</div>',
           '<p class="title">{name} [{nick}]</p>',
           '<br/>',
-          '<p class="info">{bio}</p>',
+          '<p class="info">{[this.addBreaks(values.bio)]}</p>',
           '<br/>',
           '<div class="info">',
             '<tpl if="slideshare">',
@@ -53,8 +53,15 @@ codebits.views.UserDetail = Ext.extend(Ext.Panel, {
             '<p><tpl for="skills">{.} </tpl></p>',
           '</div>',
         '</div>',
-      '</tpl>'
-    );
+      '</tpl>',
+      {
+        /**
+         * Substitute \n fo <br/>
+         */
+        addBreaks: function(value) {
+          return value.replace(/\n/g, "<br/>");
+        }
+      });
     
     this.addEvents('updateData');
     this.on('updateData', this.onUpdateData, this);

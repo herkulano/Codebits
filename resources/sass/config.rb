@@ -5,10 +5,12 @@ dir = File.dirname(__FILE__)
 load File.join('/', 'Developer', 'SenchaTouch', 'latest', 'resources', 'themes')
 
 # Compass configurations
+relative_assets = true
 sass_path = dir
 css_path = File.join(dir, "..", "css")
 
 # Require any additional compass plugins here.
-images_dir = File.join(dir, "..", "imgs")
+images_dir = "../imgs"
+#images_path = File.join(dir)
 output_style = :compressed
 environment = :production

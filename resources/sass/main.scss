@@ -4,14 +4,17 @@
 $include_default_icons: false;
 $include_default_uis: false;
 
-$base_color: rgba(31, 31, 31, 1);
+$base_color: rgba(50, 50, 50, 1);
 $list_active_color: lighten($base_color, 10%);
 
 $back_color: lighten($base_color, 2%);
-$text_color: rgba(200, 200, 200, 1);
+$text_color: rgba(255, 255, 255, 1);
 
-$divide_color: lighten($base_color, 10%);
+$divide_color: rgba(150, 150, 150, 1);
 $shadow_color: rgba(0, 0, 0, 0.5);
+
+$cb_green: #4cb848;
+$cb_dark_green: #146020;
 
 $green_color: rgba(0, 100, 0, 0.4);
 $red_color: rgba(100, 0, 0, 0.4);
@@ -38,7 +41,7 @@ $date_font: 0.9em;
 @include sencha-form;
 
 @mixin bodyBack() {
-  background: $back_color url('../imgs/navBk.png') repeat;
+  background: $back_color image-url('bg.png') repeat;
 }
 
 @mixin loading() {
@@ -46,7 +49,7 @@ $date_font: 0.9em;
   padding: 1em;
   padding-left: 2.5em;
   display: block;
-  background: transparentize($base_color, 0.2) url('../imgs/loading.gif') 0.6em center no-repeat;
+  background: transparentize($base_color, 0.2) image-url('loading.gif') 0.6em center no-repeat;
 }
 
 body {
@@ -63,14 +66,18 @@ body {
 
 div.x-toolbar.home-toolbar {
   height: 85px;
-  background: $base_color url('../imgs/home_header.png') center center no-repeat;
-  border-bottom: black 4px solid;
+  @include background(  image-url('bg_small.png'),
+                        linear-gradient(  $cb_dark_green, 
+                                          darken($cb_dark_green, 20%)));
+  border-bottom: none;
   @include box-shadow(black, 0px, 2px, 16px);
   
   div.x-container {
     width: 100%;
   }
   div.home-toolbar-img {
+    background-size: contain;
+    @include background( image-url('home_header.png') center no-repeat );
     width: 300px;
     height: 75px;
     margin: auto;
@@ -116,8 +123,14 @@ div.home-view {
 
 div.x-toolbar.navbar {
   height: 47px;
-  background: darken($back_color, 10%);
-  border-bottom: none;
+  /*
+  @include background(  image-url('bg_small.png'),
+                        linear-gradient(  darken($cb_dark_green, 6%), 
+                                          darken($cb_dark_green, 12%)));
+  */
+  @include background(  image-url('bg_small.png'),
+                        darken($cb_dark_green, 8%));
+  border-bottom: darken($cb_dark_green, 12%) 1px solid;
   @include box-shadow(black, 0px, 0px, 12px);
 }
 
@@ -127,7 +140,7 @@ div.x-toolbar.navbar {
   color: $text_color;
   @include border-radius(0);
   height: 35px;
-  margin: 0px;
+  margin: 0px 5px;
   padding: 0px 5px 0px 25px;
   
   & > span {
@@ -137,24 +150,24 @@ div.x-toolbar.navbar {
   }
   
   &.x-button-pressed {
-    background: darken($back_color, 5%);
+    background: $cb_dark_green;
   }
 }
 
 .x-toolbar .x-button.x-button-plain.back-bt {
-  background: $back_color url('../imgs/bt-back.png') no-repeat 3px center;
+  background: $back_color image-url('bt-back.png') no-repeat 3px center;
   
   &.x-button-pressed {
-    background: darken($back_color, 5%) url('../imgs/bt-back.png') no-repeat 3px center;
+    background: $cb_dark_green image-url('bt-back.png') no-repeat 3px center;
   }
 }
 
 .x-toolbar .x-button.x-button-plain.refresh-bt {
   width: 35px;
-  background: $back_color url('../imgs/bt-refresh.png') no-repeat center center;
+  background: $back_color image-url('bt-refresh.png') no-repeat center center;
   
   &.x-button-pressed {
-    background: darken($back_color, 5%) url('../imgs/bt-refresh.png') no-repeat center center;
+    background: $cb_dark_green image-url('bt-refresh.png') no-repeat center center;
   }
 }
 
@@ -163,10 +176,10 @@ div.x-toolbar.navbar {
   
   .x-button.x-button-plain.info-bt {
     width: 35px;
-    background: $back_color url('../imgs/bt-info.png') no-repeat center center;
+    background: $back_color image-url('bt-info.png') no-repeat center center;
     
     &.x-button-pressed {
-      background: darken($back_color, 5%) url('../imgs/bt-info.png') no-repeat center center;
+      background: $cb_dark_green image-url('bt-info.png') no-repeat center center;
     }
   }
 }
@@ -230,10 +243,12 @@ div.list-view {
   }
   
   .x-list-header {
-    background: lighten($base_color, 20%);
+    background: $cb_dark_green;
+    color: $text_color;
     @include box-shadow(black, 0px, 0px, 8px);
     padding: 0.2em 0.9em;
     font-size: 0.8em;
+    border: none;
   }
 }
 
@@ -422,19 +437,17 @@ div.list-view {
       h1 {
         clear: both;
         font-size: $title_font - 0.2;
-        padding-top: 5px;
       }
       p {
-        color: darken($text_color, 10%);
-        font-size: $date_font - 0.1;
-        background-color: darken($base_color, 2%);
-        padding: 1px;
+        color: lighten($cb_dark_green, 5%);
+        font-size: $date_font - 0.2;
+        margin-top: 8px;
       }
       .user {
-        float: left;
+        //float: left;
       }
       .date {
-        float: right;
+        
       }
     }
   }
@@ -582,7 +595,7 @@ div.detail-view {
   }
   
   .share {
-    margin: 12px 0px;
+    margin: 8px 0px;
   }
 }
 
@@ -668,15 +681,15 @@ div.x-toolbar.gps-coords {
   .x-mask-loading {
     -webkit-border-radius: .5em;
     color: $text_color;
-    border: $shadow_color 2px solid;
+    border: black 2px solid;
     text-align: left;
-    padding: 1em 1em 1em 3em;
+    padding: 0 1em 1em 3em;
     font-size: $loading_font;
     font-weight: normal;
     display: block;
     width: 100%;
     height: 3.3em;
-    background: $base_color url('../imgs/loading.gif') 0.9em center no-repeat;
+    background: $base_color image-url('loading.gif') 0.8em center no-repeat;
   }
 }
 

@@ -29,7 +29,7 @@ codebits.views.Home = Ext.extend(Ext.Panel, {
           {title:'where?',      card:'map',         img:'where'},
           {title:'vote',        card:'vote',        img:'vote'},
           {title:'gps',         card:'gps',         img:'gps'},
-          {title:'find them',   card:'twitterfind', img:'gps'},
+          {title:'find them',   card:'twitterfind', img:'findthem'},
         ]
       }),
       
@@ -107,6 +107,8 @@ codebits.views.Home = Ext.extend(Ext.Panel, {
       cls: 'info-content',
     });
     
+    // Using http://cubiq.org/add-to-home-screen instead
+    /*
     if (Ext.is.iOS && !localStorage['addToHomeScreenInfo']) {
       this.addOverlay = new Ext.Panel({
         floating: true,
@@ -130,6 +132,7 @@ codebits.views.Home = Ext.extend(Ext.Panel, {
       
       localStorage['addToHomeScreenInfo'] = true;
     }
+    */
   },
   
   itemTapHandler: function(subList, subIdx, el, e) {

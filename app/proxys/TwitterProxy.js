@@ -10,7 +10,7 @@ Ext.data.TwitterProxy = Ext.extend(Ext.data.ScriptTagProxy, {
      * @type String
      * The search query to run if none is specified (defaults to 'extjs')
      */
-    defaultQuery: '#codebits',
+    defaultQuery: 'codebits',
     
     constructor: function(config) {
       config = config || {};
